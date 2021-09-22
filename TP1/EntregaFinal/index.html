@@ -5,8 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Entrega Visualizacion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> 
 </head>
 <body>
     <h1>Entrega del trabajo</h1>
+    <h3>Herramientas</h3>
+    <h5>Lapiz</h5>
+        <input type="range" min="1" max="20" id="rangePencil">
+        <input type="color" id="color">
+    <h5>Goma</h5>
+        <input type="range" min="5" max="30" id="rangeEraser">
+    <h5>Agregar Imagen</h5>
+    <input type="file" id="inputFile">
+    <h5>Filtros</h5>
+        <button id="buttonNegative">Negativo</button>
+        <button id="buttonBinarization">Binarización</button>
+        <button id="buttonSepia" class="btn btn-primary btn-lg active">Sepia</button>
+        <div>
+           <p>Brillo</p> 
+            <button id="buttonMoreBright">+</button>
+            <button id="buttonLessBright">-</button>
+        </div> 
+        <button id="buttonSaturation">Saturacion</button>
+        <button id="buttonBlur">Blur</button>
+        <canvas id="canvas" width="600" height="600"></canvas>
+    <h5>Guardar</h5>
+    <button id="buttonDownload"  >Descargar en tu PC :3 </button>
+    <h5>Limpiar</h5>
+        <button>Reestablecer</button>
+        <button id="buttonNew">Nuevo</button>
+    <script src="js.js"></script>
 </body>
 </html>
