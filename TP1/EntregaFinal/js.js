@@ -2,9 +2,7 @@
 
 /**
  * Lista de las cosas que falta:
- * Poner canvas con fondo transparente/elegido
  * Hacer correctamente reestablecer
- * Hacer correctamente la carga/limpieza/estado basico de la pagina
  * Verificar que cuando se aplica un filtro solo lo haga una vez, filtros con este problema: Sepia, Brillo, Saturacion.
  * Comentar mas el codigo
  * Pulir codigo
@@ -13,6 +11,12 @@
 // Ni bien se carga la página
 $(document).ready(function (){
     cleanCanvas();
+    document.getElementById('rangeSaturation').value = 0;
+    document.getElementById('rangePencil').value= 3;
+    document.getElementById('rangeEraser').value = 5;
+    document.getElementById('rangeBright').value = 0;
+    document.getElementById('inputFile').value = "";
+    document.getElementById('colorPencil').value = "#000000";
 });
 ///////////////// ZONA DE ESCUCHA DE VARIABLE GLOBALES /////////////////
 

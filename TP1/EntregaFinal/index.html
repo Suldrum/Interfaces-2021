@@ -12,11 +12,11 @@
     <h1>Entrega del trabajo</h1>
     <h3>Herramientas</h3>
     <h5>Lapiz</h5><button id="buttonPencil">lapicitooo </button>
-        <input type="range" min="1" max="20" id="rangePencil">
-        <input type="color" id="colorPencil">
+        <input type="range" min="1" max="20" id="rangePencil" value="3">
+        <input type="color" id="colorPencil" value="#000000">
     <h5>Goma</h5>
         <button id="buttonEraser">gomitaaa </button>
-        <input type="range" min="5" max="30" id="rangeEraser">
+        <input type="range" min="5" max="30" id="rangeEraser" value="5">
     <h5>Agregar Imagen</h5>
     <input type="file" id="inputFile">
     <h5>Filtros</h5>
@@ -25,10 +25,10 @@
         <button id="buttonSepia" class="btn btn-primary btn-lg active">Sepia</button>
         <div>
            <p>Brillo</p> 
-            <input type="range" min="-50" max="50" id="rangeBright">
+            <input type="range" min="-50" max="50" id="rangeBright" value="0">
         </div> 
         <button id="buttonSaturation">Saturacion</button>
-        <input type="range" min="-10" max="10" id="rangeSaturation">
+        <input type="range" min="-10" max="10" id="rangeSaturation" value="0">
         <button id="buttonBlur">Blur</button>
         <canvas id="canvas" width="600" height="600"></canvas>
     <h5>Guardar</h5>
