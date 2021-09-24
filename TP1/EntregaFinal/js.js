@@ -1,14 +1,11 @@
 'use strict';
 
-
-
 /**
  * Lista de las cosas que falta:
  * Corregir/hacer descargar
- * Verificar que cuando se aplica un filtro solo lo haga una vez, ahora mismo si presionas sepia miles de veces lo aplica infinita veces, de ser necesario trabajar con la aplicacion de un solo filtro por vez
- * Decidir si el brillo funcionara con botones separados, un unico boton que sube o con rango como las herramientas (controlar que no se pase de cierto nivel de luz/oscuridad)
- * Filtros de Saturacion y Blur
- * Decidir si los filtros de Saturacion y Blur trabajaran con rangos fijos o escala (tipo por rango)
+ * Verificar que cuando se aplica un filtro solo lo haga una vez, filtros con este problema: Sepia, Brillo, Saturacion.
+ * Filtro de Blur.
+ * Decidir si el Blur trabajaran con rangos fijos o escala (tipo por rango)
  * Comentar mas el codigo
  * Pulir codigo
  * Decidir si puede volver un paso hacia atras
@@ -41,7 +38,9 @@ btnSaturation.addEventListener('click', filterSaturation);
 let btnBlur = document.getElementById('buttonBlur');
 btnBlur.addEventListener('click', filterBlur);
 let brightness = document.getElementById('rangeBright');
-brightness.addEventListener('click', function(){filterBright()});
+brightness.addEventListener('change', function(){filterBright()});
+let saturation = document.getElementById('rangeSaturation');
+saturation.addEventListener('change', function(){filterSaturation()});
 //HERRAMIENTAS
 let btnPencil = document.getElementById('buttonPencil');
 btnPencil.addEventListener('click', function(){changetool('Pencil')});
@@ -289,45 +288,64 @@ function filterBinarization(){
 //Brillo
 function filterBright()
 {
-        //obtenemos la imagen
-        let image = getImgData();
-        //Tomamos el valor del rango
-        let bright = parseInt(document.getElementById('rangeBright').value );
-        //Recorrido pixel a pixel 
-        for (let x = 0; x <= image.width; x++) {    
-            for (let y = 0; y < image.height; y++) {
-                //obtenemos la informacion del pixel
-                let pixel = getPixel(image, x, y);
-                //Calculamos los nuevos valores
-                let r = validateBright(pixel[0], bright);
-                let g = validateBright(pixel[1], bright);
-                let b = validateBright(pixel[2], bright);
-                //seteamos los nuevos valores
-                setPixel(image, x, y,r,g, b ,255);
-            }
+    //obtenemos la imagen
+    let image = getImgData();
+     //Tomamos el valor del rango
+     let bright = parseInt(document.getElementById('rangeBright').value );
+    //Recorrido pixel a pixel 
+     for (let x = 0; x <= image.width; x++) {    
+        for (let y = 0; y < image.height; y++) {
+            //obtenemos la informacion del pixel
+            let pixel = getPixel(image, x, y);
+            //Calculamos los nuevos valores
+            let r = validatePixel(pixel[0], bright);
+             let g = validatePixel(pixel[1], bright);
+             let b = validatePixel(pixel[2], bright);
+             //seteamos los nuevos valores
+            setPixel(image, x, y,r,g, b ,255);
         }
-        putImgData(image);
+    }
+    putImgData(image);
 
 }
 
-function validateBright(pixel, bright)
+function validatePixel(pixel, value)
 {
-    if (pixel+bright < 0)
+    if (pixel+value < 0)
     {
         return 0;
     }
     else
-        if ( pixel+bright > 255)
+        if ( pixel+value > 255)
         {
             return 255
         }
     else
-        return pixel+bright ;
+        return pixel+value ;
 }
 
 //Saturacion
 function filterSaturation(){
-
+    //obtenemos la imagen
+    let image = getImgData();
+     //Tomamos el valor del rango
+     let saturationValue = parseInt(document.getElementById('rangeSaturation').value );
+    //Recorrido pixel a pixel 
+     for (let x = 0; x <= image.width; x++) {    
+        for (let y = 0; y < image.height; y++) {
+            //obtenemos la informacion del pixel
+            let pixel = getPixel(image, x, y);
+            //Calculamos la cantidad de gris que vamos a quitar
+            let gray = (0.2989* pixel[0] + 0.5870* pixel[1] + 0.1140* pixel[2]) * (-1);
+            //Calculamos los nuevos valores
+            let r = validatePixel(pixel[0] * (1+saturationValue), gray * saturationValue);
+            let g = validatePixel(pixel[1] * (1+saturationValue), gray * saturationValue);
+            let b = validatePixel(pixel[2] * (1+saturationValue), gray * saturationValue);
+             //seteamos los nuevos valores
+            setPixel(image, x, y,r,g, b ,255);
+        }
+    }
+    putImgData(image);
 }
 
 //Blur
