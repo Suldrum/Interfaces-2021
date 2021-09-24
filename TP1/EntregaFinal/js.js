@@ -6,7 +6,6 @@
  * Lista de las cosas que falta:
  * Corregir/hacer descargar
  * Verificar que cuando se aplica un filtro solo lo haga una vez, ahora mismo si presionas sepia miles de veces lo aplica infinita veces, de ser necesario trabajar con la aplicacion de un solo filtro por vez
- * Hacer la parte de las herramientas en js (borrar y lapiz)
  * Decidir si el brillo funcionara con botones separados, un unico boton que sube o con rango como las herramientas (controlar que no se pase de cierto nivel de luz/oscuridad)
  * Filtros de Saturacion y Blur
  * Decidir si los filtros de Saturacion y Blur trabajaran con rangos fijos o escala (tipo por rango)
@@ -15,7 +14,6 @@
  * Decidir si puede volver un paso hacia atras
  * Hacer Reestablecer: devuelve la imagen a su estado original para no estarla resubiendo constantemente
  */
-
 
 ///////////////// ZONA DE ESCUCHA DE VARIABLE GLOBALES /////////////////
 
@@ -31,7 +29,7 @@ let tool = 'None';
 
 ///////////////// ZONA DE ESCUCHA DE EVENTOS /////////////////
 
-//BOTONES DE FILTROS
+//FILTROS
 let btnNegative = document.getElementById('buttonNegative');
 btnNegative.addEventListener('click', filterNegative);
 let btnSepia = document.getElementById('buttonSepia');
@@ -42,12 +40,14 @@ let btnSaturation = document.getElementById('buttonSaturation');
 btnSaturation.addEventListener('click', filterSaturation);
 let btnBlur = document.getElementById('buttonBlur');
 btnBlur.addEventListener('click', filterBlur);
-//BOTONES DE HERRAMIENTAS
+let brightness = document.getElementById('rangeBright');
+brightness.addEventListener('click', function(){filterBright()});
+//HERRAMIENTAS
 let btnPencil = document.getElementById('buttonPencil');
 btnPencil.addEventListener('click', function(){changetool('Pencil')});
 let btnEraser = document.getElementById('buttonEraser');
 btnEraser.addEventListener('click', function(){changetool('Eraser')});
-//BOTONES DE LA IMAGEN
+//IMAGEN
 let fileImage = document.getElementById('inputFile');
 fileImage.addEventListener('change', loadImage);
 let btnNew = document.getElementById('buttonNew');
@@ -286,11 +286,51 @@ function filterBinarization(){
     putImgData(image);
 }
 
+//Brillo
+function filterBright()
+{
+        //obtenemos la imagen
+        let image = getImgData();
+        //Tomamos el valor del rango
+        let bright = parseInt(document.getElementById('rangeBright').value );
+        //Recorrido pixel a pixel 
+        for (let x = 0; x <= image.width; x++) {    
+            for (let y = 0; y < image.height; y++) {
+                //obtenemos la informacion del pixel
+                let pixel = getPixel(image, x, y);
+                //Calculamos los nuevos valores
+                let r = validateBright(pixel[0], bright);
+                let g = validateBright(pixel[1], bright);
+                let b = validateBright(pixel[2], bright);
+                //seteamos los nuevos valores
+                setPixel(image, x, y,r,g, b ,255);
+            }
+        }
+        putImgData(image);
+
+}
+
+function validateBright(pixel, bright)
+{
+    if (pixel+bright < 0)
+    {
+        return 0;
+    }
+    else
+        if ( pixel+bright > 255)
+        {
+            return 255
+        }
+    else
+        return pixel+bright ;
+}
+
 //Saturacion
 function filterSaturation(){
 
 }
 
+//Blur
 function filterBlur(){
 
 }
