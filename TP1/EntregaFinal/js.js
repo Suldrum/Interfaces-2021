@@ -2,11 +2,9 @@
 
 /**
  * Lista de las cosas que falta:
- * Hacer correctamente reestablecer
  * Verificar que cuando se aplica un filtro solo lo haga una vez, filtros con este problema: Sepia, Brillo, Saturacion.
  * Comentar mas el codigo
  * Pulir codigo
- * Hacer Reestablecer: devuelve la imagen a su estado original para no estarla resubiendo constantemente
  */
 // Ni bien se carga la página
 $(document).ready(function (){
@@ -17,6 +15,7 @@ $(document).ready(function (){
     document.getElementById('rangeBright').value = 0;
     document.getElementById('inputFile').value = "";
     document.getElementById('colorPencil').value = "#000000";
+    ctxOriginal.clearRect(0, 0,ctxOriginal.width, ctxOriginal.height);
 });
 ///////////////// ZONA DE ESCUCHA DE VARIABLE GLOBALES /////////////////
 
@@ -24,6 +23,11 @@ let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 let width = canvas.width;
 let height = canvas.height;
+let canvasOriginal = document.createElement('canvas');
+let ctxOriginal  = canvasOriginal.getContext('2d');
+ctxOriginal.width = canvas.width;
+ctxOriginal.height=canvas.height;
+ctxOriginal.drawImage(canvas,0,0);
 let imageData = ctx.createImageData(width, height);
 let inputFile = document.getElementById('inputFile');
 let tool = 'None';
@@ -110,11 +114,15 @@ function loadImage(){
             else{
                  width = canvas.height * (1.0 * width) /height;
             }
-            canvas.width = height;
-            canvas.height = width;
+            canvas.width = width;
+            canvas.height = height;
+            canvasOriginal.width= width;
+            canvasOriginal.height= height;
             //Dibuja la imagen en el canvas haciendo que cubra todo su superficie
             ctx.drawImage(image,0,0,canvas.width, canvas.height);       
             imageData = getImgData();
+            //La guardo tambien en un canvas auxiliar
+            ctxOriginal.drawImage(image,0,0,canvasOriginal.width,canvasOriginal.height);
         }
         image.src = reader.result;
     }; 
@@ -132,7 +140,16 @@ function downloadImage(){
 function reestablishImage()
 {
     if (document.getElementById('inputFile').files[0] !== undefined)
-        loadImage();
+    {
+        console.log(width+"width");
+        console.log(canvasOriginal.width+"canvasOriginal.width");
+        console.log(canvas.width+"canvas.width");
+        width = canvasOriginal.width;
+		height = canvasOriginal.height;
+		canvas.width = width;
+		canvas.height = height;
+		ctx.drawImage(canvasOriginal,0,0,canvas.width,canvas.height);
+    }
 
 }
 
