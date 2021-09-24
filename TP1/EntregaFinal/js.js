@@ -39,8 +39,6 @@ let btnSepia = document.getElementById('buttonSepia');
 btnSepia.addEventListener('click', filterSepia);
 let btnBinarization= document.getElementById('buttonBinarization');
 btnBinarization.addEventListener('click', filterBinarization);
-let btnSaturation = document.getElementById('buttonSaturation');
-btnSaturation.addEventListener('click', filterSaturation);
 let btnBlur = document.getElementById('buttonBlur');
 btnBlur.addEventListener('click', filterBlur);
 let brightness = document.getElementById('rangeBright');
