@@ -23,6 +23,7 @@ let width = canvas.width;
 let height = canvas.height;
 let imageData = ctx.createImageData(width, height);
 let inputFile = document.getElementById('inputFile');
+let state = false;
 
 
 ///////////////// FIN DE ZONA DE ESCUCHA DE VARIABLE GLOBALES /////////////////
@@ -44,6 +45,8 @@ let fileImage = document.getElementById('inputFile');
 fileImage.addEventListener('change', loadImage);
 let btnNew = document.getElementById('buttonNew');
 btnNew.addEventListener('click', cleanCanvas);
+let btnReestablish= document.getElementById('buttonReestablish');
+btnReestablish.addEventListener('click', reestablishImage);
 let btnDownload = document.getElementById('buttonDownload');
 btnDownload.addEventListener('click', downloadImage);
 
@@ -85,6 +88,7 @@ function cleanCanvas(){
 
 // Una vez elegida una imagen la carga al canvas y la adapta al tamaño del canvas
 function loadImage(){
+    cleanCanvas();
     let file = document.getElementById('inputFile').files[0];
     let reader = new FileReader();
     reader.onload = function(){ 
@@ -114,7 +118,18 @@ function downloadImage(){
     this.href = imageUrl;
 }
 
+function reestablishImage()
+{
+    if (document.getElementById('inputFile').files[0] !== undefined)
+        loadImage();
+
+}
+
 ///////////////// FIN DE ZONA DE MANEJO DE CANVAS /////////////////
+
+///////////////// ZONA DE MANEJO DE HERRAMIENTAS /////////////////
+
+///////////////// FIN DE ZONA DE MANEJO DE HERRAMIENTAS /////////////////
 
 ///////////////// ZONA DE FILTROS /////////////////
 
