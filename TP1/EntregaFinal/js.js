@@ -359,8 +359,8 @@ function filterBlur(){
     //obtenemos la imagen
     let image = getImgData();
     //Recorrido pixel a pixel 
-    for (let x = 0; x < image.width; x++) {    
-        for (let y = 0; y < image.height; y++) {
+    for (let x = 1; x < image.width - 1 ; x++) {    
+        for (let y = 1; y < image.height - 1; y++) {
             //Calculamos los nuevos valores
             let r = promedioColor(image, x, y,0);
             let g = promedioColor(image, x, y,1);
