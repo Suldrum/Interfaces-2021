@@ -2,7 +2,9 @@
 
 /**
  * Lista de las cosas que falta:
- * Corregir/hacer descargar
+ * Poner canvas con fondo transparente/elegido
+ * Hacer correctamente reestablecer
+ * Hacer correctamente la carga/limpieza/estado basico de la pagina
  * Verificar que cuando se aplica un filtro solo lo haga una vez, filtros con este problema: Sepia, Brillo, Saturacion.
  * Filtro de Blur.
  * Decidir si el Blur trabajaran con rangos fijos o escala (tipo por rango)
@@ -41,6 +43,8 @@ let brightness = document.getElementById('rangeBright');
 brightness.addEventListener('change', function(){filterBright()});
 let saturation = document.getElementById('rangeSaturation');
 saturation.addEventListener('change', function(){filterSaturation()});
+let blured = document.getElementById('rangeBlur');
+blured.addEventListener('change', function(){filterBlur()});
 //HERRAMIENTAS
 let btnPencil = document.getElementById('buttonPencil');
 btnPencil.addEventListener('click', function(){changetool('Pencil')});
@@ -117,11 +121,12 @@ function loadImage(){
     reader.readAsDataURL(file);
 }
 
-//ARREGLAR #>.>
 function downloadImage(){
-    console.log("ajam");
-    let imageUrl = canvas.toDataURL("image/jpg");
+    //Devuelve la imagen del canvas en el formato especificado
+    let imageUrl = canvas.toDataURL("image/jpeg");
+    //Guarda la imagen de manera local
     this.href = imageUrl;
+
 }
 
 function reestablishImage()
@@ -350,6 +355,9 @@ function filterSaturation(){
 
 //Blur
 function filterBlur(){
+    let blurValue = "blur("+parseInt(document.getElementById('rangeBlur').value )+")px";
+ //   console.log(ctx.style.filter);
+    ctx.style.filter = blurValue;
 
 }
 
