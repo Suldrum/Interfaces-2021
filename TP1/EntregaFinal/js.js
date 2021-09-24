@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 /**
  * Lista de las cosas que falta:
  * Corregir/hacer descargar
@@ -23,13 +25,13 @@ let width = canvas.width;
 let height = canvas.height;
 let imageData = ctx.createImageData(width, height);
 let inputFile = document.getElementById('inputFile');
-let state = false;
-
+let tool = 'None';
 
 ///////////////// FIN DE ZONA DE ESCUCHA DE VARIABLE GLOBALES /////////////////
 
 ///////////////// ZONA DE ESCUCHA DE EVENTOS /////////////////
 
+//BOTONES DE FILTROS
 let btnNegative = document.getElementById('buttonNegative');
 btnNegative.addEventListener('click', filterNegative);
 let btnSepia = document.getElementById('buttonSepia');
@@ -38,9 +40,14 @@ let btnBinarization= document.getElementById('buttonBinarization');
 btnBinarization.addEventListener('click', filterBinarization);
 let btnSaturation = document.getElementById('buttonSaturation');
 btnSaturation.addEventListener('click', filterSaturation);
-
 let btnBlur = document.getElementById('buttonBlur');
 btnBlur.addEventListener('click', filterBlur);
+//BOTONES DE HERRAMIENTAS
+let btnPencil = document.getElementById('buttonPencil');
+btnPencil.addEventListener('click', function(){changetool('Pencil')});
+let btnEraser = document.getElementById('buttonEraser');
+btnEraser.addEventListener('click', function(){changetool('Eraser')});
+//BOTONES DE LA IMAGEN
 let fileImage = document.getElementById('inputFile');
 fileImage.addEventListener('change', loadImage);
 let btnNew = document.getElementById('buttonNew');
@@ -128,6 +135,94 @@ function reestablishImage()
 ///////////////// FIN DE ZONA DE MANEJO DE CANVAS /////////////////
 
 ///////////////// ZONA DE MANEJO DE HERRAMIENTAS /////////////////
+
+//Cambia el estado del puntero segun el estado que le llega, si le vuelve a llegar el mismo que ya tenia se queda en none (osea que sin estado/nada)
+function changetool(newTool)
+{
+    if (tool == newTool)
+        tool='None';
+    else
+        tool=newTool;
+}
+//Variables de coordenadas
+let x=0, y=0;
+//Variable para controlar cuando esta realmente dibujando o solo paseando por el canvas 
+let isDrawing = false;
+function draw(x, y, x1, y1){
+    //Se prepara para dibujar
+    ctx.beginPath();
+    //Punto inicial
+    ctx.moveTo(x, y);
+    //Punto final
+    ctx.lineTo(x1, y1);
+    //Lo dibuja
+    ctx.stroke();
+    //Termina de dibujar
+    ctx.closePath();
+}
+
+
+
+//Suelta el mouse por lo tanto se termina de dibujar
+canvas.addEventListener("mouseup",function(e){
+    if (isDrawing)
+    {
+        //Dibujo el punto final
+        draw(x, y, e.offsetX, e.offsetY);
+        //Reinicio los valores
+        x=0;
+        y=0;
+        //Se deja de dibujar
+        isDrawing = false;
+    }
+})
+
+//Mientras este dibujando y dentro del canvas dibujo
+canvas.addEventListener("mousemove",function(e){
+    if (isDrawing)
+    {  
+        //Dibujo desde las coordenadas almacenadas a las nuevas coordenadas
+        draw(x, y, e.offsetX, e.offsetY);
+        //Las viejas coordenadas se actualizan
+        x = e.offsetX;
+        y = e.offsetY;
+    }
+})
+
+//Si se sale del canvas se toma como que dejo de dibujar
+canvas.addEventListener("mouseleave",function(e){
+    isDrawing = false;
+})
+//Si hace click dentro del canvas
+canvas.addEventListener('mousedown', function(e){
+   //Si hay una herramienta seleccionada
+    if (tool !== "None")
+   {
+       //Setteo el ancho del trazado
+        setLineWidth(tool);
+        setStrokeColor(tool);
+        //Almaceno las coordenadas donde se hizo click con el mouse en el canvas 
+        x = e.offsetX;
+        y = e.offsetY;
+        //Tomo nota que se esta dibujando
+        isDrawing = true;
+    }
+});
+
+//Setteo el ancho del trazado
+function setLineWidth(tool)
+{
+    //Tomo el valor de ancho de la herramienta elegida
+    ctx.lineWidth = document.getElementById('range'+tool).value;
+}
+
+function setStrokeColor(tool){
+    console.log(ctx.strokeStyle);
+    if (tool == "Eraser")
+        ctx.strokeStyle = "#FFFFFF";
+    else
+        ctx.strokeStyle = document.getElementById('color'+tool).value;
+}
 
 ///////////////// FIN DE ZONA DE MANEJO DE HERRAMIENTAS /////////////////
 
