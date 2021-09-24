@@ -6,14 +6,14 @@
  * Hacer correctamente reestablecer
  * Hacer correctamente la carga/limpieza/estado basico de la pagina
  * Verificar que cuando se aplica un filtro solo lo haga una vez, filtros con este problema: Sepia, Brillo, Saturacion.
- * Filtro de Blur.
- * Decidir si el Blur trabajaran con rangos fijos o escala (tipo por rango)
  * Comentar mas el codigo
  * Pulir codigo
- * Decidir si puede volver un paso hacia atras
  * Hacer Reestablecer: devuelve la imagen a su estado original para no estarla resubiendo constantemente
  */
-
+// Ni bien se carga la página
+$(document).ready(function (){
+    cleanCanvas();
+});
 ///////////////// ZONA DE ESCUCHA DE VARIABLE GLOBALES /////////////////
 
 let canvas = document.getElementById('canvas');
@@ -43,8 +43,6 @@ let brightness = document.getElementById('rangeBright');
 brightness.addEventListener('change', function(){filterBright()});
 let saturation = document.getElementById('rangeSaturation');
 saturation.addEventListener('change', function(){filterSaturation()});
-let blured = document.getElementById('rangeBlur');
-blured.addEventListener('change', function(){filterBlur()});
 //HERRAMIENTAS
 let btnPencil = document.getElementById('buttonPencil');
 btnPencil.addEventListener('click', function(){changetool('Pencil')});
@@ -98,12 +96,11 @@ function cleanCanvas(){
 
 // Una vez elegida una imagen la carga al canvas y la adapta al tamaño del canvas
 function loadImage(){
-    cleanCanvas();
     let file = document.getElementById('inputFile').files[0];
     let reader = new FileReader();
     reader.onload = function(){ 
         let image = new Image();
-        //edita los valores de ancho y alto para no salirse del canvas
+        //edita los valores de ancho y alto para que se adapte al canvas
         image.onload = function(){ 
             if(height > width){
                 height = canvas.width * (1.0 * height) / width;
@@ -113,7 +110,8 @@ function loadImage(){
             }
             canvas.width = height;
             canvas.height = width;
-            ctx.drawImage(image,0,0,canvas.width, canvas.height);         
+            //Dibuja la imagen en el canvas haciendo que cubra todo su superficie
+            ctx.drawImage(image,0,0,canvas.width, canvas.height);       
             imageData = getImgData();
         }
         image.src = reader.result;
@@ -221,11 +219,10 @@ function setLineWidth(tool)
 }
 
 function setStrokeColor(tool){
-    console.log(ctx.strokeStyle);
     if (tool == "Eraser")
-        ctx.strokeStyle = "#FFFFFF";
+    { ctx.strokeStyle = "#FFFFFF";}    
     else
-        ctx.strokeStyle = document.getElementById('color'+tool).value;
+    { ctx.strokeStyle = document.getElementById('color'+tool).value;}   
 }
 
 ///////////////// FIN DE ZONA DE MANEJO DE HERRAMIENTAS /////////////////
@@ -236,7 +233,7 @@ function setStrokeColor(tool){
 function filterNegative() {    
     let image = getImgData();
     //Recorrido pixel a pixel 
-    for (let x = 0; x <= image.width; x++) {
+    for (let x = 0; x < image.width; x++) {
         for (let y = 0; y < image.height; y++) {
             let pixel = getPixel(image, x, y);
              //Creamos nuevos valores a partir de la resta entre 255 y los valores actuales
@@ -255,7 +252,7 @@ function filterSepia() {
     //obtenemos la imagen
     let image = getImgData();
     //Recorrido pixel a pixel 
-    for (let x = 0; x <= image.width; x++) {    
+    for (let x = 0; x < image.width; x++) {    
         for (let y = 0; y < image.height; y++) {
             //obtenemos la informacion del pixel
             let pixel = getPixel(image, x, y);   
@@ -275,7 +272,7 @@ function filterBinarization(){
     //obtenemos la imagen
     let image = getImgData();
     //Recorrido pixel a pixel 
-    for (let x = 0; x <= image.width; x++) {    
+    for (let x = 0; x < image.width; x++) {    
         for (let y = 0; y < image.height; y++) {
             //obtenemos la informacion del pixel
             let pixel = getPixel(image, x, y);
@@ -298,7 +295,7 @@ function filterBright()
      //Tomamos el valor del rango
      let bright = parseInt(document.getElementById('rangeBright').value );
     //Recorrido pixel a pixel 
-     for (let x = 0; x <= image.width; x++) {    
+     for (let x = 0; x < image.width; x++) {    
         for (let y = 0; y < image.height; y++) {
             //obtenemos la informacion del pixel
             let pixel = getPixel(image, x, y);
@@ -336,7 +333,7 @@ function filterSaturation(){
      //Tomamos el valor del rango
      let saturationValue = parseInt(document.getElementById('rangeSaturation').value );
     //Recorrido pixel a pixel 
-     for (let x = 0; x <= image.width; x++) {    
+     for (let x = 0; x < image.width; x++) {    
         for (let y = 0; y < image.height; y++) {
             //obtenemos la informacion del pixel
             let pixel = getPixel(image, x, y);
@@ -355,10 +352,79 @@ function filterSaturation(){
 
 //Blur
 function filterBlur(){
-    let blurValue = "blur("+parseInt(document.getElementById('rangeBlur').value )+")px";
- //   console.log(ctx.style.filter);
-    ctx.style.filter = blurValue;
+    //obtenemos la imagen
+    let image = getImgData();
+    //Recorrido pixel a pixel 
+    for (let x = 0; x < image.width; x++) {    
+        for (let y = 0; y < image.height; y++) {
+            //Calculamos los nuevos valores
+            let r = promedioColor(image, x, y,0);
+            let g = promedioColor(image, x, y,1);
+            let b = promedioColor(image, x, y,2);
+            //seteamos los nuevos valores
+            setPixel(image, x, y,r,g, b ,255);
+        }
+    }
+    putImgData(image);
+}
+function getIndex(imageData, x, y) {
+    let index = (x + y * imageData.width) * 4;
+    return index;
+  }
+function promedioColor(imageData, x, y,color)
+{
+    //Valores de la fila superior
+    let pixel0= imageData.data[getIndex(imageData, x-1, y-1) + color]; 
+    let pixel1= imageData.data[getIndex(imageData, x, y-1)+color];
+    let pixel2= imageData.data[getIndex(imageData, x+1, y-1)+color];
 
+   //Valores de la fila actual
+   let pixel3= imageData.data[getIndex(imageData, x-1, y)+color];
+   //Valor actual donde estoy en el for
+   let pixel4= imageData.data[getIndex(imageData, x, y)+color];
+   let pixel5= imageData.data[getIndex(imageData, x+1, y)+color];
+
+   //Valores de la fila inferior
+   let pixel6= imageData.data[getIndex(imageData, x-1, y+1)+color];
+   let pixel7= imageData.data[getIndex(imageData, x, y+1)+color];
+   let pixel8= imageData.data[getIndex(imageData, x+1, y+1)+color];
+
+   //Obtenemos el promedio del color
+   let prom = (pixel0+pixel1+pixel2+pixel3+pixel4+pixel5+pixel6+pixel7+pixel8)/9;
+   return  Math.floor(prom);
 }
 
 ///////////////// FIN DE ZONA DE FILTROS /////////////////
+
+/*
+
+var canvas_blur = document.querySelector(".canvas.blur");
+var pixelRatio = window.devicePixelRatio || 1;
+var c_w = parseInt(getComputedStyle(canvas_blur).width);
+var c_h = parseInt(getComputedStyle(canvas_blur).height);
+canvas_blur.width = c_w;
+canvas_blur.height = c_h;
+
+/*******************************************************************************/
+
+
+/*
+	initCanvas(canvas){
+		this.canvas = canvas;
+		this.ctx = canvas.getContext('2d');
+		let w = canvas.width;
+		let h = canvas.height;
+		this.canvas_off = document.createElement("canvas");
+		this.ctx_off = this.canvas_off.getContext("2d");
+		this.canvas_off.width = w;
+		this.canvas_off.height = h;
+		this.ctx_off.drawImage(canvas, 0, 0);
+	}
+	recoverCanvas(){
+		let w = this.canvas_off.width;
+		let h = this.canvas_off.height;
+		this.canvas.width = w;
+		this.canvas.height = h;
+		this.ctx.drawImage(this.canvas_off,0,0);
+	}
+    */
