@@ -459,7 +459,6 @@ function promedioColor(imageData, x, y,color)
 
    //Obtenemos el promedio del color
    let prom = (pixel0+pixel1+pixel2+pixel3+pixel4+pixel5+pixel6+pixel7+pixel8)/9;
-   //Devuelvo un valor entero porque no existe valores decimales
    return Math.floor(prom);
 }
 
