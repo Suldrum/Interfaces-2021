@@ -2,21 +2,25 @@
 
 /**
  * Lista de las cosas que falta:
- * Verificar la correcta aplicacion del filtro de Saturacion.
  * Comentar mas el codigo
  * Pulir codigo
  */
 // Ni bien se carga la página
 $(document).ready(function (){
     cleanCanvas();
-    document.getElementById('rangeSaturation').value = 0;
+    loadFiltersDefaults();
     document.getElementById('rangePencil').value= 3;
     document.getElementById('rangeEraser').value = 5;
-    document.getElementById('rangeBright').value = 0;
-    document.getElementById('inputFile').value = "";
     document.getElementById('colorPencil').value = "#000000";
+    document.getElementById('inputFile').value = "";
     ctxOriginal.clearRect(0, 0,ctxOriginal.width, ctxOriginal.height);
 });
+
+function loadFiltersDefaults()
+{
+    document.getElementById('rangeSaturation').value = 0;
+    document.getElementById('rangeBright').value = 0;
+}
 ///////////////// ZONA DE ESCUCHA DE VARIABLE GLOBALES /////////////////
 
 let canvas = document.getElementById('canvas');
@@ -145,14 +149,12 @@ function reestablishImage()
 {
     if (document.getElementById('inputFile').files[0] !== undefined)
     {
-        console.log(width+"width");
-        console.log(canvasOriginal.width+"canvasOriginal.width");
-        console.log(canvas.width+"canvas.width");
         width = canvasOriginal.width;
 		height = canvasOriginal.height;
 		canvas.width = width;
 		canvas.height = height;
 		ctx.drawImage(canvasOriginal,0,0,canvas.width,canvas.height);
+        loadFiltersDefaults();
     }
 
 }
@@ -351,6 +353,7 @@ function validatePixel(pixel, value)
 
 //Saturacion
 function filterSaturation(){
+
     //obtenemos la imagen
     let image = getImgDataOriginal();
      //Tomamos el valor del rango
@@ -366,11 +369,11 @@ function filterSaturation(){
             let r = validatePixel(pixel[0] * (1+saturationValue), gray * saturationValue);
             let g = validatePixel(pixel[1] * (1+saturationValue), gray * saturationValue);
             let b = validatePixel(pixel[2] * (1+saturationValue), gray * saturationValue);
-             //seteamos los nuevos valores
             setPixel(image, x, y,r,g, b ,255);
         }
     }
     putImgData(image);
+
 }
 
 //Blur
