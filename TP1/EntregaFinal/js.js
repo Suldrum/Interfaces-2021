@@ -1,18 +1,9 @@
 'use strict';
 
-// Ni bien se carga la página acomodo a todos sus valores por defecto
+// Ni bien se carga la página me aseguro que este en su estado por defecto
 $(document).ready(function (){
-    //limpio el canvas los dos canvas para evitar problemas con la cache
-    cleanCanvas(ctx);
-    cleanCanvas(ctxOriginal);
-    //Acomodo los rangos de los filtros
-    loadFiltersDefaults();
-    //Acomodo los valores de las herramientas
-    document.getElementById('rangePencil').value= 3;
-    document.getElementById('rangeEraser').value = 5;
-    document.getElementById('colorPencil').value = "#000000";
-    //Limpio el valor del input donde se elige la imagen
-    document.getElementById('inputFile').value = "";
+    //Funcion que encargada de invocar todas las funciones de defaults
+    startNewCanvas();
 });
 
 //Funcion para cargar los valores por defecto de los rangos de los filtros
@@ -20,6 +11,29 @@ function loadFiltersDefaults()
 {
     document.getElementById('rangeSaturation').value = 0;
     document.getElementById('rangeBright').value = 0;
+}
+
+//Funcion para cargar los valores por defecto de las herramientas
+function loadToolsDefaults()
+{
+    //Acomodo los valores de las herramientas
+    document.getElementById('rangePencil').value= 3;
+    document.getElementById('rangeEraser').value = 5;
+    document.getElementById('colorPencil').value = "#000000";
+    //Limpio el valor del input donde se elige la imagen
+    document.getElementById('inputFile').value = "";
+}
+
+//Funcion que carga todos los valores por defecto
+function startNewCanvas()
+{
+    //limpio el canvas los dos canvas para evitar problemas con la cache
+    clearCanvas(ctx);
+    clearCanvas(ctxOriginal);
+    //Cargo los valores por defecto de los filtros
+    loadFiltersDefaults();
+    //Cargo los valores por defecto de las herramientas
+    loadToolsDefaults();
 }
 ///////////////// ZONA DE VARIABLE GLOBALES /////////////////
 
@@ -68,7 +82,7 @@ let fileImage = document.getElementById('inputFile');
 fileImage.addEventListener('change', loadImage);
 //FUNCIONES DE LA PAGINA
 let btnNew = document.getElementById('buttonNew');
-btnNew.addEventListener('click', cleanCanvas(ctx));
+btnNew.addEventListener('click', startNewCanvas);
 let btnReestablish= document.getElementById('buttonReestablish');
 btnReestablish.addEventListener('click', reestablishImage);
 let btnDownload = document.getElementById('buttonDownload');
@@ -169,8 +183,8 @@ function putImgData(image){
 }
 
 //Limpia el canvas
-function cleanCanvas(ctxType){
-    ctxType.clearRect(0, 0,canvas.width, canvas.height);
+function clearCanvas(ctxType){
+    ctxType.clearRect(0, 0,canvas.width, canvas.width);
 }
 
 //Una vez elegida una imagen la carga al canvas
@@ -179,11 +193,14 @@ function loadImage(){
     let reader = new FileReader();
     reader.onload = function(){ 
         let image = new Image();
-        image.onload = function(){ 
+        image.onload = function(){
+            //Elimino las imagenes viejas
+            clearCanvas(ctx);
+            clearCanvas(ctxOriginal);
             //Dibuja la imagen en el canvas haciendo que cubra todo su superficie
             ctx.drawImage(image,0,0,canvas.width, canvas.height);       
             //La guardo tambien en un canvas auxiliar
-            ctxOriginal.drawImage(image,0,0,canvasOriginal.width,canvasOriginal.height);
+            ctxOriginal.drawImage(image,0,0,canvas.width,canvas.width);
         }
         image.src = reader.result;
     }; 
