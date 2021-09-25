@@ -22,18 +22,24 @@ function loadToolsDefaults()
     document.getElementById('colorPencil').value = "#000000";
     //Limpio el valor del input donde se elige la imagen
     document.getElementById('inputFile').value = "";
+    tool = 'None';
+}
+
+//Funcion que carga todas las funciones que setean los valores por defecto
+function loadAllDefaults()
+{
+    loadToolsDefaults();
+    loadFiltersDefaults();
 }
 
 //Funcion que carga todos los valores por defecto
 function startNewCanvas()
 {
-    //limpio el canvas los dos canvas para evitar problemas con la cache
+    //Limpio el canvas los dos canvas para evitar problemas con la cache
     clearCanvas(ctx);
     clearCanvas(ctxOriginal);
-    //Cargo los valores por defecto de los filtros
-    loadFiltersDefaults();
-    //Cargo los valores por defecto de las herramientas
-    loadToolsDefaults();
+    //Cargo todos los valores por defecto
+    loadAllDefaults()();
 }
 ///////////////// ZONA DE VARIABLE GLOBALES /////////////////
 
@@ -197,6 +203,8 @@ function loadImage(){
             //Elimino las imagenes viejas
             clearCanvas(ctx);
             clearCanvas(ctxOriginal);
+            //Vuelvo a acomodar los rangos de los filtros
+            loadFiltersDefaults();
             //Dibuja la imagen en el canvas haciendo que cubra todo su superficie
             ctx.drawImage(image,0,0,canvas.width, canvas.height);       
             //La guardo tambien en un canvas auxiliar
@@ -372,6 +380,7 @@ function filterSaturation(){
     let image = getImgData(ctxOriginal);
      //Tomamos el valor del rango
      let saturationValue = parseInt(document.getElementById('rangeSaturation').value );
+     saturationValue = ((saturationValue < 0)?  (saturationValue/10) : saturationValue);
     //Recorrido pixel a pixel 
      for (let x = 0; x < image.width; x++) {    
         for (let y = 0; y < image.height; y++) {
