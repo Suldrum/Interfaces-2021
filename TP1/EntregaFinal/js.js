@@ -1,5 +1,9 @@
 'use strict';
-
+/**
+ * 
+ * RAMA GH-PAGES
+ * 
+ */
 // Ni bien se carga la página me aseguro que este en su estado por defecto
 $(document).ready(function (){
     //Funcion que encargada de invocar todas las funciones de defaults
