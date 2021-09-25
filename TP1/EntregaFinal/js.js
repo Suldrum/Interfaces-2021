@@ -30,8 +30,8 @@ let ctx = canvas.getContext('2d');
 let canvasOriginal = document.createElement('canvas');
 let ctxOriginal  = canvasOriginal.getContext('2d');
 //Seteo de propiedades al canvas auxiliar
-ctxOriginal.width = canvas.width;
-ctxOriginal.height= canvas.height;
+canvasOriginal.width = canvas.width;
+canvasOriginal.height= canvas.height;
 //Input donde se recibira la imagen
 let inputFile = document.getElementById('inputFile');
 //Esta variable tendra la funcion de mantener la informacion sobre que herramienta se encuentra activa, por default no tendra ninguna
