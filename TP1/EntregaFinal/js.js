@@ -336,7 +336,7 @@ function filterBright()
         for (let y = 0; y < image.height; y++) {
             //obtenemos la informacion del pixel
             let pixel = getPixel(image, x, y);
-            //Calculamos los nuevos valores
+            //Calculamos los nuevos valores segun la formula pasada en la clase del 22/9/2021
             let r = validatePixel(pixel[0], bright);
             let g = validatePixel(pixel[1], bright);
             let b = validatePixel(pixel[2], bright);
