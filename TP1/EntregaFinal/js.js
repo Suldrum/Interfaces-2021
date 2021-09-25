@@ -2,7 +2,7 @@
 
 /**
  * Lista de las cosas que falta:
- * Verificar que cuando se aplica un filtro solo lo haga una vez, filtros con este problema: Sepia, Brillo, Saturacion.
+ * Verificar la correcta aplicacion del filtro de Saturacion.
  * Comentar mas el codigo
  * Pulir codigo
  */
@@ -89,6 +89,10 @@ function setPixel(imageData, x, y, r, g, b, a) {
 
 function getImgData() {
     return ctx.getImageData( 0, 0, canvas.width, canvas.height );
+}
+
+function getImgDataOriginal() {
+    return ctxOriginal.getImageData( 0, 0, canvas.width, canvas.height );
 }
 
 function putImgData(image){
@@ -250,7 +254,7 @@ function setStrokeColor(tool){
 
 //Negativo
 function filterNegative() {    
-    let image = getImgData();
+    let image = getImgDataOriginal();
     //Recorrido pixel a pixel 
     for (let x = 0; x < image.width; x++) {
         for (let y = 0; y < image.height; y++) {
@@ -269,7 +273,7 @@ function filterNegative() {
 //Sepia
 function filterSepia() {
     //obtenemos la imagen
-    let image = getImgData();
+    let image = getImgDataOriginal();
     //Recorrido pixel a pixel 
     for (let x = 0; x < image.width; x++) {    
         for (let y = 0; y < image.height; y++) {
@@ -289,7 +293,7 @@ function filterSepia() {
 //Binarizacion
 function filterBinarization(){
     //obtenemos la imagen
-    let image = getImgData();
+    let image = getImgDataOriginal();
     //Recorrido pixel a pixel 
     for (let x = 0; x < image.width; x++) {    
         for (let y = 0; y < image.height; y++) {
@@ -310,7 +314,7 @@ function filterBinarization(){
 function filterBright()
 {
     //obtenemos la imagen
-    let image = getImgData();
+    let image = getImgDataOriginal();
      //Tomamos el valor del rango
      let bright = parseInt(document.getElementById('rangeBright').value );
     //Recorrido pixel a pixel 
@@ -348,7 +352,7 @@ function validatePixel(pixel, value)
 //Saturacion
 function filterSaturation(){
     //obtenemos la imagen
-    let image = getImgData();
+    let image = getImgDataOriginal();
      //Tomamos el valor del rango
      let saturationValue = parseInt(document.getElementById('rangeSaturation').value );
     //Recorrido pixel a pixel 
@@ -414,36 +418,3 @@ function promedioColor(imageData, x, y,color)
 }
 
 ///////////////// FIN DE ZONA DE FILTROS /////////////////
-
-/*
-
-var canvas_blur = document.querySelector(".canvas.blur");
-var pixelRatio = window.devicePixelRatio || 1;
-var c_w = parseInt(getComputedStyle(canvas_blur).width);
-var c_h = parseInt(getComputedStyle(canvas_blur).height);
-canvas_blur.width = c_w;
-canvas_blur.height = c_h;
-
-/*******************************************************************************/
-
-
-/*
-	initCanvas(canvas){
-		this.canvas = canvas;
-		this.ctx = canvas.getContext('2d');
-		let w = canvas.width;
-		let h = canvas.height;
-		this.canvas_off = document.createElement("canvas");
-		this.ctx_off = this.canvas_off.getContext("2d");
-		this.canvas_off.width = w;
-		this.canvas_off.height = h;
-		this.ctx_off.drawImage(canvas, 0, 0);
-	}
-	recoverCanvas(){
-		let w = this.canvas_off.width;
-		let h = this.canvas_off.height;
-		this.canvas.width = w;
-		this.canvas.height = h;
-		this.ctx.drawImage(this.canvas_off,0,0);
-	}
-    */
