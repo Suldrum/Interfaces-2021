@@ -389,12 +389,14 @@ function filterBright()
 
 //Saturacion
 function filterSaturation(){
-
+    
     //obtenemos la imagen
     let image = getImgData(ctxOriginal);
-     //Tomamos el valor del rango
-     let saturationValue = parseInt(document.getElementById('rangeSaturation').value );
-     saturationValue = ((saturationValue < 0)?  (saturationValue/10) : saturationValue);
+    //Tomamos el valor del rango
+    let saturationValue = parseInt(document.getElementById('rangeSaturation').value );
+    //Tomamos el minimo valor de saturacion
+    let saturationMin = parseInt(document.getElementById('rangeSaturation').min) * (-1);
+    saturationValue = ((saturationValue < 0)? (saturationValue/saturationMin) : (  saturationValue ));
     //Recorrido pixel a pixel 
      for (let x = 0; x < image.width; x++) {    
         for (let y = 0; y < image.height; y++) {
@@ -473,7 +475,7 @@ function promedioColor(imageData, x, y,color)
 
    //Obtenemos el promedio del color
    let prom = (pixel0+pixel1+pixel2+pixel3+pixel4+pixel5+pixel6+pixel7+pixel8)/9;
-   return Math.floor(prom);
+   return prom;
 }
 
 ///////////////// FIN ZONA DE FUNCIONES AUXILIARES PARA LOS FILTROS /////////////////
