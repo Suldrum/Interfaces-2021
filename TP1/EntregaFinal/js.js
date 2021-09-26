@@ -138,17 +138,6 @@ canvas.addEventListener("mouseout",function(e){
     }
 });
 
-//Si se vuelve a entrar al canvas mientras esta dibujando
-canvas.addEventListener("mouseenter",function(e){
-    //Dibujo la ultima linea
-    if (isDrawing)
-    {  
-        draw(x, y, e.offsetX, e.offsetY);
-        x = e.offsetX;
-        y = e.offsetY;
-    }
-});
-
 //Si hace click dentro del canvas
 canvas.addEventListener('mousedown', function(e){
    //Si hay una herramienta seleccionada
