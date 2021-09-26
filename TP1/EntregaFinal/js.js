@@ -43,7 +43,7 @@ function startNewCanvas()
     clearCanvas(ctx);
     clearCanvas(ctxOriginal);
     //Cargo todos los valores por defecto
-    loadAllDefaults()();
+    loadAllDefaults();
 }
 ///////////////// ZONA DE VARIABLE GLOBALES /////////////////
 
@@ -112,7 +112,7 @@ canvas.addEventListener("mouseup",function(e){
         //Se deja de dibujar
         isDrawing = false;
     }
-})
+});
 
 //Mientras este dibujando y dentro del canvas dibujo
 canvas.addEventListener("mousemove",function(e){
@@ -124,12 +124,30 @@ canvas.addEventListener("mousemove",function(e){
         x = e.offsetX;
         y = e.offsetY;
     }
-})
+});
 
-//Si se sale del canvas se toma como que dejo de dibujar
-canvas.addEventListener("mouseleave",function(e){
-    isDrawing = false;
-})
+//Si se sale del canvas mientras esta dibujando me encargo de dibujar hasta el borde
+canvas.addEventListener("mouseout",function(e){
+    //Dibujo la ultima linea
+    if (isDrawing)
+    {  
+        draw(x, y, e.offsetX, e.offsetY);
+        x = e.offsetX;
+        y = e.offsetY;
+        isDrawing = false;
+    }
+});
+
+//Si se vuelve a entrar al canvas mientras esta dibujando
+canvas.addEventListener("mouseenter",function(e){
+    //Dibujo la ultima linea
+    if (isDrawing)
+    {  
+        draw(x, y, e.offsetX, e.offsetY);
+        x = e.offsetX;
+        y = e.offsetY;
+    }
+});
 
 //Si hace click dentro del canvas
 canvas.addEventListener('mousedown', function(e){
@@ -145,6 +163,9 @@ canvas.addEventListener('mousedown', function(e){
         y = e.offsetY;
         //Tomo nota que se esta dibujando
         isDrawing = true;
+        //Dibujo el primer punto o punto
+        ctx.strokeRect(x,y,1,1); 
+
     }
 });
 
