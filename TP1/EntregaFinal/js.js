@@ -418,7 +418,7 @@ function filterSaturation(){
 //Blur
 function filterBlur(){
     //obtenemos la imagen
-    let image = getImgData(ctx);
+    let image = getImgData(ctxOriginal);
     //Recorrido pixel a pixel 
     for (let x = 1; x < image.width - 1 ; x++) {    
         for (let y = 1; y < image.height - 1; y++) {
