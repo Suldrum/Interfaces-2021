@@ -3,6 +3,11 @@
  * 
  * RAMA MASTER
  * 
+ * A CORREGIR:
+ * Blur con deslizador
+ * Mas frontend que no scrolle, ugh 
+ * Corregir cuando entran imagenes no se deforme, aspect radio y resolucion, cuidado al descargar
+ * Que los rangos de las cosas si no se esta tocando esten en 0
  */
 // Ni bien se carga la página me aseguro que este en su estado por defecto
 $(document).ready(function (){
@@ -15,6 +20,7 @@ function loadFiltersDefaults()
 {
     document.getElementById('rangeSaturation').value = 0;
     document.getElementById('rangeBright').value = 0;
+    document.getElementById('rangeBlur').value = 0;
 }
 
 //Funcion para cargar los valores por defecto de las herramientas
@@ -76,8 +82,9 @@ let btnSepia = document.getElementById('buttonSepia');
 btnSepia.addEventListener('click', filterSepia);
 let btnBinarization= document.getElementById('buttonBinarization');
 btnBinarization.addEventListener('click', filterBinarization);
-let btnBlur = document.getElementById('buttonBlur');
-btnBlur.addEventListener('click', filterBlur);
+let blured = document.getElementById('rangeBlur');
+blured.addEventListener('change',function(){filterBlur(this.value)});
+//btnBlur.addEventListener('click', filterBlur);
 let brightness = document.getElementById('rangeBright');
 brightness.addEventListener('change', function(){filterBright()});
 let saturation = document.getElementById('rangeSaturation');
@@ -184,7 +191,7 @@ function getPixel(imageData, x, y) {
 //Modifica un pixel que se encuentra en la posicion (x, y) de una imagen pasada por parametro segun los valores r, g, b, a que recibidos
 function setPixel(imageData, x, y, r, g, b, a) {
     //Se selecciona el pixel
-    let index = (x + y * imageData.width) * 4;
+    let index = getIndex(imageData, x, y);
     //El pixel recibe sus nuevos valores en la posicion correspondiente
     imageData.data[index + 0] = r;
     imageData.data[index + 1] = g;
@@ -416,21 +423,37 @@ function filterSaturation(){
 }
 
 //Blur
-function filterBlur(){
-    //obtenemos la imagen
+
+//Crea el efecto de blur segun el valor elegido
+function filterBlur(value){
+    //control para no salirse
+    if (value > 10)
+    {
+        value = 10;
+    }
+     //obtenemos la imagen
     let image = getImgData(ctxOriginal);
-    //Recorrido pixel a pixel 
+    //Altera la imagen aplicando el efecto de blur tantas veces como indica el valor que le llega por parametro
+    for (let i = 0; i < value ; i++) {  
+        effectBlur(image);
+    }
+    //ponemos la imagen filtreada en el canvas
+    putImgData(image);
+}
+
+//Genera el efecto de blur en cada pixel de una imagen
+function effectBlur(image){
+    //Recorrido pixel a pixel
     for (let x = 1; x < image.width - 1 ; x++) {    
         for (let y = 1; y < image.height - 1; y++) {
             //Calculamos los nuevos valores
-            let r = promedioColor(image, x, y,0);
-            let g = promedioColor(image, x, y,1);
-            let b = promedioColor(image, x, y,2);
+            let r = areaColor(image, x, y,0) /9 ;
+            let g = areaColor(image, x, y,1) /9;
+            let b = areaColor(image, x, y,2) /9;
             //seteamos los nuevos valores
             setPixel(image, x, y,r,g, b ,255);
         }
     }
-    putImgData(image);
 }
 
 
@@ -454,28 +477,29 @@ function validatePixel(pixel, value)
         return pixel+value ;
 }
 
-//Funcion auxiliar para el filtrado de Blur, devuelve el promedio de un color en un area de 3x3 con la posicion central siendo (x,y) de la imagen
-function promedioColor(imageData, x, y,color)
+//Funcion auxiliar para el filtrado de Blur, devuelve la suma total de un color en un area de 3x3 con la posicion central siendo (x,y) de la imagen
+function areaColor(imageData, x, y,color)
 {
+    //acumulador donde sumo el valor del color en cada pixel revisado
+    let area = 0;
     //Valores de la fila superior
-    let pixel0= imageData.data[getIndex(imageData, x-1, y-1) + color]; 
-    let pixel1= imageData.data[getIndex(imageData, x, y-1)+color];
-    let pixel2= imageData.data[getIndex(imageData, x+1, y-1)+color];
+    area += imageData.data[getIndex(imageData, x-1, y-1) + color]; 
+    area += imageData.data[getIndex(imageData, x, y-1)+color];
+    area += imageData.data[getIndex(imageData, x+1, y-1)+color];
 
    //Valores de la fila actual
-   let pixel3= imageData.data[getIndex(imageData, x-1, y)+color];
-   //Valor actual donde estoy en el for
-   let pixel4= imageData.data[getIndex(imageData, x, y)+color];
-   let pixel5= imageData.data[getIndex(imageData, x+1, y)+color];
+   area += imageData.data[getIndex(imageData, x-1, y)+color];
+   //Valor actual donde estoy en el for que invoca esta funcion
+   area += imageData.data[getIndex(imageData, x, y)+color];
+   area += imageData.data[getIndex(imageData, x+1, y)+color];
 
    //Valores de la fila inferior
-   let pixel6= imageData.data[getIndex(imageData, x-1, y+1)+color];
-   let pixel7= imageData.data[getIndex(imageData, x, y+1)+color];
-   let pixel8= imageData.data[getIndex(imageData, x+1, y+1)+color];
+   area += imageData.data[getIndex(imageData, x-1, y+1)+color];
+   area += imageData.data[getIndex(imageData, x, y+1)+color];
+   area += imageData.data[getIndex(imageData, x+1, y+1)+color];
 
-   //Obtenemos el promedio del color
-   let prom = (pixel0+pixel1+pixel2+pixel3+pixel4+pixel5+pixel6+pixel7+pixel8)/9;
-   return prom;
+   //Obtenemos la suma total del color
+   return area;
 }
 
 ///////////////// FIN ZONA DE FUNCIONES AUXILIARES PARA LOS FILTROS /////////////////
