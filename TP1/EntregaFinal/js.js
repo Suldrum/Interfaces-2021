@@ -35,9 +35,20 @@ function loadToolsDefaults()
     tool = 'None';
 }
 
+function loadCanvasDefaults()
+{
+    //Setea el canvas con su ancho y alto por defecto
+    canvas.width = 600 ;
+    canvas.height = 600 ;
+    //Limpia el canvas y el canvas en memoria
+    clearCanvas(ctx);
+    clearCanvas(ctxOriginal);
+}
+
 //Funcion que carga todas las funciones que setean los valores por defecto
 function loadAllDefaults()
 {
+    loadCanvasDefaults();
     loadToolsDefaults();
     loadFiltersDefaults();
 }
@@ -45,9 +56,6 @@ function loadAllDefaults()
 //Funcion que carga todos los valores por defecto
 function startNewCanvas()
 {
-    //Limpio el canvas los dos canvas para evitar problemas con la cache
-    clearCanvas(ctx);
-    clearCanvas(ctxOriginal);
     //Cargo todos los valores por defecto
     loadAllDefaults();
 }
@@ -221,18 +229,21 @@ function loadImage(){
     reader.onload = function(){ 
         let image = new Image();
         image.onload = function(){
-            //Elimino las imagenes viejas
-            clearCanvas(ctx);
-            clearCanvas(ctxOriginal);
-            //Vuelvo a acomodar los rangos de los filtros
+            //Vuelvo a cargar los valores por defecto del canvas y los filtros
+            loadCanvasDefaults();
             loadFiltersDefaults();
-            //Dibuja la imagen en el canvas haciendo que cubra todo su superficie
+            //Calculo una escala basada en el tamaño del canvas y de la imagen para mantener el aspecto de la imagen que se muestra
+            let scale = Math.min(canvas.width / image.width, canvas.height / image.height);
+            //Reacomoda el tamaño del canvas
+            canvas.width = image.width * scale;
+            canvas.height = image.height * scale;   
+            //Dibuja la imagen en el canvas
             ctx.drawImage(image,0,0,canvas.width, canvas.height);       
             //La guardo tambien en un canvas auxiliar
-            ctxOriginal.drawImage(image,0,0,canvas.width,canvas.width);
+            ctxOriginal.drawImage(image,0,0,canvas.width,canvas.height);
         }
         image.src = reader.result;
-    }; 
+    };
     reader.readAsDataURL(file);
 }
 
