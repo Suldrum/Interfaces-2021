@@ -241,6 +241,10 @@ function loadImage(){
             ctx.drawImage(image,0,0,canvas.width, canvas.height);       
             //La guardo tambien en un canvas auxiliar
             ctxOriginal.drawImage(image,0,0,canvas.width,canvas.height);
+            //Guardo el tamaño real de la imagen en el boton de descarga
+            let download = document.getElementById('buttonDownload');
+            download.setAttribute('width',image.width);
+            download.setAttribute('height',image.height);
         }
         image.src = reader.result;
     };
@@ -249,8 +253,18 @@ function loadImage(){
 
 //Da la opcion de descargar la imagen en la carpeta default de descarga de la computadora donde se ejecuta la pagina
 function downloadImage(){
-    //Devuelve la imagen del canvas en el formato especificado
-    let imageUrl = canvas.toDataURL("image/jpeg");
+    //Creo un canvas auxiliar para la descarga, este se elimina una vez termina la funcion
+    let canvasDownload = document.createElement('canvas');
+    let ctxDownload  = canvasDownload.getContext('2d');
+    //Elemento donde se guardaron los valores originales
+    let download = document.getElementById('buttonDownload');
+    //Seteo de propiedades el tamaño original
+    canvasDownload.width = download.getAttribute('width');
+    canvasDownload.height= download.getAttribute('height');
+    //Redibujo la imagen a descargar con el tamaño original
+    ctxDownload.drawImage(canvas,0,0, canvasDownload.width,canvasDownload.height);
+    //Imagen a formato jpeg
+    let imageUrl = canvasDownload.toDataURL("image/jpeg");
     //Guarda la imagen de manera local
     this.href = imageUrl;
 }
