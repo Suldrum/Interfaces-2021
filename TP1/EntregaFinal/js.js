@@ -12,6 +12,8 @@ $(document).ready(function (){
     loadAllDefaults();
 });
 
+///////////////// ZONA DE FUNCIONES DEFAULTS /////////////////
+
 //Funcion para cargar los valores por defecto de los rangos de los filtros
 function loadFiltersDefaults()
 {
@@ -32,6 +34,7 @@ function loadToolsDefaults()
     tool = 'None';
 }
 
+//Funcion que devuelve el canvas y el tamaño de descarga de la imagen a sus valores por defecto
 function loadCanvasDefaults()
 {
     //Setea el canvas con su ancho y alto por defecto
@@ -54,14 +57,7 @@ function loadAllDefaults()
     loadFiltersDefaults();
 }
 
-//Vuelve a esta default todos los filtros menos el filtro que le llega por parametro y devuelve el valor del rango del filtro elegido como entero algo muy importante porque sino se rompe todo
-function cleanRangeFilters(filter)
-{
-    let value= parseInt(filter.value) ;
-    loadFiltersDefaults();
-    filter.value = value;
-    return value;
-}
+///////////////// FIN ZONA DE FUNCIONES DEFAULTS /////////////////
 
 ///////////////// ZONA DE VARIABLE GLOBALES /////////////////
 
@@ -143,12 +139,11 @@ canvas.addEventListener("mousemove",function(e){
 
 //Si se sale del canvas mientras esta dibujando me encargo de dibujar hasta el borde
 canvas.addEventListener("mouseout",function(e){
-    //Dibujo la ultima linea
     if (isDrawing)
     {  
+        //Dibujo la ultima linea
         draw(x, y, e.offsetX, e.offsetY);
-        x = e.offsetX;
-        y = e.offsetY;
+        //Se deja de dibujar
         isDrawing = false;
     }
 });
@@ -167,7 +162,7 @@ canvas.addEventListener('mousedown', function(e){
         y = e.offsetY;
         //Tomo nota que se esta dibujando
         isDrawing = true;
-        //Dibujo el primer punto o punto
+        //Dibujo el primer punto / punto
         ctx.strokeRect(x,y,1,1); 
 
     }
@@ -234,14 +229,14 @@ function loadImage(){
             loadFiltersDefaults();
             //Calculo una escala basada en el tamaño del canvas y de la imagen para mantener el aspecto de la imagen que se muestra
             let scale = Math.min(canvas.width / image.width, canvas.height / image.height);
-            //Reacomoda el tamaño de los canvas
+            //Reacomoda el tamaño de los canvas que se ve por pantalla y del canvas que almacenara la imagen original
             canvas.width = image.width * scale;
             canvas.height = image.height * scale;
             canvasOriginal.width = canvas.width;
             canvasOriginal.height = canvas.height ;
             //Dibuja la imagen en el canvas
             ctx.drawImage(image,0,0,canvas.width, canvas.height);       
-            //La guardo tambien en un canvas auxiliar
+            //La guardo en el canvas auxiliar
             ctxOriginal.drawImage(image,0,0,canvas.width,canvas.height);
             //Guardo el tamaño real de la imagen en el boton de descarga
             let download = document.getElementById('buttonDownload');
@@ -290,7 +285,7 @@ function reestablishImage()
 
 ///////////////// ZONA DE MANEJO DE HERRAMIENTAS /////////////////
 
-//Cambia el estado de la tool segun la nueva herramienta que le llega
+//Cambia la herramienta actual segun la nueva herramienta que le llega
 function changetool(newTool)
 {
     //Si vuelve a elegir la misma herramienta se considera que la dejo de usar
@@ -486,6 +481,19 @@ function effectBlur(image){
 ///////////////// FIN DE ZONA DE FILTROS /////////////////
 
 ///////////////// ZONA DE FUNCIONES AUXILIARES PARA LOS FILTROS /////////////////
+
+//Vuelve a esta default todos los filtros menos el filtro que le llega por parametro y devuelve el valor del rango del filtro elegido como parseInt algo muy importante porque sino se rompe todo
+function cleanRangeFilters(filter)
+{
+    //Guardo en un auxiliar el valor que terminare por devolver
+    let value= parseInt(filter.value);
+    //Todo vuelve a su estado por defecto
+    loadFiltersDefaults();
+    //Dejo puesto el filtro elegido como estaba
+    filter.value = value;
+    //Devuelvo el valor
+    return value;
+}
 
 //Verifica que luego de una operacion de suma se retorne un valor valido para un pixel
 function validatePixel(pixel, value)
