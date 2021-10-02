@@ -4,15 +4,12 @@
  * RAMA MASTER
  * 
  * A CORREGIR:
- * Blur con deslizador
  * Mas frontend que no scrolle, ugh 
- * Corregir cuando entran imagenes no se deforme, aspect radio y resolucion, cuidado al descargar
- * Que los rangos de las cosas si no se esta tocando esten en 0
  */
 // Ni bien se carga la página me aseguro que este en su estado por defecto
 $(document).ready(function (){
     //Funcion que encargada de invocar todas las funciones de defaults
-    startNewCanvas();
+    loadAllDefaults();
 });
 
 //Funcion para cargar los valores por defecto de los rangos de los filtros
@@ -43,6 +40,10 @@ function loadCanvasDefaults()
     //Limpia el canvas y el canvas en memoria
     clearCanvas(ctx);
     clearCanvas(ctxOriginal);
+    //Setea los valores de la descarga
+    let download = document.getElementById('buttonDownload');
+    download.setAttribute('width',canvas.width);
+    download.setAttribute('height',canvas.height);
 }
 
 //Funcion que carga todas las funciones que setean los valores por defecto
@@ -53,12 +54,15 @@ function loadAllDefaults()
     loadFiltersDefaults();
 }
 
-//Funcion que carga todos los valores por defecto
-function startNewCanvas()
+//Vuelve a esta default todos los filtros menos el filtro que le llega por parametro y devuelve el valor del rango del filtro elegido como entero algo muy importante porque sino se rompe todo
+function cleanRangeFilters(filter)
 {
-    //Cargo todos los valores por defecto
-    loadAllDefaults();
+    let value= parseInt(filter.value) ;
+    loadFiltersDefaults();
+    filter.value = value;
+    return value;
 }
+
 ///////////////// ZONA DE VARIABLE GLOBALES /////////////////
 
 //Canvas donde se veran por pantallas los cambios realizados a la imagen que se agrega a la pagina y los dibujos que se hagan a con las herramientas
@@ -67,11 +71,6 @@ let ctx = canvas.getContext('2d');
 //Canvas auxiliar que mantendra la informacion original de la imagen que se agrego a la pagina
 let canvasOriginal = document.createElement('canvas');
 let ctxOriginal  = canvasOriginal.getContext('2d');
-//Seteo de propiedades al canvas auxiliar
-canvasOriginal.width = canvas.width;
-canvasOriginal.height= canvas.height;
-//Input donde se recibira la imagen
-let inputFile = document.getElementById('inputFile');
 //Esta variable tendra la funcion de mantener la informacion sobre que herramienta se encuentra activa, por default no tendra ninguna
 let tool = 'None';
 //Variables de coordenadas del mouse cuando se dibuja
@@ -84,34 +83,35 @@ let isDrawing = false;
 ///////////////// ZONA DE ESCUCHA DE EVENTOS /////////////////
 
 //FILTROS
-let btnNegative = document.getElementById('buttonNegative');
-btnNegative.addEventListener('click', filterNegative);
-let btnSepia = document.getElementById('buttonSepia');
-btnSepia.addEventListener('click', filterSepia);
-let btnBinarization= document.getElementById('buttonBinarization');
-btnBinarization.addEventListener('click', filterBinarization);
-let blured = document.getElementById('rangeBlur');
-blured.addEventListener('change',function(){filterBlur(this.value)});
-//btnBlur.addEventListener('click', filterBlur);
-let brightness = document.getElementById('rangeBright');
-brightness.addEventListener('change', function(){filterBright()});
-let saturation = document.getElementById('rangeSaturation');
-saturation.addEventListener('change', function(){filterSaturation()});
+//Negativo
+document.getElementById('buttonNegative').addEventListener('click', filterNegative);
+//Sepia
+document.getElementById('buttonSepia').addEventListener('click', filterSepia);
+//Binarizacion
+document.getElementById('buttonBinarization').addEventListener('click', filterBinarization);
+//Blur
+document.getElementById('rangeBlur').addEventListener('change',function(){filterBlur(cleanRangeFilters(this));});
+//Brillo
+document.getElementById('rangeBright').addEventListener('change', function(){filterBright(cleanRangeFilters(this));});
+//Saturacion
+document.getElementById('rangeSaturation').addEventListener('change', function(){filterSaturation(cleanRangeFilters(this));});
+
 //HERRAMIENTAS
-let btnPencil = document.getElementById('buttonPencil');
-btnPencil.addEventListener('click', function(){changetool('Pencil')});
-let btnEraser = document.getElementById('buttonEraser');
-btnEraser.addEventListener('click', function(){changetool('Eraser')});
+//Lapiz
+document.getElementById('buttonPencil').addEventListener('click', function(){changetool('Pencil');});
+//Goma
+document.getElementById('buttonEraser').addEventListener('click', function(){changetool('Eraser');});
+
 //IMAGEN
-let fileImage = document.getElementById('inputFile');
-fileImage.addEventListener('change', loadImage);
+document.getElementById('inputFile').addEventListener('change', loadImage);
+
 //FUNCIONES DE LA PAGINA
-let btnNew = document.getElementById('buttonNew');
-btnNew.addEventListener('click', startNewCanvas);
-let btnReestablish= document.getElementById('buttonReestablish');
-btnReestablish.addEventListener('click', reestablishImage);
-let btnDownload = document.getElementById('buttonDownload');
-btnDownload.addEventListener('click', downloadImage);
+//Nuevo
+document.getElementById('buttonNew').addEventListener('click', loadAllDefaults);
+//Reestablecer Imagen
+document.getElementById('buttonReestablish').addEventListener('click', reestablishImage);
+//Descargar Imagen
+document.getElementById('buttonDownload').addEventListener('click', downloadImage);
 
 //FUNCIONES DE DIBUJO DENTRO DEL CANVAS
 
@@ -217,7 +217,7 @@ function putImgData(image){
     ctx.putImageData(image, 0, 0) * 4;
 }
 
-//Limpia el canvas
+//Limpia un canvas
 function clearCanvas(ctxType){
     ctxType.clearRect(0, 0,canvas.width, canvas.width);
 }
@@ -234,9 +234,11 @@ function loadImage(){
             loadFiltersDefaults();
             //Calculo una escala basada en el tamaño del canvas y de la imagen para mantener el aspecto de la imagen que se muestra
             let scale = Math.min(canvas.width / image.width, canvas.height / image.height);
-            //Reacomoda el tamaño del canvas
+            //Reacomoda el tamaño de los canvas
             canvas.width = image.width * scale;
-            canvas.height = image.height * scale;   
+            canvas.height = image.height * scale;
+            canvasOriginal.width = canvas.width;
+            canvasOriginal.height = canvas.height ;
             //Dibuja la imagen en el canvas
             ctx.drawImage(image,0,0,canvas.width, canvas.height);       
             //La guardo tambien en un canvas auxiliar
@@ -275,6 +277,8 @@ function reestablishImage()
     //Si se habia elegido algo con anterioridad
     if (document.getElementById('inputFile').files[0] !== undefined)
     {
+        //Limpia el canvas
+        clearCanvas(ctx);
         //Vuelve a colocar en el canvas visible la imagen original que se encuentra almacenada en canvasOriginal
 		ctx.drawImage(canvasOriginal,0,0,canvas.width,canvas.height);
         //Vuelve a poner los filtros a su estado por defecto
@@ -396,21 +400,19 @@ function filterBinarization(){
 }
 
 //Brillo
-function filterBright()
+function filterBright(value)
 {
     //obtenemos la imagen original
     let image = getImgData(ctxOriginal);
-     //Tomamos el valor del rango
-     let bright = parseInt(document.getElementById('rangeBright').value );
     //Recorrido pixel a pixel 
      for (let x = 0; x < image.width; x++) {    
         for (let y = 0; y < image.height; y++) {
             //obtenemos la informacion del pixel
             let pixel = getPixel(image, x, y);
             //Calculamos los nuevos valores segun la formula mencionada en la clase del 22/9/2021
-            let r = validatePixel(pixel[0], bright);
-            let g = validatePixel(pixel[1], bright);
-            let b = validatePixel(pixel[2], bright);
+            let r = validatePixel(pixel[0], value);
+            let g = validatePixel(pixel[1], value);
+            let b = validatePixel(pixel[2], value);
             //seteamos los nuevos valores
             setPixel(image, x, y,r,g, b ,255);
         }
@@ -420,43 +422,42 @@ function filterBright()
 }
 
 //Saturacion
-function filterSaturation(){
-    
-    //obtenemos la imagen
+function filterSaturation(value){
+    //Obtenemos la imagen original
     let image = getImgData(ctxOriginal);
-    //Tomamos el valor del rango
-    let saturationValue = parseInt(document.getElementById('rangeSaturation').value );
     //Tomamos el minimo valor de saturacion
     let saturationMin = parseInt(document.getElementById('rangeSaturation').min) * (-1);
-    saturationValue = ((saturationValue < 0)? (saturationValue/saturationMin) : (  saturationValue ));
+    //Si el valor es negativo divido ese valor por el minimo
+    value= ((value < 0)? (value/saturationMin) : value );
     //Recorrido pixel a pixel 
      for (let x = 0; x < image.width; x++) {    
         for (let y = 0; y < image.height; y++) {
-            //obtenemos la informacion del pixel
+            //Ibtenemos la informacion del pixel
             let pixel = getPixel(image, x, y);
-            //Calculamos la cantidad de gris que vamos a quitar
+            //Calculamos la cantidad de gris que se agrega o se quita
             let gray = (0.2989* pixel[0] + 0.5870* pixel[1] + 0.1140* pixel[2]) * (-1);
             //Calculamos los nuevos valores
-            let r = validatePixel(pixel[0] * (1+saturationValue), gray * saturationValue);
-            let g = validatePixel(pixel[1] * (1+saturationValue), gray * saturationValue);
-            let b = validatePixel(pixel[2] * (1+saturationValue), gray * saturationValue);
+            let r = validatePixel(pixel[0] * (1+value), gray * value);
+            let g = validatePixel(pixel[1] * (1+value), gray * value);
+            let b = validatePixel(pixel[2] * (1+value), gray * value);
+            //Se actualiza el pixel
             setPixel(image, x, y,r,g, b ,255);
         }
     }
+    //Se actualiza la imagen
     putImgData(image);
-
 }
 
 //Blur
 
 //Crea el efecto de blur segun el valor elegido
 function filterBlur(value){
-    //control para no salirse
-    if (value > 10)
+    //control para evitar una sobrecarga de memoria
+    if (value > 5)
     {
-        value = 10;
+        value = 5;
     }
-     //obtenemos la imagen
+    //obtenemos la imagen
     let image = getImgData(ctxOriginal);
     //Altera la imagen aplicando el efecto de blur tantas veces como indica el valor que le llega por parametro
     for (let i = 0; i < value ; i++) {  
