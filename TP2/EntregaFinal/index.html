@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Entrega Visualizacion</title>
+    <link href="css.css" rel="stylesheet"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> 
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+    <h1>Ejecicio Entregable N° 1</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>Herramientas</h3>
+                <div>
+                    
+                    <button id="buttonPencil"  class="btn btn-info"> Lapiz </button>
+                    <input type="range" min="1" max="20" id="rangePencil" value="3">
+                    <input type="color" id="colorPencil" value="#000000">
+                    
+                </div>
+                <br>
+                
+              
+                <div>
+                    <button id="buttonEraser"  class="btn btn-info"> Goma </button>
+                    <input type="range" min="5" max="30" id="rangeEraser" value="5">
+                </div>
+                <br>
+                
+                <h5>Agregar Imagen</h5>
+                <br>
+                <input type="file" id="inputFile">
+                <h5>Filtros</h5>
+                <br>
+                <button id="buttonNegative"  class="btn btn-info">Negativo</button>
+                <button id="buttonBinarization" class="btn btn-info">Binarización</button>
+                <button id="buttonSepia" class="btn btn-info">Sepia</button>
+                <br>
+                <div>
+                    <label>Brillo</label>
+                    <input type="range" min="-50" max="50" id="rangeBright" value="0">
+                </div>
+                <br> 
+                <div>
+                    <label>Saturacion</label>
+                    <input type="range" min="-10" max="10" id="rangeSaturation" value="0">
+                </div>
+                <br> 
+                <div>                    
+                    <label>BLur</label>
+                    <input type="range" min="0" max="5" id="rangeBlur" value="0">
+                </div>
+            </div>
+            <div class="col">
+                <canvas id="canvas" width="600" height="600" ></canvas>
+            </div>
+        </div>
+    </div>
+    <br>
+    <h5>Guardar</h5>
+    <a href="#" download="image.jpeg" id="buttonDownload" width="600" height="600">Descargar en tu PC :3 </a>
+    <br>
+    <h5>Limpiar</h5>
+    <br>
+    <button id="buttonReestablish" class="btn btn-warning">Reestablecer</button>
+    <button id="buttonNew" class="btn btn-success">Nuevo</button>
+    <script src="js.js"></script>
+</body>
+<footer>
+    <p>Grupo 8 - integrantes: Gozalo Milesi y Selene Rodrigo</p>
+</footer>
+</html>
