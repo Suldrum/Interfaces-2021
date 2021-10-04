@@ -66,6 +66,8 @@ class Tablero {
 			return (i-1);
 		else
 			return 0;
+
+		return (matriz[i][columna] == VALORVACIO) ? i : -1;
 	}
 	
 	//Para un jugador tipo maquina, elige una columna no llena al azar para tirar una ficha.
@@ -74,7 +76,7 @@ class Tablero {
 		let movimiento=  parseInt( (Math.random() * vector.length ));
 		//Controla que no esta generando un movimiento en una columna llena
         while ( llenaColumna(vector, movimiento) )
-        movimiento=  parseInt( (Math.random() * vector.length ));
+        	movimiento=  parseInt( (Math.random() * vector.length ));
 		return movimiento;
 	}
 
