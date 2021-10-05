@@ -3,8 +3,8 @@
  * 
  * RAMA MASTER
  * 
- * A CORREGIR:
- * Mas frontend que no scrolle, ugh 
+ * 
+ * 
  */
 
 class Ficha {

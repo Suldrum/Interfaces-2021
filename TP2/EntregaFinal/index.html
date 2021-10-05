@@ -10,67 +10,56 @@
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
 <body>
-    <h1>Ejecicio Entregable N° 1</h1>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h3>Herramientas</h3>
-                <div>
-                    
-                    <button id="buttonPencil"  class="btn btn-info"> Lapiz </button>
-                    <input type="range" min="1" max="20" id="rangePencil" value="3">
-                    <input type="color" id="colorPencil" value="#000000">
-                    
-                </div>
-                <br>
-                
-              
-                <div>
-                    <button id="buttonEraser"  class="btn btn-info"> Goma </button>
-                    <input type="range" min="5" max="30" id="rangeEraser" value="5">
-                </div>
-                <br>
-                
-                <h5>Agregar Imagen</h5>
-                <br>
-                <input type="file" id="inputFile">
-                <h5>Filtros</h5>
-                <br>
-                <button id="buttonNegative"  class="btn btn-info">Negativo</button>
-                <button id="buttonBinarization" class="btn btn-info">Binarización</button>
-                <button id="buttonSepia" class="btn btn-info">Sepia</button>
-                <br>
-                <div>
-                    <label>Brillo</label>
-                    <input type="range" min="-50" max="50" id="rangeBright" value="0">
-                </div>
-                <br> 
-                <div>
-                    <label>Saturacion</label>
-                    <input type="range" min="-10" max="10" id="rangeSaturation" value="0">
-                </div>
-                <br> 
-                <div>                    
-                    <label>BLur</label>
-                    <input type="range" min="0" max="5" id="rangeBlur" value="0">
-                </div>
-            </div>
-            <div class="col">
-                <canvas id="canvas" width="600" height="600" ></canvas>
-            </div>
+    <h1>Ejecicio Entregable N° 2</h1>
+    <h3>Combate contra</h3>
+    <div>
+        <input type="radio" name="modoJuego" value="jugador" id="radioJugador">
+        <label >otro Jugador 2</label>
+        <input type="radio" name="modoJuego" value="ia" id="radioIA" >
+        <label >una IA</label>
+      </div>
+    <div>
+        <h3>Juego por tiempo</h3>
+        <div>
+            <input type="checkbox" id="porTiempo" checked="false">
+            <select disabled="true" id="selectorTiempo">
+                <option value="15">15</option>
+                <option value="30">30</option>
+                <option value="45">45</option>
+            </select>
+            <p>Minutos</p>
+            <label> Tiempo Restante:</label>
+            <label id="reloj"></label>
         </div>
+        <h3>Tamaño del tablero</h3>
+        <select id="anchoTablero">
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="8">8</option>
+        </select>
+        <select id="altoTablero">
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="8">8</option>
+        </select>
     </div>
-    <br>
-    <h5>Guardar</h5>
-    <a href="#" download="image.jpeg" id="buttonDownload" width="600" height="600">Descargar en tu PC :3 </a>
-    <br>
-    <h5>Limpiar</h5>
-    <br>
-    <button id="buttonReestablish" class="btn btn-warning">Reestablecer</button>
-    <button id="buttonNew" class="btn btn-success">Nuevo</button>
+    <div>
+        <button id="jugar">Jugar</button>
+        <button id="salir">Salir</button>
+    </div>
+    <div>
+        <label>Turno del Jugador</label>
+        <label></label>
+    </div>
+    <div id="contenedor">
+    </div>
     <script src="js.js"></script>
+    <script src="Ficha.js"></script>
+    <script src="Reloj.js"></script>
+  <!---  <script src="Tablero.js"></script> --->
+
 </body>
 <footer>
-    <p>Grupo 8 - integrantes: Gozalo Milesi y Selene Rodrigo</p>
+    <p>Grupo 13 - integrantes: Gozalo Milesi y Selene Rodrigo</p>
 </footer>
 </html>

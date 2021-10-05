@@ -4,7 +4,7 @@
  * RAMA MASTER
  * 
  * A CORREGIR:
- * Mas frontend que no scrolle, ugh 
+ * 
  */
 
  const VALORGANADOR = 5;
