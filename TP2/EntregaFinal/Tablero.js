@@ -7,28 +7,52 @@
  * 
  */
 
- const TAMAÑOMINIMO = 5;
  const VALORVACIO= '-';
 
+ const COLOR = "#008080";
+ const BLANCO = "#FFFFFF";
 
-class Tablero {
+class Tablero extends Objeto{
 
 	//Crea un nuevo tablero en blanco de tamaño fila x columna
-    constructor (fila,columna) {
-        this = new char[fila][columna];
-        for (let i= 0; i < matriz.length; i++)
-			for (let j = 0; j < matriz[i].length; j++)
-				this[i][j]= VALORVACIO;
-
+	constructor(x,y,ctx,ancho,alto){
+		super(x,y,ctx);
+		this.ancho = ancho * TAMAÑO; 
+		this.alto = alto * TAMAÑO;
+		//this.matriz = ArrayList;
     }
 	
     //Muestra el tablero
+	/*
 	mostrarTablero( matriz){
 		for (let i= 0; i < matriz.length; i++)
 		{	for (let j = 0; j < matriz[i].length ; j++)
 				System.out.print(matriz[i][j]+" ");
 		 System.out.println("");
 		 }
+	}
+	*/
+
+	dibujarTablero(){
+		//Dibuja el rectangulo
+		this.ctx.beginPath();
+        this.ctx.fillStyle = COLOR;
+        this.ctx.strokeRect(this.x, this.y, this.ancho, this.alto);
+        this.ctx.fillRect(this.x, this.y, this.ancho, this.alto);
+        this.ctx.closePath();
+		this.dibujarDefault();
+	}
+
+	dibujarDefault()
+	{
+		for (let fila = this.x; fila < this.ancho; fila += TAMAÑO) {
+            for (let columna = this.y; columna < this.alto; columna += TAMAÑO) {
+            	let x = fila + RADIO + 5 ;
+            	let y = columna + RADIO + 5 ;
+               	let ficha = new Ficha(x, y, BLANCO, this.ctx);
+               	ficha.dibujarFicha();
+            }
+        }
 	}
 	
 	// Se fija si la posicion se encuentra ocupada o "limpia".

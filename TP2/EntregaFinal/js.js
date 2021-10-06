@@ -4,13 +4,20 @@
  * RAMA MASTER
  * 
  * A CORREGIR:
- *
+ * 
+ * 
  */
+
+ const TAMAÑO = 90;
+ let canvas = document.getElementById('canvas');
+ let ctx = canvas.getContext('2d');
+
 
 //Cuando se carga la pagina
  $(document).ready(function (){
     //Funcion que se encargada de dejar la pagina en default
     loadAllDefaults();
+
 });
 
 //Funcion que carga todos los valores por defecto
@@ -22,6 +29,7 @@ function loadAllDefaults() {
 	tiempo.value = "15";
 	document.getElementById('anchoTablero').value = "5";
 	document.getElementById('altoTablero').value = "5";
+	
 }
 
 //Se encarga de deshabilitar y habilitar el campo del tiempo
@@ -30,7 +38,14 @@ document.getElementById('porTiempo').addEventListener('change',function(e){
 	tiempo.disabled = !tiempo.disabled;
 });
 
+
+
 document.getElementById('jugar').addEventListener('click',function(e){
+	//Limpia el canvas
+	ctx.clearRect(0, 0,canvas.width, canvas.height);
+	//Recalcula el tamaño del canvas -> Esto seguro tenga que ir en otra funcion porque falta el espacio que sera para las fichas
+	canvas.width = document.getElementById('anchoTablero').value * TAMAÑO ;
+	canvas.height= document.getElementById('altoTablero').value* TAMAÑO ;
 	let tiempo = document.getElementById('selectorTiempo');
 	if (!tiempo.disabled)
 	{	
@@ -38,4 +53,14 @@ document.getElementById('jugar').addEventListener('click',function(e){
 		timer.iniciar();
 		document.getElementById('salir').addEventListener('click',function(e){timer.terminar();})
 	}
+	let tablero = new Tablero(0,0,ctx,canvas.width,canvas.height );
+	tablero.dibujarTablero();
+	
+});
+
+let contador= 75;
+document.getElementById('test').addEventListener('click',function(e){
+	contador-=6;
+	let ficha = new Ficha(contador,contador,"#000000",ctx);
+	ficha.dibujarFicha();
 });
