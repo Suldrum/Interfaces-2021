@@ -6,7 +6,7 @@
  * 
  * 
  */
-const RADIO = 40;
+
 
 class Ficha extends Objeto {
     //Constructor de la clase, da propiedades a la ficha
@@ -24,11 +24,11 @@ class Ficha extends Objeto {
 
 	dibujarFicha()
 	{
-		this.ctx.beginPath();
+		this.ctx.fillStyle = this.color;
+		this.ctx.beginPath();	
         this.ctx.arc(this.x, this.y, RADIO, 0, 2 * Math.PI);
-		this.ctx.fillStyle = this.colour;
-        this.ctx.fill();
-        this.ctx.stroke();
+		this.ctx.fill();
+		this.ctx.stroke();
         this.ctx.closePath();
 	}
 	

@@ -21,34 +21,23 @@ class Tablero extends Objeto{
 		this.alto = alto * TAMAÑO;
 		//this.matriz = ArrayList;
     }
-	
-    //Muestra el tablero
-	/*
-	mostrarTablero( matriz){
-		for (let i= 0; i < matriz.length; i++)
-		{	for (let j = 0; j < matriz[i].length ; j++)
-				System.out.print(matriz[i][j]+" ");
-		 System.out.println("");
-		 }
-	}
-	*/
 
 	dibujarTablero(){
 		//Dibuja el rectangulo
+		this.ctx.fillStyle = COLOR;
 		this.ctx.beginPath();
-        this.ctx.fillStyle = COLOR;
         this.ctx.strokeRect(this.x, this.y, this.ancho, this.alto);
         this.ctx.fillRect(this.x, this.y, this.ancho, this.alto);
         this.ctx.closePath();
-		this.dibujarDefault();
 	}
 
+	//Esto deberia dibujar circulos en blanco pero no quiere el hdp!
 	dibujarDefault()
 	{
 		for (let fila = this.x; fila < this.ancho; fila += TAMAÑO) {
             for (let columna = this.y; columna < this.alto; columna += TAMAÑO) {
-            	let x = fila + RADIO + 5 ;
-            	let y = columna + RADIO + 5 ;
+            	let x = fila + RADIO + MARGEN ;
+            	let y = columna + RADIO + MARGEN  ;
                	let ficha = new Ficha(x, y, BLANCO, this.ctx);
                	ficha.dibujarFicha();
             }

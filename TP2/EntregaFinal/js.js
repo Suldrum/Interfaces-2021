@@ -8,9 +8,12 @@
  * 
  */
 
- const TAMAÑO = 90;
- let canvas = document.getElementById('canvas');
- let ctx = canvas.getContext('2d');
+const MARGEN = 5 ;
+const RADIO = 40;
+const TAMAÑO = (RADIO + MARGEN) * 2;
+
+let canvas = document.getElementById('canvas');
+let ctx = canvas.getContext('2d');
 
 
 //Cuando se carga la pagina
@@ -55,6 +58,7 @@ document.getElementById('jugar').addEventListener('click',function(e){
 	}
 	let tablero = new Tablero(0,0,ctx,canvas.width,canvas.height );
 	tablero.dibujarTablero();
+	tablero.dibujarDefault();
 	
 });
 
