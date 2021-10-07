@@ -34,16 +34,25 @@ class Tablero extends Objeto{
 	//Esto deberia dibujar circulos en blanco pero no quiere el hdp!
 	dibujarDefault()
 	{
-		for (let fila = this.x; fila < this.ancho; fila += TAMAÑO) {
-            for (let columna = this.y; columna < this.alto; columna += TAMAÑO) {
-            	let x = fila + RADIO + MARGEN ;
-            	let y = columna + RADIO + MARGEN  ;
+		this.dibujarEntrada();
+		for (let columna = this.x; columna < this.ancho; columna += TAMAÑO) {
+            for (let fila = this.y+TAMAÑO; fila < this.alto; fila += TAMAÑO) {
+            	let x = columna + RADIO + MARGEN ;
+            	let y = fila + RADIO + MARGEN  ;
                	let ficha = new Ficha(x, y, BLANCO, this.ctx);
                	ficha.dibujarFicha();
             }
         }
 	}
 	
+	dibujarEntrada(){
+
+		let imagen =  document.getElementById("flecha");
+		for (let columna = this.x; columna < this.ancho; columna += TAMAÑO) {
+			this.ctx.drawImage(imagen, columna, this.x, TAMAÑO, TAMAÑO);
+		}
+		
+	}
 	// Se fija si la posicion se encuentra ocupada o "limpia".
 	llenaColumna(vector, columna) {
 		if (vector[columna] == VALORVACIO)
