@@ -7,7 +7,17 @@
  *
  */
 // Ni bien se carga la página me aseguro que este en su estado por defecto
-class inicio {
+class Juego {
+
+	constructor(canvas){
+		
+		let anchoTablero=  document.getElementById('anchoTablero').value;
+		let altoTablero= document.getElementById('altoTablero').value;
+		this.tablero = new Tablero(3 * TAMAÑO, (TAMAÑO / 2),canvas,anchoTablero, altoTablero );
+		this.jugador1 = new Jugador();
+		this.jugador2 = new Jugador();
+    }
+
 	definirGanador(matriz,modoJuego) {
 		//Ejecucion del juego
 		
@@ -44,10 +54,35 @@ class inicio {
 	}
 
 	empezarJuego(){
-		let tablero = new Tablero();
-		tablero.inicializarTablero(matriz);
-		tablero.mostrarTablero(matriz);
+		
+		this.tablero.dibujarDefault();
+		this.repartirFichas();
+		this.visualizarFichas();
 	}
 	
+	repartirFichas()
+	{
+		let cantidadFichas = this.tablero.tamañoTablero();
+		//Si hay un numero impar de fichas al jugador 1 se le dara una ficha mas
+		this.darFichas(this.jugador1, Math.ceil(cantidadFichas/2));
+		this.darFichas(this.jugador2, Math.floor(cantidadFichas/2));
+	}
+
+	darFichas(jugador,cantFichas){
+		let cosa = 10;
+		for (let i = 0; i < cantFichas ; i++)
+		{
+			let ficha = new Ficha(cosa,cosa,"#FF0000",this.tablero.ctx);
+			jugador.agregarFicha(ficha);
+			cosa+=2;
+		}
+	}
+
+	visualizarFichas()
+	{
+		this.jugador1.mostrarFichas();
+		this.jugador2.mostrarFichas();
+	}
+
 
 }//FIN DE LA CLASE

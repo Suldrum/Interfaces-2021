@@ -19,11 +19,21 @@ class Jugador {
 	getNombre(){
 		return this.nombre;
 	}
+
 	agregarFicha(ficha)
 	{this.fichas.push(ficha);}
 
-	sacarFicha(){this.fichas.pop();}
+	sacarFicha(){return this.fichas.pop();}
 
 	ponerFicha(){}
+
+	mostrarFichas(){
+		
+		for (let i = 0; i < this.fichas.length ; i++)
+		{
+			this.fichas[i].dibujarFicha();
+		}
+		
+	}
 	
 } //FIN DE LA CLASE

@@ -22,6 +22,15 @@ class Ficha extends Objeto {
 		this.y = y;
 	}
 
+	getPosicion()
+	{
+		return [this.x,this.y];
+	}
+
+	getColor(){
+		return this.color;
+	}
+
 	dibujarFicha()
 	{
 		this.ctx.fillStyle = this.color;
@@ -32,5 +41,15 @@ class Ficha extends Objeto {
         this.ctx.closePath();
 	}
 	
-
+	esAgarrada(x,y)
+	{
+		//Distancia entre el centro y donde se hizo click
+		let dx = this.x - x;
+		let dy = this.y - y;
+		//Si esta dentro de la ficha
+		if ((Math.pow(dx,2) + Math.pow(dy,2)) < Math.pow(this.radius,2)) {
+		  return true;
+		}else
+		{return false;}
+	}
 } //FIN DE LA CLASE

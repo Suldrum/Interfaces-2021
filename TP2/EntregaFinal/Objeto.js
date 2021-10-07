@@ -12,7 +12,8 @@ class Objeto {
 	constructor(x, y, ctx) {
 		this.x = x;
 		this.y = y;
-		this.ctx = ctx; 
+		this.ctx = ctx;
+		this.draggable = false;
 	}
 
 	//Posicion del centro de la ficha
@@ -20,5 +21,7 @@ class Objeto {
 		this.x = x;
 		this.y = y;
 	}
+
+
 	
 } //FIN DE LA CLASE

@@ -44,11 +44,11 @@ document.getElementById('porTiempo').addEventListener('change',function(e){
 
 
 document.getElementById('jugar').addEventListener('click',function(e){
+
 	//Limpia el canvas
 	ctx.clearRect(0, 0,canvas.width, canvas.height);
-	//Recalcula el tamaño del canvas -> Esto seguro tenga que ir en otra funcion porque falta el espacio que sera para las fichas
-	let anchoTablero=  document.getElementById('anchoTablero').value;
-	let altoTablero= document.getElementById('altoTablero').value;
+	let juego = new Juego(canvas);
+	juego.empezarJuego();
 	let tiempo = document.getElementById('selectorTiempo');
 	if (!tiempo.disabled)
 	{	
@@ -56,15 +56,20 @@ document.getElementById('jugar').addEventListener('click',function(e){
 		timer.iniciar();
 		document.getElementById('salir').addEventListener('click',function(e){timer.terminar();})
 	}
-	let tablero = new Tablero(3 * TAMAÑO, (TAMAÑO / 2),canvas,anchoTablero, altoTablero );
-	tablero.dibujarTablero();
-	tablero.dibujarDefault();
 	
 });
 
-let contador= 75;
+
 document.getElementById('test').addEventListener('click',function(e){
-	contador-=6;
-	let ficha = new Ficha(contador,contador,"#000000",ctx);
+	/*
+	let ficha = new Ficha(200,200,"#FF0000",ctx);
+	ficha.draggable=true;
 	ficha.dibujarFicha();
+	let player = new Jugador();
+	player.agregarFicha(ficha);
+	let otra = player.sacarFicha();
+	otra.colocarPosicion(50,50);
+	otra.dibujarFicha();
+*/
+
 });
