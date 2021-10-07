@@ -47,8 +47,8 @@ document.getElementById('jugar').addEventListener('click',function(e){
 	//Limpia el canvas
 	ctx.clearRect(0, 0,canvas.width, canvas.height);
 	//Recalcula el tamaño del canvas -> Esto seguro tenga que ir en otra funcion porque falta el espacio que sera para las fichas
-	canvas.width = document.getElementById('anchoTablero').value * TAMAÑO;
-	canvas.height= document.getElementById('altoTablero').value* TAMAÑO +TAMAÑO;
+	let anchoTablero=  document.getElementById('anchoTablero').value;
+	let altoTablero= document.getElementById('altoTablero').value;
 	let tiempo = document.getElementById('selectorTiempo');
 	if (!tiempo.disabled)
 	{	
@@ -56,7 +56,7 @@ document.getElementById('jugar').addEventListener('click',function(e){
 		timer.iniciar();
 		document.getElementById('salir').addEventListener('click',function(e){timer.terminar();})
 	}
-	let tablero = new Tablero(0,0,ctx,canvas.width,canvas.height );
+	let tablero = new Tablero(3 * TAMAÑO, (TAMAÑO / 2),canvas,anchoTablero, altoTablero );
 	tablero.dibujarTablero();
 	tablero.dibujarDefault();
 	

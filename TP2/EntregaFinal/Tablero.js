@@ -15,10 +15,13 @@
 class Tablero extends Objeto{
 
 	//Crea un nuevo tablero en blanco de tamaño fila x columna
-	constructor(x,y,ctx,ancho,alto){
-		super(x,y,ctx);
+	constructor(x,y,canvas,ancho,alto){
+		super(x,y,canvas.getContext('2d'));
+
 		this.ancho = ancho * TAMAÑO; 
-		this.alto = alto * TAMAÑO;
+		this.alto = alto * TAMAÑO + TAMAÑO;
+		canvas.width = this.ancho+ 6 * TAMAÑO ;
+		canvas.height= this.alto +  TAMAÑO;
 		//this.matriz = ArrayList;
     }
 
@@ -35,8 +38,8 @@ class Tablero extends Objeto{
 	dibujarDefault()
 	{
 		this.dibujarEntrada();
-		for (let columna = this.x; columna < this.ancho; columna += TAMAÑO) {
-            for (let fila = this.y+TAMAÑO; fila < this.alto; fila += TAMAÑO) {
+		for (let columna = this.x; columna < (this.ancho + this.x); columna += TAMAÑO) {
+            for (let fila = this.y+TAMAÑO; fila < (this.alto+this.y); fila += TAMAÑO) {
             	let x = columna + RADIO + MARGEN ;
             	let y = fila + RADIO + MARGEN  ;
                	let ficha = new Ficha(x, y, BLANCO, this.ctx);
@@ -48,8 +51,8 @@ class Tablero extends Objeto{
 	dibujarEntrada(){
 
 		let imagen =  document.getElementById("flecha");
-		for (let columna = this.x; columna < this.ancho; columna += TAMAÑO) {
-			this.ctx.drawImage(imagen, columna, this.x, TAMAÑO, TAMAÑO);
+		for (let columna = this.x; columna < (this.ancho + this.x); columna += TAMAÑO) {
+			this.ctx.drawImage(imagen, columna, this.y, TAMAÑO, TAMAÑO);
 		}
 		
 	}
