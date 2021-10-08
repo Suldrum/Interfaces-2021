@@ -64,17 +64,17 @@ class Juego {
 	{
 		let cantidadFichas = this.tablero.tamañoTablero();
 		//Si hay un numero impar de fichas al jugador 1 se le dara una ficha mas
-		this.darFichas(this.jugador1, Math.ceil(cantidadFichas/2));
-		this.darFichas(this.jugador2, Math.floor(cantidadFichas/2));
+		this.darFichas(this.jugador1, Math.ceil(cantidadFichas/2), TAMAÑO + MARGEN  , TAMAÑO * this.tablero.matriz.length);
+		this.darFichas(this.jugador2, Math.floor(cantidadFichas/2),canvas.width - (TAMAÑO +RADIO) ,TAMAÑO * this.tablero.matriz.length);
 	}
 
-	darFichas(jugador,cantFichas){
-		let cosa = 10;
+	darFichas(jugador,cantFichas, xPivote, yPivote){
 		for (let i = 0; i < cantFichas ; i++)
 		{
-			let ficha = new Ficha(cosa,cosa,"#FF0000",this.tablero.ctx);
+			let saltoX = Math.random() * TAMAÑO/2 ;
+			let saltoY = Math.random() * TAMAÑO/2 ;
+			let ficha = new Ficha(xPivote+saltoX, yPivote+saltoY,"#FF0000",this.tablero.ctx);
 			jugador.agregarFicha(ficha);
-			cosa+=2;
 		}
 	}
 
