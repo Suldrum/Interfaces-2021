@@ -73,7 +73,7 @@ class Juego {
 		{
 			let saltoX = Math.random() * TAMAÑO/2 ;
 			let saltoY = Math.random() * TAMAÑO/2 ;
-			let ficha = new Ficha(xPivote+saltoX, yPivote+saltoY,"#FF0000",this.tablero.ctx);
+			let ficha = new Ficha(xPivote+saltoX, yPivote+saltoY,jugador.getColor(),this.tablero.ctx);
 			jugador.agregarFicha(ficha);
 		}
 	}

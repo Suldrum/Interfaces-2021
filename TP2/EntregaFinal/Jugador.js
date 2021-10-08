@@ -13,13 +13,17 @@ class Jugador {
 		//Segun de quien sea el turno da el valor a la ficha
 		this.nombre= "jugador";
 		this.fichas = [];
-        
+        this.color = "#FF0000";
 	}
 
 	getNombre(){
 		return this.nombre;
 	}
 
+	getColor()
+	{
+		return this.color;
+	}
 	agregarFicha(ficha)
 	{this.fichas.push(ficha);}
 
