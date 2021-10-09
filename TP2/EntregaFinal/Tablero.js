@@ -146,4 +146,33 @@ class Tablero extends Objeto{
 		
 		return this.matriz.length * this.matriz[0].length;
 	}
+
+	sobreFlecha(x,y)
+	{
+		console.log("coordenadas: "+x+" "+y);
+		let y1 = this.y;
+		for (let columna = this.x; columna < (this.ancho + this.x); columna += TAMAÑO) {
+			/*
+			console.log("valor de x: "+columna);
+			console.log("valor de primer y if: "+ (x > (columna- TAMAÑO * 0.5)));
+			console.log("valor de segundo y if: "+(x < (columna + TAMAÑO - TAMAÑO * 0.5)));
+			console.log("-------");
+			console.log("valor de y: "+y);
+			console.log("valor de primer y if: "+ (y > (this.y  - TAMAÑO * 0.5)  ));
+			console.log("valor de segundo y if: "+( y < this.y + TAMAÑO - TAMAÑO * 0.5) );
+			console.log("------------------");
+			console.log("------------------");
+			console.log("------------------");
+			*/
+			if (x > (columna- TAMAÑO * 0.5) 
+			&& x <= (columna + TAMAÑO - TAMAÑO * 0.5)
+			&& y > (this.y  - TAMAÑO * 0.5)  
+			&& y <= this.y + TAMAÑO - TAMAÑO * 0.5) 
+			{return true; }
+		}
+		
+		
+		
+		return false;
+	}
 }//Fin de la clase

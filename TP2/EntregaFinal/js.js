@@ -116,6 +116,7 @@ canvas.addEventListener('mousemove',  function(e) {
 		fichaJugada.draggable = false;
 		fichaJugada = null;
 		juego.actualizarEstado();
+		console.log(juego.fichaSobreFlecha(x,y));
 		}
 	});
 

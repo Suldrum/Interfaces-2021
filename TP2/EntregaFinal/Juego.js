@@ -80,12 +80,14 @@ class Juego {
 			let x = e.offsetX;
         	let y = e.offsetY;
 			fichaJugada = jugador.juegaFicha(x,y);
-		});
-
-		
+		});	
 			
-			
-	}	
+	}
+	
+	fichaSobreFlecha(x,y)
+	{
+		return this.tablero.sobreFlecha(x,y);
+	}
 	
 	repartirFichas()
 	{
