@@ -64,8 +64,9 @@ class Juego {
 	actualizarEstado()
 	{
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		this.visualizarFichas();
+		
 		this.tablero.actualizarTablero();
+		this.visualizarFichas();
 		//redibujar ficha elegida
 		//eliminar la ficha cuando entra en el tablero
 	}
