@@ -69,6 +69,26 @@ class Tablero extends Objeto{
 		this.dibujarEspaciosLibres();
 	}
 	
+	//Dibuja las fichas que estan en la matriz
+	dibujarFichasEnTablero()
+	{
+		let i=0,j = 0;
+		for (let fila = this.y+TAMAÑO; fila < (this.alto+this.y); fila += TAMAÑO) {
+			j= 0;
+			for (let columna = this.x; columna < (this.ancho + this.x); columna += TAMAÑO) {
+               	let ficha = this.matriz[i][j];
+               	ficha.dibujarFicha();
+				j++;
+            }
+			i++;
+        }
+	}
+
+	actualizarTablero(){
+		this.dibujarFondo();
+		this.dibujarEntrada();
+		this.dibujarFichasEnTablero();
+	}
 
 	// Se fija si la posicion se encuentra ocupada o "limpia".
 	espacioLibre(vector, columna) {

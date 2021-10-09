@@ -13,7 +13,7 @@ class Ficha extends Objeto {
 	constructor(x, y, color, ctx) {
 		super(x,y,ctx);
 		this.color = color;
-        
+
 	}
 
 	//Posicion del centro de la ficha
@@ -21,7 +21,7 @@ class Ficha extends Objeto {
 		this.x = x;
 		this.y = y;
 	}
-
+	
 	getPosicion()
 	{
 		return [this.x,this.y];
@@ -33,12 +33,14 @@ class Ficha extends Objeto {
 
 	dibujarFicha()
 	{
+		
 		this.ctx.fillStyle = this.color;
 		this.ctx.beginPath();	
         this.ctx.arc(this.x, this.y, RADIO, 0, 2 * Math.PI);
 		this.ctx.fill();
 		this.ctx.stroke();
         this.ctx.closePath();
+	
 	}
 	
 	esAgarrada(x,y)
@@ -47,9 +49,6 @@ class Ficha extends Objeto {
 		let dx = this.x - x;
 		let dy = this.y - y;
 		//Si esta dentro de la ficha
-		if ((Math.pow(dx,2) + Math.pow(dy,2)) < Math.pow(this.radius,2)) {
-		  return true;
-		}else
-		{return false;}
+		return Math.pow(dx,2) + Math.pow(dy,2) < Math.pow(RADIO,2);
 	}
 } //FIN DE LA CLASE

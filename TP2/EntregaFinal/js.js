@@ -14,6 +14,8 @@ const TAMAÑO = (RADIO + MARGEN) * 2;
 
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
+let juego;
+let fichaJugada = null;
 
 
 //Cuando se carga la pagina
@@ -47,7 +49,7 @@ document.getElementById('jugar').addEventListener('click',function(e){
 
 	//Limpia el canvas
 	ctx.clearRect(0, 0,canvas.width, canvas.height);
-	let juego = new Juego(canvas);
+	juego = new Juego(canvas);
 	juego.empezarJuego();
 	let tiempo = document.getElementById('selectorTiempo');
 	if (!tiempo.disabled)
@@ -59,17 +61,69 @@ document.getElementById('jugar').addEventListener('click',function(e){
 	
 });
 
-
+let ficha= new Ficha(100,100,"#000000",ctx);
 document.getElementById('test').addEventListener('click',function(e){
-	/*
-	let ficha = new Ficha(200,200,"#FF0000",ctx);
-	ficha.draggable=true;
+	
+	//let ficha2 = new Ficha(200,200,"#FF0000",ctx);
+//	ficha2.dibujarFicha();
+//	ficha = new Ficha(100,100,"#000000",ctx);
 	ficha.dibujarFicha();
-	let player = new Jugador();
-	player.agregarFicha(ficha);
-	let otra = player.sacarFicha();
-	otra.colocarPosicion(50,50);
-	otra.dibujarFicha();
-*/
-
+	/*
+	ficha.colocarPosicion(250,250);
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ficha.dibujarFicha();
+	*/
 });
+
+
+
+canvas.addEventListener('mousemove',  function(e) {
+	if (fichaJugada !== null && fichaJugada.draggable) {
+		let x = e.offsetX;
+		let y = e.offsetY;
+		x = permanecerDentro(x,canvas.width);
+		y = permanecerDentro(y, canvas.height);
+		fichaJugada.colocarPosicion(x,y);
+		juego.actualizarEstado();
+	}
+});
+
+	//Si se sale del canvas mientras esta dibujando me encargo de dibujar hasta el borde
+	canvas.addEventListener("mouseout",function(e){
+	if (fichaJugada !== null && fichaJugada.draggable)
+	{  
+		let x = e.offsetX;
+		let y = e.offsetY;
+		x = permanecerDentro(x,canvas.width);
+		y = permanecerDentro(y, canvas.height);
+		fichaJugada.colocarPosicion(x,y);
+		fichaJugada.draggable = false;
+		fichaJugada = null;
+		juego.actualizarEstado();
+	}
+	});
+
+//Si se sale del canvas mientras esta dibujando me encargo de dibujar hasta el borde
+	canvas.addEventListener("mouseup",function(e){
+	   if (fichaJugada !== null && fichaJugada.draggable)
+		{  
+		//Dibujo la ficha por ultima vez
+		let x = e.offsetX;
+		let y = e.offsetY;
+		x = permanecerDentro(x,canvas.width);
+		y = permanecerDentro(y, canvas.height);
+		fichaJugada.colocarPosicion(x,y);
+		fichaJugada.draggable = false;
+		fichaJugada = null;
+		juego.actualizarEstado();
+		}
+	});
+
+	function permanecerDentro(valor, max)
+	{
+		if (valor < RADIO)
+			{return RADIO;}
+		if (valor > max - RADIO)
+			{return max - RADIO;}
+		return valor;
+	}

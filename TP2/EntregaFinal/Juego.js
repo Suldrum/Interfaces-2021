@@ -10,12 +10,12 @@
 class Juego {
 
 	constructor(canvas){
-		
 		let anchoTablero=  document.getElementById('anchoTablero').value;
 		let altoTablero= document.getElementById('altoTablero').value;
 		this.tablero = new Tablero(3 * TAMAÑO, (TAMAÑO / 2),canvas,anchoTablero, altoTablero );
-		this.jugador1 = new Jugador();
-		this.jugador2 = new Jugador();
+		this.jugador1 = new Jugador("jugador 1", "#FF0000");
+		this.jugador2 = new Jugador("jugador 2", "#000000");
+		
     }
 
 	definirGanador(matriz,modoJuego) {
@@ -54,11 +54,37 @@ class Juego {
 	}
 
 	empezarJuego(){
-		
 		this.tablero.dibujarDefault();
 		this.repartirFichas();
 		this.visualizarFichas();
+		this.ronda(this.jugador1);
+		
 	}
+
+	actualizarEstado()
+	{
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		this.visualizarFichas();
+		this.tablero.actualizarTablero();
+		//redibujar ficha elegida
+		//eliminar la ficha cuando entra en el tablero
+	}
+
+	//Empieza la ronda del jugador
+	ronda(jugador)
+	{
+		
+		//Si hace click me fijo que lo hizo sobre una ficha
+		canvas.addEventListener('mousedown', function(e) {
+			let x = e.offsetX;
+        	let y = e.offsetY;
+			fichaJugada = jugador.juegaFicha(x,y);
+		});
+
+		
+			
+			
+	}	
 	
 	repartirFichas()
 	{
@@ -84,5 +110,13 @@ class Juego {
 		this.jugador2.mostrarFichas();
 	}
 
+	controlarFicha(fichaJugada)
+	{
+		console.log("F");
+		//Ficha que se esta moviendo
+	
+		
+			
+	}
 
 }//FIN DE LA CLASE
