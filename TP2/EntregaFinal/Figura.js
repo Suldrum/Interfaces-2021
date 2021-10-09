@@ -7,13 +7,18 @@
  * 
  */
 
-class Objeto {
+class Figura {
     //Constructor de la clase, da propiedades a la ficha
-	constructor(x, y, ctx) {
+	constructor(x, y, color,ctx) {
 		this.x = x;
 		this.y = y;
+		this.color = color;
 		this.ctx = ctx;
-		this.draggable = false;
+	//	this.draggable = false;
+	}
+
+	getColor(){
+		return this.color;
 	}
 
 	//Posicion del centro de la ficha
@@ -22,6 +27,12 @@ class Objeto {
 		this.y = y;
 	}
 
-
+	obtenerPosicion(){
+		return [this.x,this.y];
+	}
 	
+	dibujar(){}
+
+	dibujarImagen(imagen){}
+	esClickeada(x,y){}
 } //FIN DE LA CLASE

@@ -61,13 +61,13 @@ document.getElementById('jugar').addEventListener('click',function(e){
 	
 });
 
-let ficha= new Ficha(100,100,"#000000",ctx);
+let ficha= new Circulo(100,100,"#000000",ctx);
 document.getElementById('test').addEventListener('click',function(e){
 	
 	//let ficha2 = new Ficha(200,200,"#FF0000",ctx);
 //	ficha2.dibujarFicha();
 //	ficha = new Ficha(100,100,"#000000",ctx);
-	ficha.dibujarFicha();
+	ficha.dibujar();
 	/*
 	ficha.colocarPosicion(250,250);
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -85,6 +85,7 @@ canvas.addEventListener('mousemove',  function(e) {
 		y = permanecerDentro(y, canvas.height);
 		fichaJugada.colocarPosicion(x,y);
 		juego.actualizarEstado();
+		
 	}
 });
 
@@ -97,12 +98,13 @@ canvas.addEventListener('mousemove',  function(e) {
 		x = permanecerDentro(x,canvas.width);
 		y = permanecerDentro(y, canvas.height);
 		fichaJugada.colocarPosicion(x,y);
+		juego.actualizarEstado();
 		fichaJugada.draggable = false;
 		fichaJugada = null;
-		juego.actualizarEstado();
+		
 	}
 	});
-
+let filaCaida= -1;
 //Si se sale del canvas mientras esta dibujando me encargo de dibujar hasta el borde
 	canvas.addEventListener("mouseup",function(e){
 	   if (fichaJugada !== null && fichaJugada.draggable)
@@ -113,10 +115,11 @@ canvas.addEventListener('mousemove',  function(e) {
 		x = permanecerDentro(x,canvas.width);
 		y = permanecerDentro(y, canvas.height);
 		fichaJugada.colocarPosicion(x,y);
+		juego.actualizarEstado();
+		console.log(juego.fichaSobreFlecha(fichaJugada.obtenerPosicion()));
+		console.log(filaCaida);
 		fichaJugada.draggable = false;
 		fichaJugada = null;
-		juego.actualizarEstado();
-		console.log(juego.fichaSobreFlecha(x,y));
 		}
 	});
 
@@ -128,3 +131,12 @@ canvas.addEventListener('mousemove',  function(e) {
 			{return max - RADIO;}
 		return valor;
 	}
+
+	canvas.addEventListener('mousedown', function(e) {
+		let x = e.offsetX;
+		let y = e.offsetY;
+		fichaJugada = juego.turno.juegaFicha(x,y);
+		fichaJugada.colocarPosicion(x,y);
+		juego.actualizarEstado();
+	});	
+	

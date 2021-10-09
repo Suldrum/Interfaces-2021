@@ -43,7 +43,7 @@ class Jugador {
 		
 		for (let i = 0; i < this.fichas.length ; i++)
 		{
-			this.fichas[i].dibujarFicha();
+			this.fichas[i].dibujar();
 		}
 		
 	}
@@ -54,7 +54,7 @@ class Jugador {
 		//Si toco una de sus fichas
 		for (let i = 0; i < this.fichas.length ; i++)
 		{
-			if (this.fichas[i].esAgarrada(x,y))
+			if (this.fichas[i].esClickeada(x,y))
 			{
 				this.fichas[i].draggable = true;
 				return this.fichas[i];

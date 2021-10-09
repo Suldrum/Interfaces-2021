@@ -9,16 +9,15 @@
  const COLOR = "#008080";
  const BLANCO = "#FFFFFF";
 
-class Tablero extends Objeto{
+class Tablero extends Cuadrado{
 
 	//Crea un nuevo tablero en blanco de tamaño fila x columna
 	constructor(x,y,canvas,ancho,alto){
-		super(x,y,canvas.getContext('2d'));
-
-		this.ancho = ancho * TAMAÑO; 
-		this.alto = alto * TAMAÑO + TAMAÑO;
+		super(x,y,COLOR,canvas.getContext('2d'),(ancho * TAMAÑO),(alto * TAMAÑO + TAMAÑO));
 		canvas.width = this.ancho+ 6 * TAMAÑO ;
 		canvas.height= this.alto +  TAMAÑO;
+		//Vector lector de entrada
+		this.vector = [ancho];
 		//Matriz donde se guarda la informacion del tablero
 		this.matriz = [alto];
 		for (let fila = 0; fila < alto ; fila++) {
@@ -27,19 +26,18 @@ class Tablero extends Objeto{
     }
 
 	dibujarFondo(){
-		//Dibuja el rectangulo
-		this.ctx.fillStyle = COLOR;
-		this.ctx.beginPath();
-        this.ctx.strokeRect(this.x, this.y, this.ancho, this.alto);
-        this.ctx.fillRect(this.x, this.y, this.ancho, this.alto);
-        this.ctx.closePath();
+		super.dibujar();
 	}
 
 	dibujarEntrada(){
 
 		let imagen =  document.getElementById("flecha");
+		let i = 0;
 		for (let columna = this.x; columna < (this.ancho + this.x); columna += TAMAÑO) {
-			this.ctx.drawImage(imagen, columna, this.y, TAMAÑO, TAMAÑO);
+			let flecha = new Cuadrado(columna,this.y,COLOR,this.ctx,TAMAÑO,TAMAÑO);
+			this.vector[i] = flecha;
+			i++;
+			flecha.dibujarImagen(imagen);
 		}
 		
 	}
@@ -52,8 +50,8 @@ class Tablero extends Objeto{
 			for (let columna = this.x; columna < (this.ancho + this.x); columna += TAMAÑO) {
             	let x = columna + RADIO + MARGEN ;
             	let y = fila + RADIO + MARGEN  ;
-               	let ficha = new Ficha(x, y, BLANCO, this.ctx);
-               	ficha.dibujarFicha();
+               	let ficha = new Circulo(x, y, BLANCO, this.ctx);
+               	ficha.dibujar();
 				this.matriz[i][j] = ficha;
 				j++;
 				
@@ -77,7 +75,7 @@ class Tablero extends Objeto{
 			j= 0;
 			for (let columna = this.x; columna < (this.ancho + this.x); columna += TAMAÑO) {
                	let ficha = this.matriz[i][j];
-               	ficha.dibujarFicha();
+               	ficha.dibujar();
 				j++;
             }
 			i++;
@@ -149,30 +147,17 @@ class Tablero extends Objeto{
 
 	sobreFlecha(x,y)
 	{
-		console.log("coordenadas: "+x+" "+y);
-		let y1 = this.y;
-		for (let columna = this.x; columna < (this.ancho + this.x); columna += TAMAÑO) {
-			/*
-			console.log("valor de x: "+columna);
-			console.log("valor de primer y if: "+ (x > (columna- TAMAÑO * 0.5)));
-			console.log("valor de segundo y if: "+(x < (columna + TAMAÑO - TAMAÑO * 0.5)));
-			console.log("-------");
-			console.log("valor de y: "+y);
-			console.log("valor de primer y if: "+ (y > (this.y  - TAMAÑO * 0.5)  ));
-			console.log("valor de segundo y if: "+( y < this.y + TAMAÑO - TAMAÑO * 0.5) );
-			console.log("------------------");
-			console.log("------------------");
-			console.log("------------------");
-			*/
-			if (x > (columna- TAMAÑO * 0.5) 
-			&& x <= (columna + TAMAÑO - TAMAÑO * 0.5)
-			&& y > (this.y  - TAMAÑO * 0.5)  
-			&& y <= this.y + TAMAÑO - TAMAÑO * 0.5) 
-			{return true; }
+		let cont= 1;
+		for (let i = 0; i < this.vector.length; i++) {	
+			if (this.vector[i].esClickeada(x,y)) 
+			{
+				filaCaida=cont;
+				return true; 
+			}
+			cont++;
 		}
 		
-		
-		
+		filaCaida = -1;
 		return false;
 	}
 }//Fin de la clase

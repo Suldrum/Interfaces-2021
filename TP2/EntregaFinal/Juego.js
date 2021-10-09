@@ -15,6 +15,7 @@ class Juego {
 		this.tablero = new Tablero(3 * TAMAÑO, (TAMAÑO / 2),canvas,anchoTablero, altoTablero );
 		this.jugador1 = new Jugador("jugador 1", "#FF0000");
 		this.jugador2 = new Jugador("jugador 2", "#000000");
+		this.turno= null;
 		
     }
 
@@ -54,6 +55,7 @@ class Juego {
 	}
 
 	empezarJuego(){
+		
 		this.tablero.dibujarDefault();
 		this.repartirFichas();
 		this.visualizarFichas();
@@ -74,18 +76,27 @@ class Juego {
 	//Empieza la ronda del jugador
 	ronda(jugador)
 	{
-		
+		this.turno = jugador;
 		//Si hace click me fijo que lo hizo sobre una ficha
-		canvas.addEventListener('mousedown', function(e) {
-			let x = e.offsetX;
-        	let y = e.offsetY;
-			fichaJugada = jugador.juegaFicha(x,y);
-		});	
-			
+		
 	}
 	
-	fichaSobreFlecha(x,y)
+	
+	darTurno()
 	{
+		if (this.turno === this.jugador1)
+		{
+			this.turno = this.jugador2;
+		}
+		else
+		{
+			this.turno = this.jugador1;
+		}
+	}
+	fichaSobreFlecha(vector)
+	{
+		let x = vector[0];
+		let y = vector[1];
 		return this.tablero.sobreFlecha(x,y);
 	}
 	
@@ -102,7 +113,7 @@ class Juego {
 		{
 			let saltoX = Math.random() * TAMAÑO/2 ;
 			let saltoY = Math.random() * TAMAÑO/2 ;
-			let ficha = new Ficha(xPivote+saltoX, yPivote+saltoY,jugador.getColor(),this.tablero.ctx);
+			let ficha = new Circulo(xPivote+saltoX, yPivote+saltoY,jugador.getColor(),this.tablero.ctx);
 			jugador.agregarFicha(ficha);
 		}
 	}
