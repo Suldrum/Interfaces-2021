@@ -31,17 +31,8 @@ class Cuadrado extends Figura {
 	}
 
 	esClickeada(x,y)
-	{
-			if (x > (this.x- this.ancho * 0.5) 
-			&& x <= (this.x + this.ancho  - this.ancho  * 0.5)
-			&& y > (this.y  - this.alto * 0.5)  
-			&& y <= this.y + this.alto - this.alto * 0.5) 
-			{
-				return true; 
-			}
-			else{
-				return false; 
-			}
+	{	
+		return (x > this.x && x < this.x + this.ancho) && (y > this.y && y < this.y + this.alto)
 		
 	}
 } //FIN DE LA CLASE

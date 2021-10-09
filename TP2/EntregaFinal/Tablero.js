@@ -148,6 +148,7 @@ class Tablero extends Cuadrado{
 	sobreFlecha(x,y)
 	{
 		let cont= 1;
+		console.log("coordenada-> x: "+x+" y: "+y);
 		for (let i = 0; i < this.vector.length; i++) {	
 			if (this.vector[i].esClickeada(x,y)) 
 			{
