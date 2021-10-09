@@ -30,7 +30,6 @@ class Tablero extends Cuadrado{
 	}
 
 	dibujarEntrada(){
-
 		let imagen =  document.getElementById("flecha");
 		let i = 0;
 		for (let columna = this.x; columna < (this.ancho + this.x); columna += TAMAÑO) {
@@ -90,10 +89,7 @@ class Tablero extends Cuadrado{
 
 	// Se fija si la posicion se encuentra ocupada o "limpia".
 	espacioLibre(vector, columna) {
-		if (vector[columna].getColor() === BLANCO)
-			return false;
-		else
-			return true;
+		return (vector[columna].getColor() === BLANCO);
 	}
 
 	tableroLleno()
@@ -108,9 +104,14 @@ class Tablero extends Cuadrado{
 	}
 
     //Pone una ficha en el tablero en una fila y columna de la matriz
-	meterFicha(fila,columna, ficha) {
-		this.matriz[fila][columna]= ficha;
-		//ficha.dibujarFicha();
+	meterFicha(columna, ficha) {
+		let fila = this.filaUbicacion(columna);
+		if (fila > -1)
+		{
+			let lugar = this.matriz[fila][columna].obtenerPosicion();
+			ficha.colocarPosicion(lugar[0],lugar[1]);
+			this.matriz[fila][columna]= ficha;
+		}
 	}
 	
 	//Retorna la ultima ubicacion en blanco de una columna.
@@ -119,7 +120,7 @@ class Tablero extends Cuadrado{
 		if (this.espacioLibre(this.matriz[0], columna))
 		{
 			let i =0;
-			while ((i < this.matriz[i].length ) && (espacioLibre(this.matriz[i], columna)))
+			while ((i < this.matriz.length ) && (this.espacioLibre(this.matriz[i], columna)))
 			{	i++;}
 			return (i!=0) ? (i - 1) : 0 ; 
 		}
@@ -147,18 +148,12 @@ class Tablero extends Cuadrado{
 
 	sobreFlecha(x,y)
 	{
-		let cont= 1;
-		console.log("coordenada-> x: "+x+" y: "+y);
 		for (let i = 0; i < this.vector.length; i++) {	
 			if (this.vector[i].esClickeada(x,y)) 
 			{
-				filaCaida=cont;
-				return true; 
+				return i; 
 			}
-			cont++;
 		}
-		
-		filaCaida = -1;
-		return false;
+		return -1;
 	}
 }//Fin de la clase

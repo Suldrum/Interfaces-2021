@@ -104,7 +104,7 @@ canvas.addEventListener('mousemove',  function(e) {
 		
 	}
 	});
-let filaCaida= -1;
+
 //Si se sale del canvas mientras esta dibujando me encargo de dibujar hasta el borde
 	canvas.addEventListener("mouseup",function(e){
 	   if (fichaJugada !== null && fichaJugada.draggable)
@@ -115,9 +115,12 @@ let filaCaida= -1;
 		x = permanecerDentro(x,canvas.width);
 		y = permanecerDentro(y, canvas.height);
 		fichaJugada.colocarPosicion(x,y);
+		let columna = juego.fichaSobreFlecha(x,y);
+		if (columna > -1)
+		{
+			juego.meterFicha(columna,fichaJugada);
+		}
 		juego.actualizarEstado();
-		console.log(juego.fichaSobreFlecha(fichaJugada.obtenerPosicion()));
-		console.log(filaCaida);
 		fichaJugada.draggable = false;
 		fichaJugada = null;
 		}
@@ -133,10 +136,15 @@ let filaCaida= -1;
 	}
 
 	canvas.addEventListener('mousedown', function(e) {
+
 		let x = e.offsetX;
 		let y = e.offsetY;
 		fichaJugada = juego.turno.juegaFicha(x,y);
-		fichaJugada.colocarPosicion(x,y);
-		juego.actualizarEstado();
+		if (fichaJugada !== null && fichaJugada.draggable)
+		{  
+			fichaJugada.colocarPosicion(x,y);
+			juego.actualizarEstado();
+		}	
+	
 	});	
 	

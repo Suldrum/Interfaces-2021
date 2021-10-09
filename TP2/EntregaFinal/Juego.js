@@ -81,6 +81,9 @@ class Juego {
 		
 	}
 	
+	meterFicha(columna,ficha){
+		this.tablero.meterFicha(columna,ficha);
+	}
 	
 	darTurno()
 	{
@@ -93,10 +96,8 @@ class Juego {
 			this.turno = this.jugador1;
 		}
 	}
-	fichaSobreFlecha(vector)
+	fichaSobreFlecha(x,y)
 	{
-		let x = vector[0];
-		let y = vector[1];
 		return this.tablero.sobreFlecha(x,y);
 	}
 	
