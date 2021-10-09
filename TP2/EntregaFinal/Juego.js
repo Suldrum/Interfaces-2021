@@ -13,6 +13,7 @@ class Juego {
 		let anchoTablero=  document.getElementById('anchoTablero').value;
 		let altoTablero= document.getElementById('altoTablero').value;
 		this.tablero = new Tablero(3 * TAMAÑO, (TAMAÑO / 2),canvas,anchoTablero, altoTablero );
+		this.condicionVictoria = new Recorrido();
 		this.jugador1 = new Jugador("jugador 1", "#FF0000");
 		this.jugador2 = new Jugador("jugador 2", "#000000");
 		this.turno= null;
@@ -82,7 +83,12 @@ class Juego {
 	}
 	
 	meterFicha(columna,ficha){
-		this.tablero.meterFicha(columna,ficha);
+		let resultado = this.tablero.meterFicha(columna,ficha);
+		if (resultado !=null)
+		{
+			let victoria = this.condicionVictoria.victoria(this.tablero.matriz,resultado[0],resultado[1]);
+			console.log(victoria);
+		}
 	}
 	
 	darTurno()

@@ -111,7 +111,10 @@ class Tablero extends Cuadrado{
 			let lugar = this.matriz[fila][columna].obtenerPosicion();
 			ficha.colocarPosicion(lugar[0],lugar[1]);
 			this.matriz[fila][columna]= ficha;
+			return [fila,columna];
 		}
+		else
+			return null;
 	}
 	
 	//Retorna la ultima ubicacion en blanco de una columna.
