@@ -84,7 +84,7 @@ canvas.addEventListener('mousemove',  function(e) {
 		x = permanecerDentro(x,canvas.width);
 		y = permanecerDentro(y, canvas.height);
 		fichaJugada.colocarPosicion(x,y);
-		juego.actualizarEstado();
+		juego.actualizarJuego();
 		
 	}
 });
@@ -98,7 +98,7 @@ canvas.addEventListener('mousemove',  function(e) {
 		x = permanecerDentro(x,canvas.width);
 		y = permanecerDentro(y, canvas.height);
 		fichaJugada.colocarPosicion(x,y);
-		juego.actualizarEstado();
+		juego.actualizarJuego();
 		fichaJugada.draggable = false;
 		fichaJugada = null;
 		
@@ -115,12 +115,12 @@ canvas.addEventListener('mousemove',  function(e) {
 		x = permanecerDentro(x,canvas.width);
 		y = permanecerDentro(y, canvas.height);
 		fichaJugada.colocarPosicion(x,y);
-		let columna = juego.fichaSobreFlecha(x,y);
+		let columna = juego.sobreFlecha(x,y);
 		if (columna > -1)
 		{
 			juego.meterFicha(columna,fichaJugada);
 		}
-		juego.actualizarEstado();
+		juego.actualizarJuego();
 		fichaJugada.draggable = false;
 		fichaJugada = null;
 		}
@@ -143,7 +143,7 @@ canvas.addEventListener('mousemove',  function(e) {
 		if (fichaJugada !== null && fichaJugada.draggable)
 		{  
 			fichaJugada.colocarPosicion(x,y);
-			juego.actualizarEstado();
+			juego.actualizarJuego();
 		}	
 	
 	});	

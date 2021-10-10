@@ -28,7 +28,7 @@ class Circulo extends Figura {
 	}
 
 	dibujarImagen(imagen){
-	//	this.dibujar();
+		super.dibujarImagen(imagen);
 		this.ctx.drawImage(imagen, (this.x - this.radio), (this.y - this.radio),  Math.pow(this.radio,2),  Math.pow(this.radio,2));
 	}
 

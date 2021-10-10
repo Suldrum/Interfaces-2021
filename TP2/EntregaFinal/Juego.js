@@ -13,12 +13,90 @@ class Juego {
 		let anchoTablero=  document.getElementById('anchoTablero').value;
 		let altoTablero= document.getElementById('altoTablero').value;
 		this.tablero = new Tablero(3 * TAMAÑO, (TAMAÑO / 2),canvas,anchoTablero, altoTablero );
-		this.condicionVictoria = new Recorrido();
+		this.condicionVictoria = new Victoria();
 		this.jugador1 = new Jugador("jugador 1", "#FF0000");
 		this.jugador2 = new Jugador("jugador 2", "#000000");
 		this.turno= null;
 		
     }
+
+	repartirFichas()
+	{
+		let cantidadFichas = this.tablero.tamañoTablero();
+		//Si hay un numero impar de fichas al jugador 1 se le dara una ficha mas
+		this.darFichas(this.jugador1, Math.ceil(cantidadFichas/2), TAMAÑO + MARGEN  , TAMAÑO * this.tablero.matriz.length);
+		this.darFichas(this.jugador2, Math.floor(cantidadFichas/2),canvas.width - (TAMAÑO +RADIO) ,TAMAÑO * this.tablero.matriz.length);
+	}
+
+	darFichas(jugador,cantFichas, xPivote, yPivote){
+		for (let i = 0; i < cantFichas ; i++)
+		{
+			let saltoX = Math.random() * TAMAÑO/2 ;
+			let saltoY = Math.random() * TAMAÑO/2 ;
+			let ficha = new Circulo(xPivote+saltoX, yPivote+saltoY,jugador.getColor(),this.tablero.ctx);
+			jugador.agregarFicha(ficha);
+		}
+	}
+
+	visualizarFichas()
+	{
+		this.jugador1.mostrarFichas();
+		this.jugador2.mostrarFichas();
+	}
+
+	empezarJuego(){
+		this.tablero.dibujarDefault();
+		this.repartirFichas();
+		this.visualizarFichas();
+		this.ronda(this.jugador1);
+		
+	}
+
+	actualizarJuego()
+	{
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		this.tablero.actualizarTablero();
+		this.visualizarFichas();
+	}
+
+
+	
+	meterFicha(columna,ficha){
+		let resultado = this.tablero.meterFicha(columna,ficha);
+		if (resultado !=null)
+		{
+			this.turno.sacarFicha(this.turno.fichas.indexOf(ficha));
+			let victoria = this.condicionVictoria.victoria(this.tablero.matriz,resultado[0],resultado[1]);
+			console.log(victoria);
+		}
+	}
+	
+
+	sobreFlecha(x,y)
+	{
+		return this.tablero.sobreFlecha(x,y);
+	}
+	
+
+	darTurno()
+	{
+		if (this.turno === this.jugador1)
+		{
+			this.turno = this.jugador2;
+		}
+		else
+		{
+			this.turno = this.jugador1;
+		}
+	}
+
+	//Empieza la ronda del jugador
+	ronda(jugador)
+	{
+		this.turno = jugador;
+		//Si hace click me fijo que lo hizo sobre una ficha
+		
+	}
 
 	definirGanador(matriz,modoJuego) {
 		//Ejecucion del juego
@@ -54,90 +132,4 @@ class Juego {
 		
 		return(jugadorGanador);
 	}
-
-	empezarJuego(){
-		
-		this.tablero.dibujarDefault();
-		this.repartirFichas();
-		this.visualizarFichas();
-		this.ronda(this.jugador1);
-		
-	}
-
-	actualizarEstado()
-	{
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		
-		this.tablero.actualizarTablero();
-		this.visualizarFichas();
-		//redibujar ficha elegida
-		//eliminar la ficha cuando entra en el tablero
-	}
-
-	//Empieza la ronda del jugador
-	ronda(jugador)
-	{
-		this.turno = jugador;
-		//Si hace click me fijo que lo hizo sobre una ficha
-		
-	}
-	
-	meterFicha(columna,ficha){
-		let resultado = this.tablero.meterFicha(columna,ficha);
-		if (resultado !=null)
-		{
-			let victoria = this.condicionVictoria.victoria(this.tablero.matriz,resultado[0],resultado[1]);
-			console.log(victoria);
-		}
-	}
-	
-	darTurno()
-	{
-		if (this.turno === this.jugador1)
-		{
-			this.turno = this.jugador2;
-		}
-		else
-		{
-			this.turno = this.jugador1;
-		}
-	}
-	fichaSobreFlecha(x,y)
-	{
-		return this.tablero.sobreFlecha(x,y);
-	}
-	
-	repartirFichas()
-	{
-		let cantidadFichas = this.tablero.tamañoTablero();
-		//Si hay un numero impar de fichas al jugador 1 se le dara una ficha mas
-		this.darFichas(this.jugador1, Math.ceil(cantidadFichas/2), TAMAÑO + MARGEN  , TAMAÑO * this.tablero.matriz.length);
-		this.darFichas(this.jugador2, Math.floor(cantidadFichas/2),canvas.width - (TAMAÑO +RADIO) ,TAMAÑO * this.tablero.matriz.length);
-	}
-
-	darFichas(jugador,cantFichas, xPivote, yPivote){
-		for (let i = 0; i < cantFichas ; i++)
-		{
-			let saltoX = Math.random() * TAMAÑO/2 ;
-			let saltoY = Math.random() * TAMAÑO/2 ;
-			let ficha = new Circulo(xPivote+saltoX, yPivote+saltoY,jugador.getColor(),this.tablero.ctx);
-			jugador.agregarFicha(ficha);
-		}
-	}
-
-	visualizarFichas()
-	{
-		this.jugador1.mostrarFichas();
-		this.jugador2.mostrarFichas();
-	}
-
-	controlarFicha(fichaJugada)
-	{
-		console.log("F");
-		//Ficha que se esta moviendo
-	
-		
-			
-	}
-
 }//FIN DE LA CLASE

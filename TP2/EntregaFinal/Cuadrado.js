@@ -26,7 +26,7 @@ class Cuadrado extends Figura {
 	}
 	
 	dibujarImagen(imagen){
-	//	this.dibujar();
+		super.dibujarImagen(imagen);
 		this.ctx.drawImage(imagen, this.x, this.y, this.ancho, this.alto);
 	}
 

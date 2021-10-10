@@ -29,13 +29,13 @@ class Jugador {
 	setTurno(turno){
 		this.turno = turno;
 	}
-	getTurno(turno){
+	getTurno(){
 		return this.turno;
 	}
 	agregarFicha(ficha)
 	{this.fichas.push(ficha);}
 
-	sacarFicha(){return this.fichas.pop();}
+	sacarFicha(ficha){this.fichas.splice(ficha, 1);}
 
 	ponerFicha(){}
 

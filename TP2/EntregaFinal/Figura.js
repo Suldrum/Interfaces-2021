@@ -14,7 +14,6 @@ class Figura {
 		this.y = y;
 		this.color = color;
 		this.ctx = ctx;
-	//	this.draggable = false;
 	}
 
 	getColor(){
@@ -33,6 +32,8 @@ class Figura {
 	
 	dibujar(){}
 
-	dibujarImagen(imagen){}
+	dibujarImagen(imagen){
+		this.dibujar();
+	}
 	esClickeada(x,y){}
 } //FIN DE LA CLASE

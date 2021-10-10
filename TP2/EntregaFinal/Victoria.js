@@ -9,7 +9,7 @@
 
  const VALORGANADOR = 3;
 //Clase creada para verificar las distintas formas en las que un jugador pudo ganar el juego.
-class Recorrido {
+class Victoria {
 	
     //Recorre horizontalmente y devuelve si encontro la cantidad de igualdades necesarias para ganar el juego.
 	movHorizontal(vector,  columna) {
