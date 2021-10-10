@@ -48,7 +48,7 @@ class Juego {
 		this.tablero.dibujarDefault();
 		this.repartirFichas();
 		this.visualizarFichas();
-		this.ronda(this.jugador1);
+		this.turno=this.jugador1;
 		
 	}
 
@@ -58,8 +58,6 @@ class Juego {
 		this.tablero.actualizarTablero();
 		this.visualizarFichas();
 	}
-
-
 	
 	meterFicha(columna,ficha){
 		let resultado = this.tablero.meterFicha(columna,ficha);
@@ -67,7 +65,12 @@ class Juego {
 		{
 			this.turno.sacarFicha(this.turno.fichas.indexOf(ficha));
 			let victoria = this.condicionVictoria.victoria(this.tablero.matriz,resultado[0],resultado[1]);
-			console.log(victoria);
+			if(victoria || this.tablero.tableroLleno()){
+				//visualizarGanador
+				this.terminarJuego();
+			}
+			else
+			{this.darTurno();}
 		}
 	}
 	
@@ -90,46 +93,9 @@ class Juego {
 		}
 	}
 
-	//Empieza la ronda del jugador
-	ronda(jugador)
-	{
-		this.turno = jugador;
-		//Si hace click me fijo que lo hizo sobre una ficha
+	terminarJuego() {
+		console.log("se terminooo");
 		
-	}
-
-	definirGanador(matriz,modoJuego) {
-		//Ejecucion del juego
-		
-
-		let turno = true;
-		let jugadorGanador = 'E';
-		let movGanador = new Recorrido();
-		
-		while(!(tablero.tableroLleno(matriz[0])) && (jugadorGanador === 'E'))
-		{	
-			System.out.println(" ");
-			let ficha = new Ficha(turno);
-			System.out.println("Turno del jugador: "+ficha.fichaValor);
-			let jugada;
-			
-			//Cuando juego la IA
-			if (!(modoJuego) && !(turno))
-				{
-					Thread.sleep(3*1000);
-				
-				jugada= ficha.movimientoAzar(matriz[0]);}
-			else
-				jugada= ficha.movimientoValido(matriz[0]);
-			
-			let fila = ficha.filaUbicacion(matriz, jugada);
-			ficha.meterFicha(matriz, fila, jugada, ficha.fichaValor);
-			if (movGanador.movDiagonalDer(matriz, fila, jugada) || movGanador.movDiagonalIzq(matriz, fila, jugada) || movGanador.movHorizontal(matriz[fila], jugada) || movGanador.movVertical(matriz, fila, jugada))
-				jugadorGanador= ficha.fichaValor;
-			turno = (!turno);
-			tablero.mostrarTablero(matriz);
-		}//FIN DEL JUEGO
-		
-		return(jugadorGanador);
+		this.turno = null;
 	}
 }//FIN DE LA CLASE

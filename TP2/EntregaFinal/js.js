@@ -14,7 +14,7 @@ const TAMAÑO = (RADIO + MARGEN) * 2;
 
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
-let juego;
+let juego = null;
 let fichaJugada = null;
 
 
@@ -27,6 +27,7 @@ let fichaJugada = null;
 
 //Funcion que carga todos los valores por defecto
 function loadAllDefaults() {
+	ctx.clearRect(0, 0,canvas.width, canvas.height);
 	document.getElementById('radioJugador').checked = true;
 	document.getElementById('porTiempo').checked = false;
 	let tiempo = document.getElementById('selectorTiempo');
@@ -46,7 +47,6 @@ document.getElementById('porTiempo').addEventListener('change',function(e){
 
 
 document.getElementById('jugar').addEventListener('click',function(e){
-
 	//Limpia el canvas
 	ctx.clearRect(0, 0,canvas.width, canvas.height);
 	juego = new Juego(canvas);
@@ -61,24 +61,15 @@ document.getElementById('jugar').addEventListener('click',function(e){
 	
 });
 
-let ficha= new Circulo(100,100,"#000000",ctx);
+
 document.getElementById('test').addEventListener('click',function(e){
 	
-	//let ficha2 = new Ficha(200,200,"#FF0000",ctx);
-//	ficha2.dibujarFicha();
-//	ficha = new Ficha(100,100,"#000000",ctx);
-	ficha.dibujar();
-	/*
-	ficha.colocarPosicion(250,250);
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	ficha.dibujarFicha();
-	*/
 });
 
 
 
 canvas.addEventListener('mousemove',  function(e) {
-	if (fichaJugada !== null && fichaJugada.draggable) {
+	if (fichaJugada != null) {
 		let x = e.offsetX;
 		let y = e.offsetY;
 		x = permanecerDentro(x,canvas.width);
@@ -91,7 +82,7 @@ canvas.addEventListener('mousemove',  function(e) {
 
 	//Si se sale del canvas mientras esta dibujando me encargo de dibujar hasta el borde
 	canvas.addEventListener("mouseout",function(e){
-	if (fichaJugada !== null && fichaJugada.draggable)
+	if (fichaJugada != null)
 	{  
 		let x = e.offsetX;
 		let y = e.offsetY;
@@ -99,15 +90,13 @@ canvas.addEventListener('mousemove',  function(e) {
 		y = permanecerDentro(y, canvas.height);
 		fichaJugada.colocarPosicion(x,y);
 		juego.actualizarJuego();
-		fichaJugada.draggable = false;
-		fichaJugada = null;
-		
+		fichaJugada = null;		
 	}
 	});
 
 //Si se sale del canvas mientras esta dibujando me encargo de dibujar hasta el borde
 	canvas.addEventListener("mouseup",function(e){
-	   if (fichaJugada !== null && fichaJugada.draggable)
+		if (fichaJugada != null)
 		{  
 		//Dibujo la ficha por ultima vez
 		let x = e.offsetX;
@@ -121,7 +110,6 @@ canvas.addEventListener('mousemove',  function(e) {
 			juego.meterFicha(columna,fichaJugada);
 		}
 		juego.actualizarJuego();
-		fichaJugada.draggable = false;
 		fichaJugada = null;
 		}
 	});
@@ -136,15 +124,15 @@ canvas.addEventListener('mousemove',  function(e) {
 	}
 
 	canvas.addEventListener('mousedown', function(e) {
-
 		let x = e.offsetX;
 		let y = e.offsetY;
-		fichaJugada = juego.turno.juegaFicha(x,y);
-		if (fichaJugada !== null && fichaJugada.draggable)
-		{  
-			fichaJugada.colocarPosicion(x,y);
-			juego.actualizarJuego();
-		}	
-	
+		if (juego.turno != null)
+		{fichaJugada = juego.turno.juegaFicha(x,y);
+			if (fichaJugada != null )
+			{  
+				fichaJugada.colocarPosicion(x,y);
+				juego.actualizarJuego();
+			}	
+		}
 	});	
 	

@@ -95,12 +95,11 @@ class Tablero extends Cuadrado{
 	tableroLleno()
 	{
 		let columna= 0;
-		while ((columna < this.ancho) && (espacioLibre(this.matriz[0], columna)) )
+		while ((columna < this.matriz[0].length) && (!(this.espacioLibre(this.matriz[0] , columna)) ))
 		{
-			
 			columna++;
 		}
-		return columna == this.ancho;
+		return columna == this.matriz[0].length;
 	}
 
     //Pone una ficha en el tablero en una fila y columna de la matriz
@@ -138,7 +137,7 @@ class Tablero extends Cuadrado{
         //Crea un movimiento al azar
 		let movimiento=  parseInt( (Math.random() * this.matriz[0].length ));
 		//Controla que no esta generando un movimiento en una columna llena
-        while ( llenaColumna(this.matriz[0], movimiento) )
+        while ( this.llenaColumna(this.matriz[0], movimiento) )
         	movimiento=  parseInt( (Math.random() * this.matriz[0].length ));
 		return movimiento;
 	}
