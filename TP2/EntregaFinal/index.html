@@ -12,13 +12,36 @@
 <body>
     <img id="flecha" src="img/flechasAbajo.png" alt="flechasAbajo" hidden>
     <h1>Ejecicio Entregable N° 2</h1>
+    <label>Nombre del Jugador 1: </label>
+    <label></label>
+    <div>
+        <select id="colorJugador1">
+            <option value="#ff0000">Rojo</option>
+            <option value="#0000ff">Azul</option>
+            <option value="#00ff00">Verde</option>
+            <option value="#ffff00">Amarillo</option>
+            <option value="#00ffff">Celeste</option>
+        </select>
+      </div>
     <h3>Combate contra</h3>
     <div>
         <input type="radio" name="modoJuego" value="jugador" id="radioJugador">
         <label >otro Jugador 2</label>
-        <input type="radio" name="modoJuego" value="ia" id="radioIA" >
+        <input type="radio" name="modoJuego" value="ia" id="radioIA">
         <label >una IA</label>
       </div>
+      <label>Nombre del Jugador 2: </label>
+    <label></label>
+      <div>
+        <select id="colorJugador2">
+            <option value="#ff0000">Rojo</option>
+            <option value="#0000ff">Azul</option>
+            <option value="#00ff00">Verde</option>
+            <option value="#ffff00">Amarillo</option>
+            <option value="#00ffff">Celeste</option>
+        </select>
+      </div>
+      
     <div>
         <h3>Juego por tiempo</h3>
         <div>
@@ -51,7 +74,7 @@
     </div>
     <div>
         <label>Turno del Jugador</label>
-        <label></label>
+        <label id="jugadorTurno"></label>
     </div>
     <button id="test">TEST</button>
     <canvas id="canvas" width="1000" height="650" hidden="true" ></canvas>

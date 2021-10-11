@@ -35,6 +35,8 @@ function loadAllDefaults() {
 	tiempo.value = "15";
 	document.getElementById('anchoTablero').value = "5";
 	document.getElementById('altoTablero').value = "5";
+	document.getElementById('colorJugador1').value = "#ff0000";
+	document.getElementById('colorJugador2').value = "#0000ff";
 	document.getElementById('salir').disabled = true;
 	
 }
@@ -56,19 +58,16 @@ document.getElementById('jugar').addEventListener('click',function(e){
 	let anchoTablero=  document.getElementById('anchoTablero').value;
 	let altoTablero= document.getElementById('altoTablero').value;
 	let tablero = new Tablero(3 * TAMAÑO, (TAMAÑO / 2),canvas,anchoTablero, altoTablero );
-	let jugador1 = new Jugador("jugador 1", "#FF0000");
-	let jugador2 = new Jugador("jugador 2", "#000000");
+	let colorJugador1 = document.getElementById('colorJugador1').value;
+	let colorJugador2 = document.getElementById('colorJugador2').value;
+	let jugador1 = new Jugador("jugador 1", colorJugador1);
+	let jugador2 = new Jugador("jugador 2", colorJugador2 );
 	
 	let tiempo = document.getElementById('selectorTiempo');
 	if (!tiempo.disabled)
 	{	
 		let reloj = new Reloj(tiempo.value);
 		juego = new JuegoTemporizado(tablero,jugador1,jugador2,reloj,ctx);
-		document.getElementById('reloj').addEventListener('change',function(e){
-			if (this.innerHTML === "0:00")
-			{juego.terminarJuego(false);}	
-			
-		});
 	}
 	else{
 		juego = new Juego(tablero,jugador1,jugador2,ctx);
@@ -85,7 +84,7 @@ document.getElementById('test').addEventListener('click',function(e){
 	juego.terminarJuego(false);
 });
 canvas.addEventListener('mousemove',  function(e) {
-	if (fichaJugada != null) {
+	if (juego.turno != null && fichaJugada != null) {
 		let x = e.offsetX;
 		let y = e.offsetY;
 		x = permanecerDentro(x,canvas.width);

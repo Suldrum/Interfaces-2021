@@ -48,6 +48,7 @@ class Juego {
 		this.repartirFichas();
 		this.visualizarFichas();
 		this.turno=this.jugador1;
+		document.getElementById("jugadorTurno").innerHTML= this.turno.getNombre();
 	}
 
 	actualizarJuego()
@@ -88,17 +89,21 @@ class Juego {
 		{
 			this.turno = this.jugador1;
 		}
+		document.getElementById("jugadorTurno").innerHTML= this.turno.getNombre();
 	}
 
 	terminarJuego(victoria) {
 		if (victoria)
-		{//mostrar que gano
+		{
+			//mostrar que gano
+			alert("¡Felicidades "+this.turno.getNombre()+" has ganado!");
 		}
 		else
 		{
 			//mostrar empate
+			alert("¡Empatados!");
 		}
-		
+		fichaJugada = null;
 		this.turno = null;
 	}
 }//FIN DE LA CLASE

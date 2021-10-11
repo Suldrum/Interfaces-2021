@@ -43,6 +43,7 @@ class Reloj
 	}
 	terminar(){
 		clearTimeout(this.intervalo);
+		juego.terminarJuego(false);
 	}
 
 
