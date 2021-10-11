@@ -21,6 +21,6 @@ class JuegoTemporizado extends Juego {
 
 	terminarJuego(victoria){
 		this.reloj.terminar();
-		super.terminarJuego(false);
+		super.terminarJuego(victoria);
 	}
 }//FIN DE LA CLASE
