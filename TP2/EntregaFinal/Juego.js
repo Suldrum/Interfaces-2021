@@ -9,14 +9,13 @@
 // Ni bien se carga la página me aseguro que este en su estado por defecto
 class Juego {
 
-	constructor(canvas){
-		let anchoTablero=  document.getElementById('anchoTablero').value;
-		let altoTablero= document.getElementById('altoTablero').value;
-		this.tablero = new Tablero(3 * TAMAÑO, (TAMAÑO / 2),canvas,anchoTablero, altoTablero );
+	constructor(tablero,jugador1,jugador2,ctx){
+		this.tablero = tablero;
 		this.condicionVictoria = new Victoria();
-		this.jugador1 = new Jugador("jugador 1", "#FF0000");
-		this.jugador2 = new Jugador("jugador 2", "#000000");
+		this.jugador1 = jugador1;
+		this.jugador2 = jugador2;
 		this.turno= null;
+		this.ctx = ctx;
 		
     }
 
@@ -49,12 +48,11 @@ class Juego {
 		this.repartirFichas();
 		this.visualizarFichas();
 		this.turno=this.jugador1;
-		
 	}
 
 	actualizarJuego()
 	{
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		this.ctx.clearRect(0, 0, canvas.width, canvas.height);
 		this.tablero.actualizarTablero();
 		this.visualizarFichas();
 	}
@@ -66,8 +64,7 @@ class Juego {
 			this.turno.sacarFicha(this.turno.fichas.indexOf(ficha));
 			let victoria = this.condicionVictoria.victoria(this.tablero.matriz,resultado[0],resultado[1]);
 			if(victoria || this.tablero.tableroLleno()){
-				//visualizarGanador
-				this.terminarJuego();
+				this.terminarJuego(victoria);
 			}
 			else
 			{this.darTurno();}
@@ -93,8 +90,14 @@ class Juego {
 		}
 	}
 
-	terminarJuego() {
-		console.log("se terminooo");
+	terminarJuego(victoria) {
+		if (victoria)
+		{//mostrar que gano
+		}
+		else
+		{
+			//mostrar empate
+		}
 		
 		this.turno = null;
 	}

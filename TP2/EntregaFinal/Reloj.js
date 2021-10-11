@@ -20,8 +20,6 @@ class Reloj
 	}
 
 	iniciar(){
-			//No se puede iniciar otro juego que no sea el actual
-			document.getElementById("jugar").disabled = true;
 			let reloj = document.getElementById("reloj");
 			reloj.innerHTML=(this.minutos)+":00";
 			this.intervalo = setInterval(() => {
@@ -45,9 +43,6 @@ class Reloj
 	}
 	terminar(){
 		clearTimeout(this.intervalo);
-		let reloj = document.getElementById("reloj");
-			reloj.innerHTML="termino xd";
-			document.getElementById("jugar").disabled = false;
 	}
 
 

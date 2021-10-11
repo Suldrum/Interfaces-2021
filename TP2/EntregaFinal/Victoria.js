@@ -7,7 +7,7 @@
  * 
  */
 
- const VALORGANADOR = 3;
+ const VALORGANADOR = 4;
 //Clase creada para verificar las distintas formas en las que un jugador pudo ganar el juego.
 class Victoria {
 	

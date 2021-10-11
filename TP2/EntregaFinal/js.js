@@ -35,6 +35,7 @@ function loadAllDefaults() {
 	tiempo.value = "15";
 	document.getElementById('anchoTablero').value = "5";
 	document.getElementById('altoTablero').value = "5";
+	document.getElementById('salir').disabled = true;
 	
 }
 
@@ -48,26 +49,41 @@ document.getElementById('porTiempo').addEventListener('change',function(e){
 
 document.getElementById('jugar').addEventListener('click',function(e){
 	//Limpia el canvas
+	this.disabled = true;
+	document.getElementById('salir').disabled = false;
+	canvas.hidden = false;
 	ctx.clearRect(0, 0,canvas.width, canvas.height);
-	juego = new Juego(canvas);
-	juego.empezarJuego();
+	let anchoTablero=  document.getElementById('anchoTablero').value;
+	let altoTablero= document.getElementById('altoTablero').value;
+	let tablero = new Tablero(3 * TAMAÑO, (TAMAÑO / 2),canvas,anchoTablero, altoTablero );
+	let jugador1 = new Jugador("jugador 1", "#FF0000");
+	let jugador2 = new Jugador("jugador 2", "#000000");
+	
 	let tiempo = document.getElementById('selectorTiempo');
 	if (!tiempo.disabled)
 	{	
-		let timer = new Reloj(tiempo.value);
-		timer.iniciar();
-		document.getElementById('salir').addEventListener('click',function(e){timer.terminar();})
+		let reloj = new Reloj(tiempo.value);
+		juego = new JuegoTemporizado(tablero,jugador1,jugador2,reloj,ctx);
+		document.getElementById('reloj').addEventListener('change',function(e){
+			if (this.innerHTML === "0:00")
+			{juego.terminarJuego(false);}	
+			
+		});
 	}
-	
+	else{
+		juego = new Juego(tablero,jugador1,jugador2,ctx);
+	}
+	juego.empezarJuego();
+	document.getElementById('salir').addEventListener('click',function(e){
+		juego.terminarJuego(false);
+		document.getElementById('jugar').disabled = false;
+		this.disabled = true;
+	});
 });
-
 
 document.getElementById('test').addEventListener('click',function(e){
-	
+	juego.terminarJuego(false);
 });
-
-
-
 canvas.addEventListener('mousemove',  function(e) {
 	if (fichaJugada != null) {
 		let x = e.offsetX;
@@ -123,6 +139,7 @@ canvas.addEventListener('mousemove',  function(e) {
 		return valor;
 	}
 
+	
 	canvas.addEventListener('mousedown', function(e) {
 		let x = e.offsetX;
 		let y = e.offsetY;

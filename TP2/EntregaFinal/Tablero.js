@@ -132,16 +132,6 @@ class Tablero extends Cuadrado{
 		}
 	}
 	
-	//Para un jugador tipo maquina, elige una columna no llena al azar para tirar una ficha.
-	movimientoAzar() {
-        //Crea un movimiento al azar
-		let movimiento=  parseInt( (Math.random() * this.matriz[0].length ));
-		//Controla que no esta generando un movimiento en una columna llena
-        while ( this.llenaColumna(this.matriz[0], movimiento) )
-        	movimiento=  parseInt( (Math.random() * this.matriz[0].length ));
-		return movimiento;
-	}
-
 	tamañoTablero()
 	{
 		

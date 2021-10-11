@@ -37,8 +37,6 @@ class Jugador {
 
 	sacarFicha(ficha){this.fichas.splice(ficha, 1);}
 
-	ponerFicha(){}
-
 	mostrarFichas(){
 		
 		for (let i = 0; i < this.fichas.length ; i++)
@@ -49,6 +47,7 @@ class Jugador {
 	}
 
 	//El jugador elige una ficha para jugar
+
 	juegaFicha(x,y)
 	{
 		//Si toco una de sus fichas
@@ -56,14 +55,11 @@ class Jugador {
 		{
 			if (this.fichas[i].esClickeada(x,y))
 			{
-				this.fichas[i].draggable = true;
 				return this.fichas[i];
 			}
 		}
 		//Si toco en cualquier otro lado
 		return null;	
-
 	}
-
 
 } //FIN DE LA CLASE
