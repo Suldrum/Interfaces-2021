@@ -38,12 +38,11 @@ class Reloj
 						else{reloj.innerHTML=this.minutos+":"+this.segundos;}
 				}
 				if (this.tiempo <= 0)
-					this.terminar();
+					juego.terminar(false);
 			  }, 1000);
 	}
 	terminar(){
 		clearTimeout(this.intervalo);
-		juego.terminarJuego(false);
 	}
 
 
