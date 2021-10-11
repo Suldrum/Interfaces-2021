@@ -84,7 +84,7 @@ document.getElementById('test').addEventListener('click',function(e){
 	juego.terminarJuego(false);
 });
 canvas.addEventListener('mousemove',  function(e) {
-	if (juego.turno != null && fichaJugada != null) {
+	if (juego != null && fichaJugada != null) {
 		let x = e.offsetX;
 		let y = e.offsetY;
 		x = permanecerDentro(x,canvas.width);
@@ -97,7 +97,7 @@ canvas.addEventListener('mousemove',  function(e) {
 
 	//Si se sale del canvas mientras esta dibujando me encargo de dibujar hasta el borde
 	canvas.addEventListener("mouseout",function(e){
-	if (fichaJugada != null)
+	if (juego != null && fichaJugada != null)
 	{  
 		let x = e.offsetX;
 		let y = e.offsetY;
@@ -111,7 +111,7 @@ canvas.addEventListener('mousemove',  function(e) {
 
 //Si se sale del canvas mientras esta dibujando me encargo de dibujar hasta el borde
 	canvas.addEventListener("mouseup",function(e){
-		if (fichaJugada != null)
+		if (juego != null && fichaJugada != null)
 		{  
 		//Dibujo la ficha por ultima vez
 		let x = e.offsetX;
@@ -142,7 +142,7 @@ canvas.addEventListener('mousemove',  function(e) {
 	canvas.addEventListener('mousedown', function(e) {
 		let x = e.offsetX;
 		let y = e.offsetY;
-		if (juego.turno != null)
+		if (juego != null)
 		{fichaJugada = juego.turno.juegaFicha(x,y);
 			if (fichaJugada != null )
 			{  

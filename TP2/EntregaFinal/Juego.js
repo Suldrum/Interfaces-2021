@@ -111,6 +111,6 @@ class Juego {
 			alert("¡Empatados!");
 		}
 		fichaJugada = null;
-		this.turno = null;
+		juego = null;
 	}
 }//FIN DE LA CLASE

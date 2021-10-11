@@ -64,6 +64,7 @@ class Jugador extends Figura{
 		this.ctx.lineCap = "butt";
 		//Adios contorno 
 		this.ctx.strokeStyle = this.getColor();
+		this.ctx.lineWidth = 4;
 		this.ctx.fillStyle = this.getColor(); 
 		// Establecemos la tipografía
 		this.ctx.font = "45px Verdana"; 
