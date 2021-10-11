@@ -42,10 +42,16 @@ class Juego {
 		this.jugador1.mostrarFichas();
 		this.jugador2.mostrarFichas();
 	}
+	visualizarJugadores()
+	{
+		this.jugador1.dibujar();
+		this.jugador2.dibujar();
+	}
 
 	empezarJuego(){
 		this.tablero.dibujarDefault();
 		this.repartirFichas();
+		this.visualizarJugadores();
 		this.visualizarFichas();
 		this.turno=this.jugador1;
 		document.getElementById("jugadorTurno").innerHTML= this.turno.getNombre();
@@ -55,6 +61,7 @@ class Juego {
 	{
 		this.ctx.clearRect(0, 0, canvas.width, canvas.height);
 		this.tablero.actualizarTablero();
+		this.visualizarJugadores();
 		this.visualizarFichas();
 	}
 	

@@ -60,8 +60,8 @@ document.getElementById('jugar').addEventListener('click',function(e){
 	let tablero = new Tablero(3 * TAMAÑO, (TAMAÑO / 2),canvas,anchoTablero, altoTablero );
 	let colorJugador1 = document.getElementById('colorJugador1').value;
 	let colorJugador2 = document.getElementById('colorJugador2').value;
-	let jugador1 = new Jugador("jugador 1", colorJugador1);
-	let jugador2 = new Jugador("jugador 2", colorJugador2 );
+	let jugador1 = new Jugador(MARGEN, TAMAÑO, colorJugador1, ctx, "jugador 1");
+	let jugador2 = new Jugador(canvas.width - ( 3 * TAMAÑO ) + RADIO , TAMAÑO, colorJugador2, ctx, "jugador 2");
 	
 	let tiempo = document.getElementById('selectorTiempo');
 	if (!tiempo.disabled)

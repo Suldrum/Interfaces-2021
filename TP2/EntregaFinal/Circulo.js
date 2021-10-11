@@ -17,8 +17,8 @@ class Circulo extends Figura {
 
 	dibujar()
 	{
-		
 		this.ctx.fillStyle = this.color;
+		this.ctx.strokeStyle = "#000000";
 		this.ctx.beginPath();	
         this.ctx.arc(this.x, this.y, this.radio, 0, 2 * Math.PI);
 		this.ctx.fill();

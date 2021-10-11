@@ -19,6 +19,7 @@ class Cuadrado extends Figura {
 	dibujar()
 	{
 		this.ctx.fillStyle = this.color;
+		this.ctx.strokeStyle = "#000000";
 		this.ctx.beginPath();
         this.ctx.strokeRect(this.x, this.y, this.ancho, this.alto);
         this.ctx.fillRect(this.x, this.y, this.ancho, this.alto);
