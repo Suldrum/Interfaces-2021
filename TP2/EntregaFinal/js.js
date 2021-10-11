@@ -89,6 +89,34 @@ document.getElementById('jugar').addEventListener('click',function(e){
 document.getElementById('test').addEventListener('click',function(e){
 	juego.terminarJuego(false);
 });
+
+document.getElementById('colorJugador1').addEventListener('change',function(e){
+	let colorJugador2 = document.getElementById('colorJugador2').value;
+	if ( this.value === colorJugador2 && colorJugador2 !== "#ff0000")
+	{
+		this.value = "#ff0000";
+	}
+	else
+	{
+		if ( this.value === colorJugador2)
+		{ this.value = "#0000ff";}
+	}
+});
+
+document.getElementById('colorJugador2').addEventListener('change',function(e){
+	let colorJugador1 = document.getElementById('colorJugador1').value;
+	if ( this.value === colorJugador1 && colorJugador1 !== "#0000ff")
+	{
+		this.value = "#0000ff";
+	}
+	else
+	{
+		if ( this.value === colorJugador1)
+		{this.value = "#ff0000";}
+	}
+});
+
+
 canvas.addEventListener('mousemove',  function(e) {
 	if (juego != null && fichaJugada != null) {
 		let x = e.offsetX;
