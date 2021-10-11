@@ -38,6 +38,8 @@ function loadAllDefaults() {
 	document.getElementById('colorJugador1').value = "#ff0000";
 	document.getElementById('colorJugador2').value = "#0000ff";
 	document.getElementById('salir').disabled = true;
+	document.getElementById("jugadorTurno").innerHTML= "";
+	document.getElementById("reloj").innerHTML= "";
 	
 }
 
@@ -52,6 +54,7 @@ document.getElementById('porTiempo').addEventListener('change',function(e){
 document.getElementById('jugar').addEventListener('click',function(e){
 	//Limpia el canvas
 	this.disabled = true;
+	document.getElementById("jugadorTurno").innerHTML= "";
 	document.getElementById('salir').disabled = false;
 	canvas.hidden = false;
 	ctx.clearRect(0, 0,canvas.width, canvas.height);
@@ -74,9 +77,12 @@ document.getElementById('jugar').addEventListener('click',function(e){
 	}
 	juego.empezarJuego();
 	document.getElementById('salir').addEventListener('click',function(e){
-		juego.terminarJuego(false);
-		document.getElementById('jugar').disabled = false;
-		this.disabled = true;
+		if (juego != null)
+		{
+			juego.terminarJuego(false);
+			document.getElementById('jugar').disabled = false;
+			this.disabled = true;
+		}
 	});
 });
 
