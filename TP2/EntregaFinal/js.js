@@ -70,8 +70,8 @@ document.getElementById('jugar').addEventListener('click',function(e){
 	let nombreJugador2 = document.getElementById("nombreJugador2").value;
 	nombreJugador2 =  (nombreJugador2 === "") ? nombreJugador2 = "Jugador 2" : nombreJugador1;
 	let jugador1 = new Jugador(MARGEN, TAMAÑO, colorJugador1, ctx, nombreJugador1);
-	let jugador2 = new Jugador(canvas.width - ( 3 * TAMAÑO ) + RADIO , TAMAÑO, colorJugador2, ctx, nombreJugador2);
-	
+//	let jugador2 = new Jugador(canvas.width - ( 3 * TAMAÑO ) + RADIO , TAMAÑO, colorJugador2, ctx, nombreJugador2);
+	let jugador2 = new JugadorIA(canvas.width - ( 3 * TAMAÑO ) + RADIO , TAMAÑO, colorJugador2, ctx, nombreJugador2,anchoTablero);
 	let tiempo = document.getElementById('selectorTiempo');
 	if (!tiempo.disabled)
 	{	
