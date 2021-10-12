@@ -40,6 +40,8 @@ function loadAllDefaults() {
 	document.getElementById('salir').disabled = true;
 	document.getElementById("jugadorTurno").innerHTML= "";
 	document.getElementById("reloj").innerHTML= "";
+	document.getElementById("nombreJugador1").value= "";
+	document.getElementById("nombreJugador2").value= "";
 	
 }
 
@@ -63,8 +65,12 @@ document.getElementById('jugar').addEventListener('click',function(e){
 	let tablero = new Tablero(3 * TAMAÑO, (TAMAÑO / 2),canvas,anchoTablero, altoTablero );
 	let colorJugador1 = document.getElementById('colorJugador1').value;
 	let colorJugador2 = document.getElementById('colorJugador2').value;
-	let jugador1 = new Jugador(MARGEN, TAMAÑO, colorJugador1, ctx, "jugador 1");
-	let jugador2 = new Jugador(canvas.width - ( 3 * TAMAÑO ) + RADIO , TAMAÑO, colorJugador2, ctx, "jugador 2");
+	let nombreJugador1 = document.getElementById("nombreJugador1").value;
+	nombreJugador1 =  (nombreJugador1 === "") ? nombreJugador1 = "Jugador 1" : nombreJugador1;
+	let nombreJugador2 = document.getElementById("nombreJugador2").value;
+	nombreJugador2 =  (nombreJugador2 === "") ? nombreJugador2 = "Jugador 2" : nombreJugador1;
+	let jugador1 = new Jugador(MARGEN, TAMAÑO, colorJugador1, ctx, nombreJugador1);
+	let jugador2 = new Jugador(canvas.width - ( 3 * TAMAÑO ) + RADIO , TAMAÑO, colorJugador2, ctx, nombreJugador2);
 	
 	let tiempo = document.getElementById('selectorTiempo');
 	if (!tiempo.disabled)
