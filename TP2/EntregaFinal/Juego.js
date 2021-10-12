@@ -112,5 +112,7 @@ class Juego {
 		}
 		fichaJugada = null;
 		juego = null;
+		document.getElementById('jugar').disabled = false;
+		document.getElementById('salir').disabled = true;
 	}
 }//FIN DE LA CLASE

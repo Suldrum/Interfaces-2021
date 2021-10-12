@@ -21,6 +21,7 @@ class JugadorIA extends Jugador{
 		let ficha = this.fichas[0];
 		let columna = this.movimientoAzar();
 		juego.meterFicha(columna,ficha);
+		juego.actualizarJuego();
 		
 	}
 	
