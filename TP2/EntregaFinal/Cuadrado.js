@@ -8,7 +8,7 @@
  */
 
 
-class Cuadrado extends Figura {
+class Cuadrado extends Objeto {
     //Constructor de la clase, da propiedades a la ficha
 	constructor(x, y, color, ctx, ancho, alto) {
 		super(x,y,color,ctx);

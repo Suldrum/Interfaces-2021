@@ -9,16 +9,19 @@
 
  const VALORGANADOR = 4;
 //Clase creada para verificar las distintas formas en las que un jugador pudo ganar el juego.
+//Los contadores siempre empiezan en uno porque cuenta la posicion donde inicia la verificacion
 class Victoria {
 	
     //Recorre horizontalmente y devuelve si encontro la cantidad de igualdades necesarias para ganar el juego.
 	movHorizontal(vector,  columna) {
 		let contador = 1, j=columna+1;
+		//Desde la posicion hacia la derecha
 		while ((j < vector.length ) &&(contador < VALORGANADOR) && (vector[columna].getColor() == vector [j].getColor() )){
 			contador++;
 			j++;
 		}
 		j = columna-1;
+		//Desde la posicion hacia la izquierda
 		while ((j > -1 ) &&(contador < VALORGANADOR) && (vector[columna].getColor()  == vector [j].getColor() )){
 				contador++;
 				j--;
@@ -29,7 +32,9 @@ class Victoria {
 	//Recorre verticalmente y devuelve si encontro la cantidad de igualdades necesarias para ganar el juego.
 	movVertical(matriz, fila, columna) {	
 		let contador = 1;
+		//Si hay posibilidades que puedan haber la cantidad de elementos para ganar
 		if ((matriz.length - fila) >= VALORGANADOR)
+			//Desde la posicion actual hacia abajo pregunto si el siguiente es igual a la posicion actual
 			while ((fila < (matriz.length -1) ) &&(contador < VALORGANADOR) && (matriz[fila][columna].getColor()  == matriz[fila+1][columna].getColor() ))
 			{
 				contador++;
@@ -38,9 +43,10 @@ class Victoria {
 		return  (contador == VALORGANADOR);
 	}
 	
-	//Recorre en forma de una diagonal de 135° y devuelve si encontro la cantidad de igualdades necesarias para ganar el juego.
+	//Recorre en forma de una diagonal de 135° (F(x) = -x) y devuelve si encontro la cantidad de igualdades necesarias para ganar el juego.
 	movDiagonalIzq(matriz, fila, columna) {
 		let i = fila-1, j = columna-1, contador = 1;
+		// 
 		while ((i > -1 && j > -1) &&(contador < VALORGANADOR) && (matriz[fila][columna].getColor()  == matriz[i][j].getColor() ))
 		{
 			contador++; i--; j--;

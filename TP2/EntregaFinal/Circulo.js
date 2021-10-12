@@ -8,8 +8,8 @@
  */
 
 
-class Circulo extends Figura {
-    //Constructor de la clase, da propiedades a la ficha
+class Circulo extends Objeto {
+    //Constructor de la clase
 	constructor(x, y, color, ctx) {
 		super(x,y,color,ctx);
 		this.radio = RADIO;

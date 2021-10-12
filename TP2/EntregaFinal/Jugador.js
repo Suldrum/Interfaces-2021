@@ -7,10 +7,10 @@
  * 
  */
 
-class Jugador extends Figura{
+class Jugador extends Objeto{
     //Constructor de la clase
 	constructor(x, y, color,ctx, nombre) {
-		//Segun de quien sea el turno da el valor a la ficha
+		
 		super(x, y, color,ctx);
 		this.nombre= nombre;
 		this.fichas = [];

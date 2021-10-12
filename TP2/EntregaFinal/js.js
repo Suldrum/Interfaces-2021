@@ -15,7 +15,6 @@ const TAMAÑO = (RADIO + MARGEN) * 2;
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 let juego = null;
-
 let fichaJugada = null;
 
 
@@ -26,11 +25,8 @@ let fichaJugada = null;
 
 });
 
-//Funcion que carga todos los valores por defecto
-function loadAllDefaults() {
-	ctx.clearRect(0, 0,canvas.width, canvas.height);
-	document.getElementById('radioJugador').checked = true;
-	document.getElementById('porTiempo').checked = false;
+//Carga de valores por defecto a selectores
+function loadSelectoresDefaults(){
 	let tiempo = document.getElementById('selectorTiempo');
 	tiempo.disabled =true;
 	tiempo.value = "15";
@@ -38,21 +34,138 @@ function loadAllDefaults() {
 	document.getElementById('altoTablero').value = "5";
 	document.getElementById('colorJugador1').value = "#ff0000";
 	document.getElementById('colorJugador2').value = "#0000ff";
-	document.getElementById('salir').disabled = true;
+}
+
+//Limpieza de inputs y labels
+function limpiarTextos(){
 	document.getElementById("jugadorTurno").innerHTML= "";
 	document.getElementById("reloj").innerHTML= "";
 	document.getElementById("nombreJugador1").value= "";
 	document.getElementById("nombreJugador2").value= "";
-	
+}
+
+//Carga de radios y checkboxs
+function eleccionesDefaults(){
+	document.getElementById('radioJugador').checked = true;
+	document.getElementById('porTiempo').checked = false;
+}
+
+//Funcion que carga todos los valores por defecto
+function loadAllDefaults() {
+	ctx.clearRect(0, 0,canvas.width, canvas.height);
+	document.getElementById('salir').disabled = true;
+	eleccionesDefaults();
+	loadSelectoresDefaults();
+	limpiarTextos();	
+}
+
+//Crea al jugador 1 que siempre sera un jugador humano
+function crearJugador1(){
+	//Lectura de valores en el HTML
+	let colorJugador1 = document.getElementById('colorJugador1').value;
+	let nombreJugador1 = document.getElementById("nombreJugador1").value;
+	//Si no se puso ningun nombre por defecto se llamara Jugador 1
+	nombreJugador1 =  (nombreJugador1 === "") ?  "Jugador 1" : nombreJugador1;
+	//Devuelve un jugador humano
+	return new JugadorHumano(MARGEN, TAMAÑO, colorJugador1, ctx, nombreJugador1);
+}
+
+//Crea al jugador 2 que puede ser un jugador humano o IA
+function crearJugador2(){
+	//Lectura de valores en el HTML
+	let colorJugador2 = document.getElementById('colorJugador2').value;
+	let opcionJugador2 = document.querySelector('input[name="modoJuego"]:checked');
+	//Si se eligio jugar contra otro jugador
+	if (opcionJugador2.value === "jugador")
+	{
+		//Lectura de valores en el HTML
+		let nombreJugador2 = document.getElementById("nombreJugador2").value;
+		nombreJugador2 =  (nombreJugador2 === "") ? "Jugador 2" : nombreJugador2;
+		//Devuelve un jugador humano
+		return new JugadorHumano(canvas.width - ( 3 * TAMAÑO ) + RADIO , TAMAÑO, colorJugador2, ctx, nombreJugador2);
+	}
+	else{
+		//Devuelve un jugador IA
+		return new JugadorIA(canvas.width - ( 3 * TAMAÑO ) + RADIO , TAMAÑO, colorJugador2, ctx, opcionJugador2.value,document.getElementById('anchoTablero').value);
+	}
+}
+
+//Crea el tablero
+function crearTablero(){
+	//Lectura de valores en el HTML
+	let anchoTablero=  document.getElementById('anchoTablero').value;
+	let altoTablero= document.getElementById('altoTablero').value;
+	//Devuelve un tablero
+	return new Tablero(3 * TAMAÑO, (TAMAÑO / 2),canvas,anchoTablero, altoTablero );
+}
+
+//Crea un juego que puede ser por tiempo o no
+function crearJuego(tablero,jugador1,jugador2)
+{
+	//Lectura de valor en el HTML
+	let tiempo = document.getElementById('selectorTiempo');
+	//Si se eligio jugar con tiempo
+	if (!tiempo.disabled)
+	{	
+		let reloj = new Reloj(tiempo.value);
+		//Devuelve un juego temporizado
+		return new JuegoTemporizado(tablero,jugador1,jugador2,reloj,ctx);
+	}
+	else{
+		//Devuelve un juego sin tiempo
+		return new Juego(tablero,jugador1,jugador2,ctx);
+	}
 }
 
 //Se encarga de deshabilitar y habilitar el campo del tiempo
 document.getElementById('porTiempo').addEventListener('change',function(e){
+	//Lectura de valor en el HTML
 	let tiempo =document.getElementById('selectorTiempo');
+	//Cambia su estado actual por su contrario
 	tiempo.disabled = !tiempo.disabled;
 });
 
+//Funcion que controla que el color del jugador 1 no sea el mismo que el de jugador 2
+document.getElementById('colorJugador1').addEventListener('change',function(e){
+	//Lectura de valor en el HTML
+	let colorJugador2 = document.getElementById('colorJugador2').value;
+	//Si es el mismo y no es el default
+	if ( this.value === colorJugador2 && colorJugador2 !== "#ff0000")
+	{
+		//Vuelve a su valor default
+		this.value = "#ff0000";
+	}
+	else
+	{	
+		//Si es el mismo y es el default
+		if ( this.value === colorJugador2)
+		//Toma el valor default del jugador 2
+		{ this.value = "#0000ff";}
+	}
+});
 
+//Funcion que controla que el color del jugador 2 no sea el mismo que el de jugador 1
+document.getElementById('colorJugador2').addEventListener('change',function(e){
+	//Lectura de valor en el HTML
+	let colorJugador1 = document.getElementById('colorJugador1').value;
+	//Si es el mismo y no es el default
+	if ( this.value === colorJugador1 && colorJugador1 !== "#0000ff")
+	{
+		//Vuelve a su valor default
+		this.value = "#0000ff";
+	}
+	else
+	{
+		//Si es el mismo y es el default
+		if ( this.value === colorJugador1)
+		//Toma el valor default del jugador 1
+		{this.value = "#ff0000";}
+	}
+});
+
+document.getElementById('test').addEventListener('click',function(e){
+	juego.terminarJuego(false);
+});
 
 document.getElementById('jugar').addEventListener('click',function(e){
 	//Limpia el canvas
@@ -61,71 +174,20 @@ document.getElementById('jugar').addEventListener('click',function(e){
 	document.getElementById('salir').disabled = false;
 	canvas.hidden = false;
 	ctx.clearRect(0, 0,canvas.width, canvas.height);
-	let anchoTablero=  document.getElementById('anchoTablero').value;
-	let altoTablero= document.getElementById('altoTablero').value;
-	let tablero = new Tablero(3 * TAMAÑO, (TAMAÑO / 2),canvas,anchoTablero, altoTablero );
-	let colorJugador1 = document.getElementById('colorJugador1').value;
-	let colorJugador2 = document.getElementById('colorJugador2').value;
-	let nombreJugador1 = document.getElementById("nombreJugador1").value;
-	nombreJugador1 =  (nombreJugador1 === "") ? nombreJugador1 = "Jugador 1" : nombreJugador1;
-	let opcionJugador2 = document.querySelector('input[name="modoJuego"]:checked');
-	let jugador2;
-	if (opcionJugador2.value === "jugador")
-	{
-		let nombreJugador2 = document.getElementById("nombreJugador2").value;
-		nombreJugador2 =  (nombreJugador2 === "") ? nombreJugador2 = "Jugador 2" : nombreJugador1;
-		jugador2 = new JugadorHumano(canvas.width - ( 3 * TAMAÑO ) + RADIO , TAMAÑO, colorJugador2, ctx, nombreJugador2);
-	}
-	else{
-		jugador2 = new JugadorIA(canvas.width - ( 3 * TAMAÑO ) + RADIO , TAMAÑO, colorJugador2, ctx, opcionJugador2.value,anchoTablero);
-	}
-	let jugador1 = new JugadorHumano(MARGEN, TAMAÑO, colorJugador1, ctx, nombreJugador1);
-	let tiempo = document.getElementById('selectorTiempo');
-	if (!tiempo.disabled)
-	{	
-		let reloj = new Reloj(tiempo.value);
-		juego = new JuegoTemporizado(tablero,jugador1,jugador2,reloj,ctx);
-	}
-	else{
-		juego = new Juego(tablero,jugador1,jugador2,ctx);
-	}
+
+	let tablero = crearTablero();
+	let jugador1 = crearJugador1();
+	let jugador2 = crearJugador2();
+	juego = crearJuego(tablero,jugador1,jugador2);
+	
 	juego.empezarJuego();
-	document.getElementById('salir').addEventListener('click',function(e){
-		if (juego != null)
-		{
-			juego.terminarJuego(false);
-			document.getElementById('jugar').disabled = false;
-			this.disabled = true;
-		}
-	});
 });
 
-document.getElementById('test').addEventListener('click',function(e){
-	juego.terminarJuego(false);
-});
-
-document.getElementById('colorJugador1').addEventListener('change',function(e){
-	let colorJugador2 = document.getElementById('colorJugador2').value;
-	if ( this.value === colorJugador2 && colorJugador2 !== "#ff0000")
+document.getElementById('salir').addEventListener('click',function(e){
+	if (juego != null)
 	{
-		this.value = "#ff0000";
-	}
-	else
-	{
-		if ( this.value === colorJugador2)
-		{ this.value = "#0000ff";}
-	}
-});
-
-document.getElementById('colorJugador2').addEventListener('change',function(e){
-	let colorJugador1 = document.getElementById('colorJugador1').value;
-	if ( this.value === colorJugador1 && colorJugador1 !== "#0000ff")
-	{
-		this.value = "#0000ff";
-	}
-	else
-	{
-		if ( this.value === colorJugador1)
-		{this.value = "#ff0000";}
+		juego.terminarJuego(false);
+		document.getElementById('jugar').disabled = false;
+		this.disabled = true;
 	}
 });
