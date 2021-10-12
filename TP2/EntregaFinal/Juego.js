@@ -69,6 +69,7 @@ class Juego {
 		let resultado = this.tablero.meterFicha(columna,ficha);
 		if (resultado !=null)
 		{
+			this.actualizarJuego();
 			this.turno.sacarFicha(this.turno.fichas.indexOf(ficha));
 			let victoria = this.condicionVictoria.victoria(this.tablero.matriz,resultado[0],resultado[1]);
 			if(victoria || this.tablero.tableroLleno()){
