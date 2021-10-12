@@ -15,6 +15,7 @@ const TAMAÑO = (RADIO + MARGEN) * 2;
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 let juego = null;
+
 let fichaJugada = null;
 
 
@@ -67,11 +68,18 @@ document.getElementById('jugar').addEventListener('click',function(e){
 	let colorJugador2 = document.getElementById('colorJugador2').value;
 	let nombreJugador1 = document.getElementById("nombreJugador1").value;
 	nombreJugador1 =  (nombreJugador1 === "") ? nombreJugador1 = "Jugador 1" : nombreJugador1;
-	let nombreJugador2 = document.getElementById("nombreJugador2").value;
-	nombreJugador2 =  (nombreJugador2 === "") ? nombreJugador2 = "Jugador 2" : nombreJugador1;
-	let jugador1 = new Jugador(MARGEN, TAMAÑO, colorJugador1, ctx, nombreJugador1);
-//	let jugador2 = new Jugador(canvas.width - ( 3 * TAMAÑO ) + RADIO , TAMAÑO, colorJugador2, ctx, nombreJugador2);
-	let jugador2 = new JugadorIA(canvas.width - ( 3 * TAMAÑO ) + RADIO , TAMAÑO, colorJugador2, ctx, nombreJugador2,anchoTablero);
+	let opcionJugador2 = document.querySelector('input[name="modoJuego"]:checked');
+	let jugador2;
+	if (opcionJugador2.value === "jugador")
+	{
+		let nombreJugador2 = document.getElementById("nombreJugador2").value;
+		nombreJugador2 =  (nombreJugador2 === "") ? nombreJugador2 = "Jugador 2" : nombreJugador1;
+		jugador2 = new JugadorHumano(canvas.width - ( 3 * TAMAÑO ) + RADIO , TAMAÑO, colorJugador2, ctx, nombreJugador2);
+	}
+	else{
+		jugador2 = new JugadorIA(canvas.width - ( 3 * TAMAÑO ) + RADIO , TAMAÑO, colorJugador2, ctx, opcionJugador2.value,anchoTablero);
+	}
+	let jugador1 = new JugadorHumano(MARGEN, TAMAÑO, colorJugador1, ctx, nombreJugador1);
 	let tiempo = document.getElementById('selectorTiempo');
 	if (!tiempo.disabled)
 	{	
@@ -121,74 +129,3 @@ document.getElementById('colorJugador2').addEventListener('change',function(e){
 		{this.value = "#ff0000";}
 	}
 });
-
-
-canvas.addEventListener('mousemove',  function(e) {
-	if (juego != null && fichaJugada != null) {
-		let x = e.offsetX;
-		let y = e.offsetY;
-		x = permanecerDentro(x,canvas.width);
-		y = permanecerDentro(y, canvas.height);
-		fichaJugada.colocarPosicion(x,y);
-		juego.actualizarJuego();
-		
-	}
-});
-
-	//Si se sale del canvas mientras esta dibujando me encargo de dibujar hasta el borde
-	canvas.addEventListener("mouseout",function(e){
-	if (juego != null && fichaJugada != null)
-	{  
-		let x = e.offsetX;
-		let y = e.offsetY;
-		x = permanecerDentro(x,canvas.width);
-		y = permanecerDentro(y, canvas.height);
-		fichaJugada.colocarPosicion(x,y);
-		juego.actualizarJuego();
-		fichaJugada = null;		
-	}
-	});
-
-//Si se sale del canvas mientras esta dibujando me encargo de dibujar hasta el borde
-	canvas.addEventListener("mouseup",function(e){
-		if (juego != null && fichaJugada != null)
-		{  
-		//Dibujo la ficha por ultima vez
-		let x = e.offsetX;
-		let y = e.offsetY;
-		x = permanecerDentro(x,canvas.width);
-		y = permanecerDentro(y, canvas.height);
-		fichaJugada.colocarPosicion(x,y);
-		let columna = juego.sobreFlecha(x,y);
-		if (columna > -1)
-		{
-			juego.meterFicha(columna,fichaJugada);
-		}
-		juego.actualizarJuego();
-		fichaJugada = null;
-		}
-	});
-
-	function permanecerDentro(valor, max)
-	{
-		if (valor < RADIO)
-			{return RADIO;}
-		if (valor > max - RADIO)
-			{return max - RADIO;}
-		return valor;
-	}
-
-	
-	canvas.addEventListener('mousedown', function(e) {
-		let x = e.offsetX;
-		let y = e.offsetY;
-		if (juego != null)
-		{fichaJugada = juego.turno.juegaFicha(x,y);
-			if (fichaJugada != null )
-			{  
-				fichaJugada.colocarPosicion(x,y);
-				juego.actualizarJuego();
-			}	
-		}
-	});	
-	

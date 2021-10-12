@@ -20,9 +20,7 @@ class JugadorIA extends Jugador{
 	{
 		let ficha = this.fichas[0];
 		let columna = this.movimientoAzar();
-		juego.meterFicha(columna,ficha);
-		juego.actualizarJuego();
-		
+		juego.meterFicha(columna,ficha);	
 	}
 	
 	//Para un jugador tipo maquina, elige una columna no llena al azar para tirar una ficha.

@@ -54,6 +54,7 @@ class Juego {
 		this.visualizarJugadores();
 		this.visualizarFichas();
 		this.turno=this.jugador1;
+		this.turno.juegaFicha();
 		document.getElementById("jugadorTurno").innerHTML= this.turno.getNombre();
 	}
 
@@ -97,6 +98,7 @@ class Juego {
 		{
 			this.turno = this.jugador1;
 		}
+		this.turno.juegaFicha();
 		document.getElementById("jugadorTurno").innerHTML= this.turno.getNombre();
 	}
 
@@ -111,7 +113,6 @@ class Juego {
 			//mostrar empate
 			alert("¡Empatados!");
 		}
-		fichaJugada = null;
 		juego = null;
 		document.getElementById('jugar').disabled = false;
 		document.getElementById('salir').disabled = true;
