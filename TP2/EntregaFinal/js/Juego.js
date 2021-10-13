@@ -134,8 +134,7 @@ class Juego {
 		}
 		//Elimina el juego
 		juego = null;
-		//Cambia las propiedades de los botones
+		//Permite volver a jugar
 		document.getElementById('jugar').disabled = false;
-		document.getElementById('salir').disabled = true;
 	}
 }//FIN DE LA CLASE

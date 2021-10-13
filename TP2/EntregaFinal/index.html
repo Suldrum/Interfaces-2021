@@ -13,10 +13,10 @@
     <img id="flecha" src="img/flechasAbajo.png" alt="flechasAbajo" hidden>
     <img id="ficha" src="img/ficha.png" alt="ficha" hidden>
     <img id="fondoTablero" src="img/fondoTablero.png" alt="fondoTablero" hidden>
-<div id= "menuJuego">
     <h1>Ejecicio Entregable N° 2</h1>
-    <div class="zonaJugadores">
-        <div class = "zonaJugador1">
+    <div id= "menuJuego">
+    <div class="menuJugadores">
+        <div class = "menuJugador1">
             <label>Nombre del Jugador 1: </label>
             <input maxlength="9" id="nombreJugador1" placeholder="Jugador 1" required> </input>
             <select id="colorJugador1">
@@ -27,30 +27,36 @@
                 <option value="#00ffff">Celeste</option>
             </select>
         </div>
+        <div>
+            <label>VS</label>
+        </div>
         <div class = "zonaJugador2">
-            <h5>Combate contra</h6>
             <div>
-                <input type="radio" name="modoJuego" value="jugador" id="radioJugador">
-                <label >otro Jugador 2</label>
                 <div>
+                    <input type="radio" name="modoJuego" value="jugador" id="radioJugador">
+                    <label >otro Jugador</label>
                     <label id="labelJugador2">Nombre del Jugador 2: </label>
                     <input maxlength="9"  id="nombreJugador2" placeholder="Jugador 2"> </input>
                 </div>
-                <input type="radio" name="modoJuego" value="IA" id="radioIA">
-                <label >una IA</label>
-                <select id="colorJugador2">
-                    <option value="#ff0000">Rojo</option>
-                    <option value="#0000ff">Azul</option>
-                    <option value="#00ff00">Verde</option>
-                    <option value="#ffff00">Amarillo</option>
-                    <option value="#00ffff">Celeste</option>
-                </select>
+                <div>
+                    <input type="radio" name="modoJuego" value="IA" id="radioIA">
+                    <label >una IA</label>
+                </div>
+            </div>     
+            <div>
+               <select id="colorJugador2">
+                <option value="#ff0000">Rojo</option>
+                <option value="#0000ff">Azul</option>
+                <option value="#00ff00">Verde</option>
+                <option value="#ffff00">Amarillo</option>
+                <option value="#00ffff">Celeste</option>
+                </select> 
             </div>
         </div>
     </div>
-    <div>
-        <h3>Juego por tiempo</h3>
+    <div class="caracteristicasJuego">
         <div>
+            <h5>Limite de Tiempo</h5>
             <input type="checkbox" id="porTiempo" checked="false">
             <select disabled="true" id="selectorTiempo">
                 <option value="1">1</option>
@@ -58,29 +64,32 @@
                 <option value="30">30</option>
                 <option value="45">45</option>
             </select>
-            <p>Minutos</p>
+            <label>Minutos</label>
             
         </div>
-        <h3>Tamaño del tablero</h3>
-        <select id="anchoTablero">
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="8">8</option>
-        </select>
-        <select id="altoTablero">
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="8">8</option>
-        </select>
+        <div>
+            <h5>Tamaño del tablero</h5>
+            <select id="anchoTablero">
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+            </select>
+            <select id="altoTablero">
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+            </select>
+        </div>
     </div>
-</div>
-    <label id="reloj" class="reloj"></label>
-    <div>
-        <label>Turno del Jugador</label>
-        <label id="jugadorTurno"></label>
     </div>
-
-    <canvas id="canvas" width="1000" height="650" hidden="true" ></canvas>
+    <div id="enJuego" hidden="true">
+        <label id="reloj" class="enJuego" ></label>
+        <div>
+            <label class="enJuego" hidden>Turno de: </label>
+            <label id="jugadorTurno" class="enJuego"></label>
+        </div>
+        <canvas id="canvas" width="1000" height="650"></canvas>
+    </div>
     <div>
         <button id="jugar">Jugar</button>
         <button id="salir">Salir</button>

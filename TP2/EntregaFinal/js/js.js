@@ -180,7 +180,7 @@ document.getElementById('jugar').addEventListener('click',function(e){
 	document.getElementById('salir').disabled = false;
 	document.getElementById("jugadorTurno").innerHTML= "";
 	//Revela el canvas
-	canvas.hidden = false;
+	document.getElementById('enJuego').hidden = false;
 	//Limpia el canvas
 	ctx.clearRect(0, 0,canvas.width, canvas.height);
 	//Crea los objetos y el juego
