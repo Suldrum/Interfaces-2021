@@ -86,6 +86,7 @@ class JugadorHumano extends Jugador{
 				else
 				{	//Si no simplemente actualizo el estado
 					juego.actualizarJuego();
+					juego.turno.fichaJugada = null;
 				}	
 			}
 		}
