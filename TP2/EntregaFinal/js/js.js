@@ -15,7 +15,6 @@ const TAMAÑO = (RADIO + MARGEN) * 2;
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 let juego = null;
-let fichaJugada = null;
 
 
 //Cuando se carga la pagina
@@ -173,22 +172,29 @@ document.getElementById('colorJugador2').addEventListener('change',function(e){
 	}
 });
 
+//Funcion para iniciar el juego
 document.getElementById('jugar').addEventListener('click',function(e){
-	//Limpia el canvas
+	//Se deshabilita a si mismo
 	this.disabled = true;
-	document.getElementById("jugadorTurno").innerHTML= "";
+	//Habilita la opcion de terminar el juego de una
 	document.getElementById('salir').disabled = false;
-	canvas.hidden = false;
+	document.getElementById("jugadorTurno").innerHTML= "";
+	//Revela el canvas
+	document.getElementById('enJuego').hidden = false;
+	//Limpia el canvas
 	ctx.clearRect(0, 0,canvas.width, canvas.height);
-
+	//Crea los objetos y el juego
 	let tablero = crearTablero();
 	let jugador1 = crearJugador1();
 	let jugador2 = crearJugador2();
 	juego = crearJuego(tablero,jugador1,jugador2);
+	//Oculta las opciones del juego
 	document.getElementById('menuJuego').hidden = true;
+	//Inicia el juego
 	juego.empezarJuego();
 });
 
+//Funcion para detener el juego en cualquier momento
 document.getElementById('salir').addEventListener('click',function(e){
 	if (juego != null)
 	{
