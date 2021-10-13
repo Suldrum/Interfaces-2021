@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Entrega Visualizacion</title>
+    <link href="css.css" rel="stylesheet"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> 
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+    <img id="flecha" src="img/flechasAbajo.png" alt="flechasAbajo" hidden>
+    <img id="ficha" src="img/ficha.png" alt="ficha" hidden>
+    <img id="fondoTablero" src="img/fondoTablero.png" alt="fondoTablero" hidden>
+<div id= "menuJuego">
+    <h1>Ejecicio Entregable N° 2</h1>
+    <div class="zonaJugadores">
+        <div class = "zonaJugador1">
+            <label>Nombre del Jugador 1: </label>
+            <input maxlength="9" id="nombreJugador1" placeholder="Jugador 1" required> </input>
+            <select id="colorJugador1">
+                <option value="#ff0000">Rojo</option>
+                <option value="#0000ff">Azul</option>
+                <option value="#00ff00">Verde</option>
+                <option value="#ffff00">Amarillo</option>
+                <option value="#00ffff">Celeste</option>
+            </select>
+        </div>
+        <div class = "zonaJugador2">
+            <h5>Combate contra</h6>
+            <div>
+                <input type="radio" name="modoJuego" value="jugador" id="radioJugador">
+                <label >otro Jugador 2</label>
+                <div>
+                    <label id="labelJugador2">Nombre del Jugador 2: </label>
+                    <input maxlength="9"  id="nombreJugador2" placeholder="Jugador 2"> </input>
+                </div>
+                <input type="radio" name="modoJuego" value="IA" id="radioIA">
+                <label >una IA</label>
+                <select id="colorJugador2">
+                    <option value="#ff0000">Rojo</option>
+                    <option value="#0000ff">Azul</option>
+                    <option value="#00ff00">Verde</option>
+                    <option value="#ffff00">Amarillo</option>
+                    <option value="#00ffff">Celeste</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h3>Juego por tiempo</h3>
+        <div>
+            <input type="checkbox" id="porTiempo" checked="false">
+            <select disabled="true" id="selectorTiempo">
+                <option value="1">1</option>
+                <option value="15">15</option>
+                <option value="30">30</option>
+                <option value="45">45</option>
+            </select>
+            <p>Minutos</p>
+            
+        </div>
+        <h3>Tamaño del tablero</h3>
+        <select id="anchoTablero">
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="8">8</option>
+        </select>
+        <select id="altoTablero">
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="8">8</option>
+        </select>
+    </div>
+</div>
+    <label id="reloj" class="reloj"></label>
+    <div>
+        <label>Turno del Jugador</label>
+        <label id="jugadorTurno"></label>
+    </div>
+
+    <canvas id="canvas" width="1000" height="650" hidden="true" ></canvas>
+    <div>
+        <button id="jugar">Jugar</button>
+        <button id="salir">Salir</button>
+    </div>
+    
+    <script src="js/Objeto.js"></script>
+    <script src="js/Circulo.js"></script>
+    <script src="js/Cuadrado.js"></script>
+    <script src="js/Reloj.js"></script>
+    <script src="js/Victoria.js"></script>
+    <script src="js/Tablero.js"></script>
+    <script src="js/Jugador.js"></script>
+    <script src="js/JugadorHumano.js"></script>
+    <script src="js/JugadorIA.js"></script>
+    <script src="js/Juego.js"></script>
+    <script src="js/JuegoTemporizado.js"></script>
+    <script src="js/js.js"></script>
+</body>
+<footer>
+    <p>Grupo 13 - integrantes: Gozalo Milesi y Selene Rodrigo</p>
+</footer>
+</html>
