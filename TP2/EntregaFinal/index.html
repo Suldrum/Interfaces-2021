@@ -13,6 +13,7 @@
     <img id="flecha" src="img/flechasAbajo.png" alt="flechasAbajo" hidden>
     <img id="ficha" src="img/ficha.png" alt="ficha" hidden>
     <img id="fondoTablero" src="img/fondoTablero.png" alt="fondoTablero" hidden>
+<div id= "menuJuego">
     <h1>Ejecicio Entregable N° 2</h1>
     <div class="zonaJugadores">
         <div class = "zonaJugador1">
@@ -58,8 +59,7 @@
                 <option value="45">45</option>
             </select>
             <p>Minutos</p>
-            <label> Tiempo Restante:</label>
-            <label id="reloj"></label>
+            
         </div>
         <h3>Tamaño del tablero</h3>
         <select id="anchoTablero">
@@ -73,16 +73,18 @@
             <option value="8">8</option>
         </select>
     </div>
-    <div>
-        <button id="jugar">Jugar</button>
-        <button id="salir">Salir</button>
-    </div>
+</div>
+    <label id="reloj" class="reloj"></label>
     <div>
         <label>Turno del Jugador</label>
         <label id="jugadorTurno"></label>
     </div>
-    <button id="test">TEST</button>
+
     <canvas id="canvas" width="1000" height="650" hidden="true" ></canvas>
+    <div>
+        <button id="jugar">Jugar</button>
+        <button id="salir">Salir</button>
+    </div>
     
     <script src="js/Objeto.js"></script>
     <script src="js/Circulo.js"></script>

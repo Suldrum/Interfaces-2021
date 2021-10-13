@@ -173,10 +173,6 @@ document.getElementById('colorJugador2').addEventListener('change',function(e){
 	}
 });
 
-document.getElementById('test').addEventListener('click',function(e){
-	juego.terminarJuego(false);
-});
-
 document.getElementById('jugar').addEventListener('click',function(e){
 	//Limpia el canvas
 	this.disabled = true;
@@ -189,7 +185,7 @@ document.getElementById('jugar').addEventListener('click',function(e){
 	let jugador1 = crearJugador1();
 	let jugador2 = crearJugador2();
 	juego = crearJuego(tablero,jugador1,jugador2);
-	
+	document.getElementById('menuJuego').hidden = true;
 	juego.empezarJuego();
 });
 
@@ -197,6 +193,7 @@ document.getElementById('salir').addEventListener('click',function(e){
 	if (juego != null)
 	{
 		juego.terminarJuego(false);
+		document.getElementById('menuJuego').hidden = false;
 		document.getElementById('jugar').disabled = false;
 		this.disabled = true;
 	}
