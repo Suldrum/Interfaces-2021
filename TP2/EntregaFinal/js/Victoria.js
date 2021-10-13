@@ -43,15 +43,16 @@ class Victoria {
 		return  (contador == VALORGANADOR);
 	}
 	
-	//Recorre en forma de una diagonal de 135° (F(x) = -x) y devuelve si encontro la cantidad de igualdades necesarias para ganar el juego.
+	//Recorre en forma de una diagonal de 45° (F(x) = x) y devuelve si encontro la cantidad de igualdades necesarias para ganar el juego.
 	movDiagonalIzq(matriz, fila, columna) {
 		let i = fila-1, j = columna-1, contador = 1;
-		// 
+		//Desde la posicion en diagonal hacia abajo 
 		while ((i > -1 && j > -1) &&(contador < VALORGANADOR) && (matriz[fila][columna].getColor()  == matriz[i][j].getColor() ))
 		{
 			contador++; i--; j--;
 		}
 		i = fila+1; j = columna+1;
+		//Desde la posicion en diagonal hacia arriba
 		while ((i < matriz.length && j < matriz[i].length) &&(contador < VALORGANADOR) && (matriz[fila][columna].getColor()  == matriz[i][j].getColor() ))
 		{
 			contador++; i++; j++;
@@ -59,17 +60,18 @@ class Victoria {
 		return  (contador == VALORGANADOR);
 	}
 	
-	//Recorre en forma de una diagonal de 45° y devuelve si encontro la cantidad de igualdades necesarias para ganar el juego.
+	//Recorre en forma de una diagonal de 135° (F(x) = -x) y devuelve si encontro la cantidad de igualdades necesarias para ganar el juego.
 	movDiagonalDer(matriz, fila, columna) {
 
 		let i = fila-1, j = columna+1, contador = 1;
-		
+		//Desde la posicion en diagonal hacia arriba
 		while ((i > -1 && j < matriz[i].length) &&(contador < VALORGANADOR) && (matriz[fila][columna].getColor()  == matriz[i][j].getColor() ))
 		{
 			contador++; i--; j++;
 		}
 		
 		i = fila+1; j = columna-1;
+		//Desde la posicion en diagonal hacia abajo
 		while ((i < matriz.length && j > -1) &&(contador < VALORGANADOR) && (matriz[fila][columna].getColor()  == matriz[i][j].getColor() ))
 		{
 			contador++; i++; j--;
@@ -77,6 +79,7 @@ class Victoria {
 		return  (contador == VALORGANADOR);
 	}
 	
+	//Devuelve si alguna de las opciones de victoria se cumple
 	victoria(matriz, fila, columna)
     {
         return (this.movHorizontal(matriz[fila],  columna) || this.movVertical(matriz, fila, columna) || this.movDiagonalIzq(matriz, fila, columna) || this.movDiagonalDer(matriz, fila, columna) );

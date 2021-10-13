@@ -14,11 +14,11 @@ class JugadorHumano extends Jugador{
 		super(x, y, color,ctx, nombre);
 	}
 
-	//El jugador elige una ficha para jugar
-
+	
+	//Si toco una de sus fichas
 	esFicha(x,y)
 	{
-		//Si toco una de sus fichas
+		//Verifica si el click se realizo en alguna las fichas que posee actualmente
 		for (let i = 0; i < this.fichas.length ; i++)
 		{
 			if (this.fichas[i].esClickeada(x,y))
@@ -30,6 +30,7 @@ class JugadorHumano extends Jugador{
 		return null;	
 	}
 
+	//El jugador humano mueve su ficha por el canvas y realiza su jugada al colocarla sobre alguna de las flechas
 	juegaFicha()
 	{
 		
@@ -82,18 +83,7 @@ class JugadorHumano extends Jugador{
 				}
 			}
 		
-			function permanecerDentro(valor, max)
-			{
-				if (valor < RADIO)
-					{return RADIO;}
-				if (valor > max - RADIO)
-					{return max - RADIO;}
-				return valor;
-			}
-		
-			
 			canvas.addEventListener('mousedown', mouseDown );
-			
 			function mouseDown(e) {
 				let x = e.offsetX;
 				let y = e.offsetY;
@@ -106,6 +96,18 @@ class JugadorHumano extends Jugador{
 					}	
 				}
 			}
+
+			//Funcion que se devuelve un valor contenido dentro del canvas para que la ficha no huya del mismo 
+			function permanecerDentro(valor, max)
+			{
+				if (valor < RADIO)
+					{return RADIO;}
+				if (valor > max - RADIO)
+					{return max - RADIO;}
+				return valor;
+			}
+
+			//Esta funcion capaz y la borro como hice con la de borrado de addlisteners, esta por verse
 			function mueveFicha(e){
 				if (juego != null && fichaJugada != null)
 				{  

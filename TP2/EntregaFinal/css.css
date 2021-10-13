@@ -1,0 +1,15 @@
+h1{
+    text-align: center;
+    padding: 1%;
+}
+
+#canvas{
+    border:1px solid #000000;
+}
+/*
+.zonaJugadores{
+    flex: content;
+} */
+footer{
+    margin-top: 5%;
+}

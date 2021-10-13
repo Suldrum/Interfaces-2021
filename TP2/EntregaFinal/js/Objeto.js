@@ -14,11 +14,16 @@ class Objeto {
 		this.y = y;
 		this.color = color;
 		this.ctx = ctx;
+		this.imagen = null;
 	}
 
 	//Devuelve el color del objeto
 	getColor(){
 		return this.color;
+	}
+
+	setImagen(imagen){
+		this.imagen = imagen;
 	}
 
 	//Coloca el objeto en la posicion x, y dada por parametro
@@ -33,11 +38,15 @@ class Objeto {
 	}
 	
 	//
-	dibujar(){}
+	dibujar(){
+		if (this.imagen !== null)
+		{
+			this.dibujarImagen();
+		}
+	}
 
 	//
-	dibujarImagen(imagen){
-		this.dibujar();
+	dibujarImagen(){
 	}
 
 	//

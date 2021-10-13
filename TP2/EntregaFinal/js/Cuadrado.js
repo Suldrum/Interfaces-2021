@@ -24,12 +24,15 @@ class Cuadrado extends Objeto {
 		this.ctx.beginPath();
         this.ctx.strokeRect(this.x, this.y, this.ancho, this.alto);
         this.ctx.fillRect(this.x, this.y, this.ancho, this.alto);
+		if (this.imagen !== null)
+		{
+			this.dibujarImagen();
+		}
         this.ctx.closePath();
 	}
 	
-	dibujarImagen(imagen){
-		super.dibujarImagen(imagen);
-		this.ctx.drawImage(imagen, this.x, this.y, this.ancho, this.alto);
+	dibujarImagen(){
+		this.ctx.drawImage(this.imagen, this.x, this.y, this.ancho, this.alto);
 	}
 
 	esClickeada(x,y)

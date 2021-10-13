@@ -125,6 +125,16 @@ document.getElementById('porTiempo').addEventListener('change',function(e){
 	tiempo.disabled = !tiempo.disabled;
 });
 
+//Se encarga de habilitar el input del nombre del segundo jugador2
+document.getElementById('radioJugador').addEventListener('click',function(e){
+		document.getElementById('nombreJugador2').disabled = false;
+});
+
+//Se encarga de deshabilitar el input del nombre del segundo jugador2
+document.getElementById('radioIA').addEventListener('click',function(e){
+	document.getElementById('nombreJugador2').disabled = true;
+});
+
 //Funcion que controla que el color del jugador 1 no sea el mismo que el de jugador 2
 document.getElementById('colorJugador1').addEventListener('change',function(e){
 	//Lectura de valor en el HTML

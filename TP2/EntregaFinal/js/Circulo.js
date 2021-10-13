@@ -24,13 +24,16 @@ class Circulo extends Objeto {
         this.ctx.arc(this.x, this.y, this.radio, 0, 2 * Math.PI);
 		this.ctx.fill();
 		this.ctx.stroke();
+		if (this.imagen !== null)
+		{
+			this.dibujarImagen();
+		}
         this.ctx.closePath();
 	
 	}
 
-	dibujarImagen(imagen){
-		super.dibujarImagen(imagen);
-		this.ctx.drawImage(imagen, (this.x - this.radio), (this.y - this.radio),  Math.pow(this.radio,2),  Math.pow(this.radio,2));
+	dibujarImagen(){
+		this.ctx.drawImage(this.imagen, this.x - this.radio, this.y - this.radio, this.radio * 2, this.radio * 2);
 	}
 
 	esClickeada(x,y)

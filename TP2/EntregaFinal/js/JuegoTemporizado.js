@@ -6,7 +6,8 @@
  * A CORREGIR:
  *
  */
-// Ni bien se carga la página me aseguro que este en su estado por defecto
+
+// Clase para un juego con un reloj que limita el tiempo de juego
 class JuegoTemporizado extends Juego {
 
 	constructor(tablero,jugador1,jugador2,reloj,ctx){

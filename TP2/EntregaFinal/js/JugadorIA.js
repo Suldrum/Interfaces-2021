@@ -7,6 +7,7 @@
  * 
  */
 
+//Jugador manejado a por la maquina cuya estrategia es al azar
 class JugadorIA extends Jugador{
     //Constructor de la clase
 	constructor(x, y, color,ctx, nombre, cantidadColumnas) {
@@ -14,8 +15,7 @@ class JugadorIA extends Jugador{
 		this.random = cantidadColumnas;
 	}
 
-	//El jugador elige una ficha para jugar
-
+	//El jugador IA siempre elige su primera ficha para jugar en una columna al azar
 	juegaFicha()
 	{
 		let ficha = this.fichas[0];
@@ -30,7 +30,8 @@ class JugadorIA extends Jugador{
 		//Controla que no esta generando un movimiento en una columna llena
 		while (!juego.tablero.espacioLibre(juego.tablero.matriz[0], movimiento) )
 			{
-				movimiento=  parseInt( (Math.random() * this.random ));}
+				movimiento=  parseInt( (Math.random() * this.random ));
+			}
 		return movimiento;
 	}
 
