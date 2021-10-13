@@ -116,6 +116,7 @@ class Juego {
 			this.turno = this.jugador1;
 		}
 		this.turno.juegaFicha();
+		//Muestra al jugador en turno en el HTML
 		document.getElementById("jugadorTurno").innerHTML= this.turno.getNombre();
 	}
 
@@ -131,7 +132,9 @@ class Juego {
 			//mostrar empate
 			alert("¡Empatados!");
 		}
+		//Elimina el juego
 		juego = null;
+		//Cambia las propiedades de los botones
 		document.getElementById('jugar').disabled = false;
 		document.getElementById('salir').disabled = true;
 	}

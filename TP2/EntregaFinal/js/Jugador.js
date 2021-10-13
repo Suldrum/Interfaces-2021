@@ -51,7 +51,7 @@ class Jugador extends Objeto{
 		this.ctx.beginPath(); 
 		// Trazo sin terminaciones
 		this.ctx.lineCap = "butt";
-		//Adios contorno 
+		//El contorno "desaparece" al ser del mismo color que la letra
 		this.ctx.strokeStyle = this.getColor();
 		this.ctx.lineWidth = 4;
 		this.ctx.fillStyle = this.getColor(); 

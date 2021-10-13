@@ -17,9 +17,13 @@ class Circulo extends Objeto {
 
 	dibujar()
 	{
+		//Relleno de su color
 		this.ctx.fillStyle = this.color;
+		//Borde negro
 		this.ctx.strokeStyle = "#000000";
+		//Tamaño del borde
 		this.ctx.lineWidth = 2;
+		//Inicia el trazado
 		this.ctx.beginPath();	
         this.ctx.arc(this.x, this.y, this.radio, 0, 2 * Math.PI);
 		this.ctx.fill();
@@ -28,6 +32,7 @@ class Circulo extends Objeto {
 		{
 			this.dibujarImagen();
 		}
+		//Termina el trazado
         this.ctx.closePath();
 	
 	}
