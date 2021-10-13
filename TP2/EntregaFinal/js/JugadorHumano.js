@@ -113,21 +113,7 @@ class JugadorHumano extends Jugador{
 			if (valor > max - RADIO)
 				{return max - RADIO;}
 			return valor;
-		}
-
-		//Esta funcion capaz y la borro como hice con la de borrado de addlisteners, esta por verse
-		function mueveFicha(e){
-			if (juego != null && juego.turno.fichaJugada != null)
-			{  
-				let x = e.offsetX;
-				let y = e.offsetY;
-				x = permanecerDentro(x,canvas.width);
-				y = permanecerDentro(y, canvas.height);
-				juego.turno.fichaJugada.colocarPosicion(x,y);
-				juego.actualizarJuego();	
-			}
-		}
-			
+		}		
 	}
 
 } //FIN DE LA CLASE
