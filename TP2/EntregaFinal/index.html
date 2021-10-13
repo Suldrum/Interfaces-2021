@@ -15,77 +15,75 @@
     <img id="fondoTablero" src="img/fondoTablero.png" alt="fondoTablero" hidden>
     <h1>Ejecicio Entregable N° 2</h1>
     <div id= "menuJuego">
-    <div class="menuJugadores">
-        <div class = "menuJugador1">
-            <label>Nombre del Jugador 1: </label>
-            <input maxlength="9" id="nombreJugador1" placeholder="Jugador 1" required> </input>
-            <select id="colorJugador1">
-                <option value="#ff0000">Rojo</option>
-                <option value="#0000ff">Azul</option>
-                <option value="#00ff00">Verde</option>
-                <option value="#ffff00">Amarillo</option>
-                <option value="#00ffff">Celeste</option>
-            </select>
-        </div>
-        <div>
-            <label>VS</label>
-        </div>
-        <div class = "zonaJugador2">
+        <div class="menuJugadores">
+            <div class = "menuJugador1">
+                <label>Nombre del Jugador 1: </label>
+                <input maxlength="9" id="nombreJugador1" placeholder="Jugador 1" required> </input>
+                <select id="colorJugador1">
+                    <option value="#ff0000">Rojo</option>
+                    <option value="#0000ff">Azul</option>
+                    <option value="#00ff00">Verde</option>
+                    <option value="#ffff00">Amarillo</option>
+                    <option value="#00ffff">Celeste</option>
+                </select>
+            </div>
             <div>
+                <label>VS</label>
+            </div>
+            <div class = "zonaJugador2">
                 <div>
-                    <input type="radio" name="modoJuego" value="jugador" id="radioJugador">
-                    <label >otro Jugador</label>
-                    <label id="labelJugador2">Nombre del Jugador 2: </label>
-                    <input maxlength="9"  id="nombreJugador2" placeholder="Jugador 2"> </input>
-                </div>
+                    <div>
+                        <input type="radio" name="modoJuego" value="jugador" id="radioJugador">
+                        <label >otro Jugador</label>
+                        <label id="labelJugador2">Nombre del Jugador 2: </label>
+                        <input maxlength="9"  id="nombreJugador2" placeholder="Jugador 2"> </input>
+                    </div>
+                    <div>
+                        <input type="radio" name="modoJuego" value="IA" id="radioIA">
+                        <label >una IA</label>
+                    </div>
+                </div>     
                 <div>
-                    <input type="radio" name="modoJuego" value="IA" id="radioIA">
-                    <label >una IA</label>
+                <select id="colorJugador2">
+                    <option value="#ff0000">Rojo</option>
+                    <option value="#0000ff">Azul</option>
+                    <option value="#00ff00">Verde</option>
+                    <option value="#ffff00">Amarillo</option>
+                    <option value="#00ffff">Celeste</option>
+                    </select> 
                 </div>
-            </div>     
-            <div>
-               <select id="colorJugador2">
-                <option value="#ff0000">Rojo</option>
-                <option value="#0000ff">Azul</option>
-                <option value="#00ff00">Verde</option>
-                <option value="#ffff00">Amarillo</option>
-                <option value="#00ffff">Celeste</option>
-                </select> 
             </div>
         </div>
-    </div>
-    <div class="caracteristicasJuego">
-        <div>
-            <h5>Limite de Tiempo</h5>
-            <input type="checkbox" id="porTiempo" checked="false">
-            <select disabled="true" id="selectorTiempo">
-                <option value="1">1</option>
-                <option value="15">15</option>
-                <option value="30">30</option>
-                <option value="45">45</option>
-            </select>
-            <label>Minutos</label>
-            
+        <div class="caracteristicasJuego">
+            <div>
+                <h5>Limite de Tiempo</h5>
+                <input type="checkbox" id="porTiempo" checked="false">
+                <select disabled="true" id="selectorTiempo">
+                    <option value="1">1</option>
+                    <option value="15">15</option>
+                    <option value="30">30</option>
+                    <option value="45">45</option>
+                </select>
+                <label>Minutos</label>
+            </div>
+            <div>
+                <h5>Tamaño del tablero</h5>
+                <select id="anchoTablero">
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="8">8</option>
+                </select>
+                <select id="altoTablero">
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="8">8</option>
+                </select>
+            </div>
         </div>
-        <div>
-            <h5>Tamaño del tablero</h5>
-            <select id="anchoTablero">
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="8">8</option>
-            </select>
-            <select id="altoTablero">
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="8">8</option>
-            </select>
-        </div>
-    </div>
     </div>
     <div id="enJuego" hidden="true">
         <label id="reloj" class="enJuego" ></label>
         <div>
-            <label class="enJuego" hidden>Turno de: </label>
             <label id="jugadorTurno" class="enJuego"></label>
         </div>
         <canvas id="canvas" width="1000" height="650"></canvas>
@@ -94,7 +92,6 @@
         <button id="jugar">Jugar</button>
         <button id="salir">Salir</button>
     </div>
-    
     <script src="js/Objeto.js"></script>
     <script src="js/Circulo.js"></script>
     <script src="js/Cuadrado.js"></script>

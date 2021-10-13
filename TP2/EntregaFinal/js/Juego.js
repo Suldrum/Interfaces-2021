@@ -63,7 +63,7 @@ class Juego {
 		this.visualizarFichas();
 		this.turno=this.jugador1;
 		this.turno.juegaFicha();
-		document.getElementById("jugadorTurno").innerHTML= this.turno.getNombre();
+		document.getElementById("jugadorTurno").innerHTML= "Turno de: "+this.turno.getNombre();
 	}
 
 	//Actualiza el canvas segun como va progresando el juego
