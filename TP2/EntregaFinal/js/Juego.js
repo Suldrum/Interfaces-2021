@@ -117,7 +117,7 @@ class Juego {
 		}
 		this.turno.juegaFicha();
 		//Muestra al jugador en turno en el HTML
-		document.getElementById("jugadorTurno").innerHTML= this.turno.getNombre();
+		document.getElementById("jugadorTurno").innerHTML= "Turno de: "+this.turno.getNombre();
 	}
 
 	//Finaliza el juego y dispara un alert que muestra el resultado
