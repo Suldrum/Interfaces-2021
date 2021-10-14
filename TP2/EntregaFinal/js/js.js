@@ -199,8 +199,8 @@ document.getElementById('salir').addEventListener('click',function(e){
 	if (juego != null)
 	{
 		juego.terminarJuego(false);
+	}
 		document.getElementById('menuJuego').hidden = false;
 		document.getElementById('jugar').disabled = false;
 		this.disabled = true;
-	}
 });
