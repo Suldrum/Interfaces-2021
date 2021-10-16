@@ -9,9 +9,9 @@
 
 class Objeto {
     //Constructor de la clase, da propiedades a los objetos
-	constructor(position, div, clase) {
-		this.position = position;
-		this.div = document.querySelector(div);
+	constructor(div, clase) {
+		this.div = document.getElementById(div);
+		this.position = parseInt(window.getComputedStyle(this.div, null).getPropertyValue("top").split("px")[0]);
 		this.width = parseInt(window.getComputedStyle(this.div, null).getPropertyValue("width").split("px")[0]);
 		this.height = parseInt(window.getComputedStyle(this.div, null).getPropertyValue("height").split("px")[0]);
 		this.baseClass = clase; //Clase de css base del objet. Ej: bird
@@ -61,5 +61,11 @@ class Objeto {
 	removeClass(clase)
 	{
 		this.div.classList.remove(clase);
+	}
+
+	//Cambia el estado del pajaro de uno a otro.Ej: bird flying, bird falling, etc
+	changeClass(clase){
+		this.removeAllClass();
+		this.addClass(clase);
 	}
 } //FIN DE LA CLASE

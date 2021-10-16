@@ -37,6 +37,8 @@ html,body {
     /* Imagen con el movimiento completo */ 
     background-image: url("img/bird.png");
     top: 250px;
+    /*para que este en el medio*/
+    position:relative;
 }
 
 /*
@@ -44,7 +46,20 @@ html,body {
 */
 .flying {
     animation: fly 1s steps(5) infinite;
-    position:relative;
+    
+}
+
+/*
+* Cada 3 segundos llama de manera infinita a fall que modifica su posicion en Y
+*/
+.falling {
+    animation: fall 1s steps(5) infinite;
+}
+
+.dying {
+    /*  tercera imagen  background-position:-257px;*/
+    background-position:-257px;
+    rotate: 90deg;
 }
 
 /*
@@ -56,4 +71,11 @@ html,body {
     /*Ancho total de la imagen en negativo*/
     100% { background-position:-640px }
 }
+
+@keyframes fall {
+
+    0%{top: 250px;}
+     100% {top: 600;} 
+}
+
 
