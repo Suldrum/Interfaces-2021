@@ -23,9 +23,10 @@ html,body {
     height: 41.1px;
 }
 */
+
 /*
 *
-*clase del ave
+*Clase del ave
 */
 .bird {
     /* Tamaño de la viñeta individual del ave (siempre la de mas arriba a la izquierda) */
@@ -39,7 +40,7 @@ html,body {
 }
 
 /*
-* cada segundo llama de manera infinita a fly con un paso por cada sprite/movimiento dentro de la imagen
+* Cada segundo llama de manera infinita a fly con un paso por cada sprite/movimiento dentro de la imagen
 */
 .flying {
     animation: fly 1s steps(5) infinite;
@@ -47,13 +48,12 @@ html,body {
 }
 
 /*
-*
+* Mueve la imagen a la izquierda (por el negativo) para generar el efecot del volar
 */
 @keyframes fly {
+    /* Partimos de la primera viñeta del sprite sheet */
     0% { background-position:0 }
+    /*Ancho total de la imagen en negativo*/
     100% { background-position:-640px }
 }
 
-/*
-*background-image: url("img/cubicBlueBird/cubicBlueBirdFrames.png");
-*/
