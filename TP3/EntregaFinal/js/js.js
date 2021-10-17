@@ -22,14 +22,21 @@ document.getElementById('test').addEventListener('click',function(e){
  
  //   bird.removeClass("flying");
  //   bird.addClass("falling");
-	bird.addClass("dying");
-
+//	bird.addClass("dying");
+ //   bird.changeClass("inGame");
     //    bird.startFalling();
+    bird.changeClass("falling");
 });
 
 window.addEventListener('keydown', e => {
     if (e.keyCode === 38) {
-        bird.makeJump(-30);
+        bird.changeClass("rising");
+    }
+});
+
+window.addEventListener('keyup', e => {
+    if (e.keyCode === 38) {
+        bird.changeClass("falling");
     }
 });
 

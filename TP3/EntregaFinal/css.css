@@ -37,6 +37,7 @@ html,body {
     top: 250px;
     /*para que este en el medio*/
     position:relative;
+    
 }
 
 /*
@@ -54,7 +55,7 @@ html,body {
 }
 
 /*
-* Mueve la imagen a la izquierda (por el negativo) para generar el efecot del volar
+* Mueve la imagen a la izquierda (por el negativo) para generar el efecto del volar
 */
 @keyframes fly {
     /* Partimos de la primera viñeta del sprite sheet */
@@ -67,7 +68,12 @@ html,body {
 * Cada 3 segundos llama a fall para que se ejecute en la misma velocidad y con el mismo efecto constante
 */
 .falling{
-    animation: fall 3s linear;
+    animation: fly 1s steps(5) infinite, fall 3s linear;
+    animation-fill-mode: forwards;
+}
+
+.rising{
+    animation: fly 1s steps(5) infinite, rise 3s linear;
     animation-fill-mode: forwards;
 }
 
@@ -80,6 +86,15 @@ html,body {
     }
 }
 
+/**
+* Modifica la posicion Y para generar el efecto de subida
+*/
+@keyframes rise {
+    100% {
+        transform: translateY(-100vh);
+    }
+}
+
 /*
 * Modifica Cada 3 segundos llama de manera lineal a die que modifica su posicion en X
 */
@@ -88,7 +103,6 @@ html,body {
     background-position:-257px;
     rotate: 90deg;
     animation: die 3s linear;
-    animation-fill-mode: forwards;
 }
 
 /**

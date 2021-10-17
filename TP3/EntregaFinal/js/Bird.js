@@ -27,6 +27,7 @@ class Bird extends Objeto {
 		}, 125);
 	}
 	makeJump(jump) {
+		this.changeClass("flapping");
 		this.position = this.validJump(jump);
         this.div.style.top = this.position + "px";
     }
