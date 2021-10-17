@@ -28,14 +28,18 @@ document.getElementById('test').addEventListener('click',function(e){
     bird.changeClass("falling");
 });
 
+//Cuando se presiona la tecla para arriba el ave comienza a subir
 window.addEventListener('keydown', e => {
-    if (e.keyCode === 38) {
+    //Si se mantiene presionando la flecha hacia arriba evito volver a invocar al metodo
+    if (!e.repeat && e.key === "ArrowUp") {
         bird.changeClass("rising");
-    }
+    }else
+        {return;}
 });
 
+//Cuando se deja de presionar la tecla para arriba el ave comienza a caer
 window.addEventListener('keyup', e => {
-    if (e.keyCode === 38) {
+    if (e.key === "ArrowUp") {
         bird.changeClass("falling");
     }
 });

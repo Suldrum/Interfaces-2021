@@ -11,15 +11,14 @@ class Objeto {
     //Constructor de la clase, da propiedades a los objetos
 	constructor(div, clase) {
 		this.div = document.getElementById(div);
-		this.position = parseInt(window.getComputedStyle(this.div, null).getPropertyValue("top").split("px")[0]);
-		this.width = parseInt(window.getComputedStyle(this.div, null).getPropertyValue("width").split("px")[0]);
-		this.height = parseInt(window.getComputedStyle(this.div, null).getPropertyValue("height").split("px")[0]);
+		this.width = parseInt(this.div.getBoundingClientRect().width);
+		this.height = parseInt(this.div.getBoundingClientRect().height);
 		this.baseClass = clase; //Clase de css base del objet. Ej: bird
 	}
 
 	//Posiciones X del Objeto
     getPositionLeft() {
-        return parseInt(window.getComputedStyle(this.div, null).getPropertyValue("left").split("px")[0]);
+        return this.div.getBoundingClientRect().left;
     }
     getPositionRight() {
         return this.getPositionLeft() + this.width;
@@ -27,8 +26,9 @@ class Objeto {
 
 	//Posiciones Y del Objeto
 	getPositionTop() {
-        return parseInt(window.getComputedStyle(this.div, null).getPropertyValue("top").split("px")[0]);
-    }
+		return this.div.getBoundingClientRect().top;
+	}
+
     getPositionBottom() {
         return (this.getPositionTop()  + this.height);
     }

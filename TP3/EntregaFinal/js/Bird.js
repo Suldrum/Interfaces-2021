@@ -13,19 +13,9 @@ class Bird extends Objeto {
 		super(div, clase);
 		//Limite de la zona de juego, sera la altura del body o del div donde se encuentre
 		this.maxLow = maxLow;
-		this.falling = true;
-		this.interval;
 	}
 
-	//Inicia la caida del ave
-	startFalling(){
-		this.interval = setInterval(() => {
-			bird.makeJump(20);
-			//Si se sale de la zona del juego deja de caer
-			if(this.isGrounded())
-			{	this.stoptFalling(); }
-		}, 125);
-	}
+
 	makeJump(jump) {
 		this.changeClass("flapping");
 		this.position = this.validJump(jump);
@@ -33,15 +23,15 @@ class Bird extends Objeto {
     }
 
 	//Para que no se vaya del div
-	validJump(jump)
+	validTop()
 	{
-		if (this.position + jump < 0)
+		if (this.getPositionTop() < 0)
 		{return 0;}
 		else
-		if (this.position + jump > this.maxLow)
-		{return this.maxLow}
+		if (this.getPositionTop() > this.maxLow)
+		{return this.maxLow;}
 		else
-		{return this.position + jump;}
+		{return this.getPositionTop();}
 	}
 
 	//Si esta tocando tierra
@@ -53,9 +43,11 @@ class Bird extends Objeto {
 	{
 		return this.falling;
 	}
-	//Finaliza la caida del ave
-	stoptFalling(){
-		this.falling = false;
-		clearTimeout(this.interval);
+
+	changeClass(clase){
+		console.log(this.validTop());
+		this.div.style.top = this.validTop() + "px";
+		super.changeClass(clase);
+		this.state = clase;	
 	}
 } //FIN DE LA CLASE
