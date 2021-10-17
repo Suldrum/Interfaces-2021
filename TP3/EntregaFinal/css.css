@@ -1,5 +1,3 @@
-
-
 /* Eliminamos márgenes y ponemos el fondo  */
 html,body {
     margin:0;
@@ -19,8 +17,8 @@ html,body {
 .player-container {
     top: 250px;
     position: absolute;
-    width: 46px;
-    height: 41.1px;
+    width: 128px;
+    height: 128px;
 }
 */
 
@@ -29,7 +27,7 @@ html,body {
 *Clase del ave
 */
 .bird {
-    /* Tamaño de la viñeta individual del ave (siempre la de mas arriba a la izquierda) */
+    /* Tamaño de la viñeta individual del ave (la de mas arriba a la izquierda) */
     width: 128px;
     height: 128px;
     /*centrado de la imagen*/
@@ -46,20 +44,13 @@ html,body {
 */
 .flying {
     animation: fly 1s steps(5) infinite;
-    
 }
 
 /*
-* Cada 3 segundos llama de manera infinita a fall que modifica su posicion en Y
+* Cada 300ms llama de manera infinita a fly con un paso por cada sprite/movimiento dentro de la imagen
 */
-.falling {
-    animation: fall 1s steps(5) infinite;
-}
-
-.dying {
-    /*  tercera imagen  background-position:-257px;*/
-    background-position:-257px;
-    rotate: 90deg;
+.flapping {
+    animation: fly 300ms steps(5) infinite; 
 }
 
 /*
@@ -72,10 +63,40 @@ html,body {
     100% { background-position:-640px }
 }
 
-@keyframes fall {
-
-    0%{top: 250px;}
-     100% {top: 600;} 
+/*
+* Cada 3 segundos llama a fall para que se ejecute en la misma velocidad y con el mismo efecto constante
+*/
+.falling{
+    animation: fall 3s linear;
+    animation-fill-mode: forwards;
 }
 
+/**
+* Modifica la posicion Y para generar el efecto de caida
+*/
+@keyframes fall {
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+/*
+* Modifica Cada 3 segundos llama de manera lineal a die que modifica su posicion en X
+*/
+.dying {
+    /*  tercera imagen  background-position:-257px;*/
+    background-position:-257px;
+    rotate: 90deg;
+    animation: die 3s linear;
+    animation-fill-mode: forwards;
+}
+
+/**
+* Modifica la posicion X para generar el efecto de caida cuando la imagen esta volteada
+*/
+@keyframes die {
+    100% {
+        transform: translateX(100vh);
+    }
+}
 

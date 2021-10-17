@@ -22,9 +22,9 @@ document.getElementById('test').addEventListener('click',function(e){
  
  //   bird.removeClass("flying");
  //   bird.addClass("falling");
-//	bird.addClass("dying")
+	bird.addClass("dying");
 
-        bird.startFalling();
+    //    bird.startFalling();
 });
 
 window.addEventListener('keydown', e => {
