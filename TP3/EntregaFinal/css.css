@@ -13,38 +13,38 @@ html,body {
     visibility: hidden;
 }
 
-/*
-.player-container {
-    top: 250px;
-    position: absolute;
-    width: 128px;
-    height: 128px;
+div{
+    border:1px solid #000000;
+
 }
-*/
+
+/************************************************************/
+/************************************************************/
+/************************************************************/
+/************************************************************/
 
 /*
 *
 *Clase del ave
 */
 .bird {
-    /* Tamaño de la viñeta individual del ave (la de mas arriba a la izquierda) */
-    width: 128px;
-    height: 128px;
-    /*centrado de la imagen*/
+    /* Tamaño de la viñeta individual del ave*/
+    width: 78px;
+    height: 68px;
+    /*centrado del div*/
     margin:auto;
     /* Imagen con el movimiento completo */ 
-    background-image: url("img/bird.png");
-    top: 0px;
-    /*para que este en el medio*/
-    position:relative;
-    
+    background-image: url("img/birdGrumpy.png");
+    /*Sin posicion no anda editar el top asi que mas vale ponerlo*/
+    position: relative;
+    /*position: absolute; necesita left right porque no se centra*/
 }
 
 /*
 * Cada segundo llama de manera infinita a fly con un paso por cada sprite/movimiento dentro de la imagen
 */
 .flying {
-    animation: fly 1s steps(5) infinite;
+    animation: fly 1s steps(4) infinite;
     animation-fill-mode: forwards;
 }
 
@@ -52,7 +52,7 @@ html,body {
 * Cada 300ms llama de manera infinita a fly con un paso por cada sprite/movimiento dentro de la imagen
 */
 .flapping {
-    animation: fly 300ms steps(5) infinite; 
+    animation: fly 300ms steps(4) infinite; 
     animation-fill-mode: forwards;
 }
 
@@ -61,21 +61,21 @@ html,body {
 */
 @keyframes fly {
     /* Partimos de la primera viñeta del sprite sheet */
-    0% { background-position:0 }
+    0% { background-position:0; }
     /*Ancho total de la imagen en negativo*/
-    100% { background-position:-640px }
+    100% { background-position: -315px; }
 }
 
 /*
 * Cada 3 segundos llama a fall para que se ejecute en la misma velocidad y con el mismo efecto constante
 */
 .falling{
-    animation: fly 1s steps(5) infinite, fall 3s linear;
+    animation: fly 1s steps(4) infinite, fall 5s linear;
     animation-fill-mode: forwards;
 }
 
 .rising{
-    animation: fly 1s steps(5) infinite, rise 3s linear;
+    animation: fly 300ms steps(4) infinite, rise 3s linear;
     animation-fill-mode: forwards;
 }
 
@@ -84,7 +84,7 @@ html,body {
 */
 @keyframes fall {
    to {
-       transform: translateY(100vh);
+       transform: translateY(80vh);
     }
 }
 
@@ -93,7 +93,7 @@ html,body {
 */
 @keyframes rise {
     to {
-        transform: translateY(-100vh);
+        transform: translateY(-80vh);
     }
 }
 
@@ -114,7 +114,7 @@ cuando la imagen esta volteada
 */
 @keyframes die {
     100% {
-        transform: translateX(100vh);
+        transform: translateX(150vh);
     }
 }
 
@@ -123,6 +123,10 @@ cuando la imagen esta volteada
 /************************************************************/
 /************************************************************/
 
+/*
+*
+*Clase de la moneda
+*/
 .coin {
     /* Tamaño de la viñeta individual del ave (la de mas arriba a la izquierda) */
     width: 51px;
@@ -131,9 +135,7 @@ cuando la imagen esta volteada
     margin:auto;
     /* Imagen con el movimiento completo */ 
     background-image: url("img/coin.png");
-    top: 0px;
-    
-    
+    top: 0px; 
 }
 
 .rotating{
@@ -142,7 +144,12 @@ cuando la imagen esta volteada
 }
 
 .collected{
-    animation: rotate 1s steps(10) infinite, effect 2s linear;
+    animation: rotate 1s steps(10) infinite, collecting 2s linear;
+    animation-fill-mode: forwards;
+}
+
+.moveToLeft{
+    animation: rotate 1s steps(10) infinite, movingLeft 30s linear;
     animation-fill-mode: forwards;
 }
 
@@ -156,8 +163,31 @@ cuando la imagen esta volteada
     100% {background-position: -512px;}
 }
 
-@keyframes effect {
+/*
+* Mueve la imagen hacia arriba a la izquierda
+*/
+@keyframes collecting {
     100% {
         transform: translate(-50vw, -50vh) ;
     }
 }
+
+/*
+* Mueve la imagen a la izquierda de su posicion para hacer creer que la pantalla se mueve
+*/
+@keyframes movingLeft {
+    100% {
+        transform: translateX(-150vh);
+    }
+}
+
+/************************************************************/
+/************************************************************/
+/************************************************************/
+/************************************************************/
+
+
+/*
+*
+*Clase de las tuberias
+*/

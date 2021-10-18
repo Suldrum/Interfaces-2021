@@ -18,7 +18,7 @@ class Objeto {
 
 	//Posiciones X del Objeto
     getPositionLeft() {
-        return this.div.getBoundingClientRect().left;
+        return parseInt(this.div.getBoundingClientRect().left);
     }
     getPositionRight() {
         return this.getPositionLeft() + this.width;
@@ -26,7 +26,7 @@ class Objeto {
 
 	//Posiciones Y del Objeto
 	getPositionTop() {
-		return this.div.getBoundingClientRect().top;
+		return  parseInt(this.div.getBoundingClientRect().top);
 	}
 
     getPositionBottom() {

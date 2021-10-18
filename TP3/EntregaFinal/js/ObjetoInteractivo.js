@@ -9,8 +9,8 @@
 
 class ObjetoInteractivo extends Objeto {
     //Constructor de la clase, da propiedades a los objetos
-	constructor(position, div,clase, delay) {
-		super(position, div,clase);
+	constructor(div,clase, delay) {
+		super(div,clase);
 		this.div.style.setProperty("animation-delay", delay + "s");
 	}
     stopAnimation() {
