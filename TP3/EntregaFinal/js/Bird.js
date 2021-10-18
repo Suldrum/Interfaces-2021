@@ -11,43 +11,38 @@ class Bird extends Objeto {
     //Constructor de la clase, da propiedades a los objetos
 	constructor(div, clase, maxLow) {
 		super(div, clase);
-		//Limite de la zona de juego, sera la altura del body o del div donde se encuentre
-		this.maxLow = maxLow;
+		//Limite de la zona de juego, sera la altura del body o del div donde se encuentre menos el espacio que ocupa dentro de el
+		this.maxLow = maxLow - this.height;
 	}
-
-
-	makeJump(jump) {
-		this.changeClass("flapping");
-		this.position = this.validJump(jump);
-        this.div.style.top = this.position + "px";
-    }
 
 	//Para que no se vaya del div
 	validTop()
 	{
 		if (this.getPositionTop() < 0)
-		{return 0;}
+		{
+			return 0;
+		}
 		else
-		if (this.getPositionTop() > this.maxLow)
-		{return this.maxLow;}
+		if (this.getPositionBottom() > this.maxLow)
+		{	
+			return this.maxLow;
+		}
 		else
 		{return this.getPositionTop();}
 	}
 
 	//Si esta tocando tierra
 	isGrounded(){
-		return(this.position === this.maxLow);
+		return(this.getPositionBottom() === this.maxLow);
 	}
 
-	isFalling()
+	updatePosition()
 	{
-		return this.falling;
+		this.div.style.top = this.validTop() + "px";
 	}
 
 	changeClass(clase){
-		console.log(this.validTop());
-		this.div.style.top = this.validTop() + "px";
-		super.changeClass(clase);
-		this.state = clase;	
+		this.updatePosition();
+		super.changeClass(clase);	
 	}
 } //FIN DE LA CLASE

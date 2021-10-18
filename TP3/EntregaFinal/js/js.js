@@ -19,22 +19,16 @@ let bodyHeight = parseInt(window.getComputedStyle(document.querySelector('body')
 
 //BOTON TEST
 document.getElementById('test').addEventListener('click',function(e){
- 
- //   bird.removeClass("flying");
- //   bird.addClass("falling");
-//	bird.addClass("dying");
- //   bird.changeClass("inGame");
-    //    bird.startFalling();
     bird.changeClass("falling");
+   
 });
 
 //Cuando se presiona la tecla para arriba el ave comienza a subir
 window.addEventListener('keydown', e => {
     //Si se mantiene presionando la flecha hacia arriba evito volver a invocar al metodo
-    if (!e.repeat && e.key === "ArrowUp") {
+    if (!e.repeat && e.key === "ArrowUp" ) {
         bird.changeClass("rising");
-    }else
-        {return;}
+    }
 });
 
 //Cuando se deja de presionar la tecla para arriba el ave comienza a caer
@@ -47,7 +41,7 @@ window.addEventListener('keyup', e => {
 /*
 *
 document.getElementById('test').addEventListener('click',function(e){
-    //Esto hace "caer al ave" cada...ehh....al ponerle mas top
+    //Esto hace "caer al ave" al ponerle mas top
     bird.removeClass("flying");
     bird.addClass("falling");
     interval = setInterval(() => {bird.makeJump(20);  }, 200);
