@@ -142,7 +142,7 @@ cuando la imagen esta volteada
 }
 
 .collected{
-    animation:  effect 2s linear;
+    animation: rotate 1s steps(10) infinite, effect 2s linear;
     animation-fill-mode: forwards;
 }
 
