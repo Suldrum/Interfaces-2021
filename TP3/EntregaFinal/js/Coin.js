@@ -34,10 +34,10 @@ class Coin extends ObjetoInteractivo {
         let birdData = bird.getPositionData();
         let coinData = this.getPositionData();
         //Si se esta en rango en eje X
-        if (coinData.left < birdData.right  && coinData.right > birdData.left ) 
+        if (birdData.left < coinData.left + coinData.width  && birdData.left + birdData.width  > coinData.left) 
         {
             //Si se esta en rango en eje Y
-            if (coinData.top < birdData.bottom && coinData.bottom > birdData.top)
+            if (birdData.top < coinData.top + coinData.height && birdData.top + birdData.height > coinData.top)
             {
             //  super.removeDelay();
                 this.taked = true;
