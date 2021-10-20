@@ -9,8 +9,8 @@
 
 class Bird extends Objeto {
     //Constructor de la clase, da propiedades a los objetos
-	constructor(div, clase, maxLow) {
-		super(div, clase);
+	constructor(div, baseClass, stateClass, maxLow) {
+		super(div, baseClass, stateClass);
 		//Limite de la zona de juego
 		this.maxLow = maxLow - this.height;
 	}
@@ -42,9 +42,8 @@ class Bird extends Objeto {
 
 	}
 
-	changeClass(clase){
-		console.log(this.getPositionTop());
+	changeStateClass(stateClass){
 		this.updatePosition();
-		super.changeClass(clase);	
+		super.changeStateClass(stateClass);	
 	}
 } //FIN DE LA CLASE

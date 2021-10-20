@@ -7,19 +7,20 @@
  * 
  * 
  */
-let bird
-
+let bird;
+let game;
 let bodyHeight = parseInt(window.getComputedStyle(document.querySelector('body'), null).getPropertyValue("height").split("px")[0]);
 //Cuando se carga la pagina
  $(document).ready(function (){
     //Funcion que se encargada de dejar la pagina en default
-    bird = new Bird("bird", "bird",bodyHeight);
+    bird = new Bird("bird", "bird","flying",bodyHeight);
 
 });
 
 //BOTON TEST
 document.getElementById('test').addEventListener('click',function(e){
-    bird.changeClass("falling");
+    game = new Game(bird);
+    game.initGame();
    
 });
 
@@ -27,14 +28,15 @@ document.getElementById('test').addEventListener('click',function(e){
 window.addEventListener('keydown', e => {
     //Si se mantiene presionando la flecha hacia arriba evito volver a invocar al metodo
     if (!e.repeat && e.key === "ArrowUp" ) {
-        bird.changeClass("rising");
+        bird.changeStateClass("rising");
     }
 });
 
 //Cuando se deja de presionar la tecla para arriba el ave comienza a caer
 window.addEventListener('keyup', e => {
+    
     if (e.key === "ArrowUp") {
-        bird.changeClass("falling");
+        bird.changeStateClass("falling");
     }
 });
 

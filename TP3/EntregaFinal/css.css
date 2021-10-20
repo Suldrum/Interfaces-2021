@@ -32,11 +32,13 @@ div{
     width: 78px;
     height: 68px;
     /*centrado del div*/
-    margin:auto;
+   /* margin:auto;*/
     /* Imagen con el movimiento completo */ 
     background-image: url("img/birdGrumpy.png");
     /*Sin posicion no anda editar el top asi que mas vale ponerlo*/
     position: absolute;
+    top: 250;
+    margin-left: 300px;
     /*position: absolute; necesita left right porque no se centra*/
 }
 
@@ -133,11 +135,13 @@ cuando la imagen esta volteada
     /* Tamaño de la viñeta individual del ave (la de mas arriba a la izquierda) */
     width: 51px;
     height: 51px;
-    /*centrado de la imagen*/
-    margin:auto;
+    position: absolute;
+    /*posicion de la imagen fuera de pantalla por el lado derecho*/
+    left:calc(100% + 51px);
     /* Imagen con el movimiento completo */ 
     background-image: url("img/coin.png");
-    top: 0px; 
+    
+    
 }
 
 .rotating{
@@ -146,12 +150,12 @@ cuando la imagen esta volteada
 }
 
 .collected{
-    animation: rotate 1s steps(10) infinite, collecting 2s linear;
+    animation: rotate 1s steps(10) infinite, collecting 5s linear;
     animation-fill-mode: forwards;
 }
 
 .moveCoinToLeft{
-    animation: rotate 1s steps(10) infinite, movingLeft 30s linear;
+    animation: rotate 1s steps(10) infinite, movingLeft 50s linear;
     animation-fill-mode: forwards;
 }
 
@@ -170,7 +174,7 @@ cuando la imagen esta volteada
 */
 @keyframes collecting {
     100% {
-        transform: translate(-50vw, -50vh) ;
+        transform: translate(-150vw, -150vh);
     }
 }
 
@@ -179,7 +183,7 @@ cuando la imagen esta volteada
 */
 @keyframes movingLeft {
     100% {
-        transform: translateX(-150vh);
+        left: -100px;
     }
 }
 
@@ -197,12 +201,13 @@ cuando la imagen esta volteada
 .pipeUp {
     /* Tamaño de la viñeta individual del ave*/
     width: 93px;
-    height: 100vh;  /*editar por js*/
-    /*centrado del div*/
-    position: relative;
+    height: 100%;  /*editar por js*/
+    /*posicion de la imagen fuera de pantalla por el lado derecho*/
+    float: right;
+    margin-right: -50px;
     /* Imagen con el movimiento completo */ 
     background-image: url("img/pipeUp.png");
-    background-repeat: no-repeat;
+    background-size: cover;
     /*Sin posicion no anda editar el top asi que mas vale ponerlo*/
 
     /*position: absolute; necesita left right porque no se centra*/
@@ -212,13 +217,13 @@ cuando la imagen esta volteada
 
     /* Tamaño de la viñeta individual del ave*/
     width: 93px;
-    height: 100vh; /*editar por js*/
+    height: 100%; /*editar por js*/
     /*centrado del div*/
     position: sticky;
     /* Imagen con el movimiento completo */ 
     rotate: 180deg;
     background-image: url("img/pipeUp.png");
-    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .movePipeUpToLeft{
@@ -233,6 +238,6 @@ cuando la imagen esta volteada
 
 @keyframes movingRight {
     100% {
-        transform: translateX(150vh);
+        transform: translateX(250vh);
     }
 }
