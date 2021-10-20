@@ -155,7 +155,7 @@ cuando la imagen esta volteada
 }
 
 .moveCoinToLeft{
-    animation: rotate 1s steps(10) infinite, movingLeft 10s linear; /*50s*/
+    animation: rotate 1s steps(10) infinite, movingLeft 10s linear infinite; /*50s*/
     animation-fill-mode: forwards;
 }
 

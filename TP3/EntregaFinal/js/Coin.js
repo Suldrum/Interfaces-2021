@@ -29,6 +29,11 @@ class Coin extends ObjetoInteractivo {
 
     setValue(value){this.value = value;}
 
+    isOutScreen(){
+        let object = this.getPositionData();
+        return (object.left < (0 - (object.width + 5)) ) ;
+
+    }
 
     isTouch(bird){
         super.stopAnimation();
@@ -47,13 +52,17 @@ class Coin extends ObjetoInteractivo {
                /*1651
        left:calc(100% + 60px);
         */
-        /*
-        this.setTop();
-        this.setLeft(value);
-        this.setAnimationDelay((Math.random() * 5 )+ 16 * index);
-        super.changeStateClass("moveCoinToLeft");	
-        this.setValue(5);
-        this.touched = false;
+        super.stopAnimation();
+        this.setTop();                  
+        if (this.touched )
+       {
+            this.touched = false;
+            this.setLeft(value);
+            this.setValue(5);
+            this.setAnimationDelay(((Math.random() * 5 )+ 16 * index)); 
+            super.changeStateClass("moveCoinToLeft");
+       } 	    
+        super.playAnimation();
         /*
         if (this.getStateClass() !== "moveCoinToLeft")
         {

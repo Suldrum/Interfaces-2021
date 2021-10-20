@@ -32,30 +32,21 @@ class Game {
     touchCoin(){  
         for (let index = 0 ; index < 3 ; index++)
         {
-           
-            /*
             if (this.coins[index].isOutScreen())
             {
-                
-                this.coins[index].touched = false;
-                this.coins[index].setAnimationDelay((Math.random() * 5 )+ 16 * index);
-                this.coins[index].changeStateClass("moveCoinToLeft");
-                this.coins[index].setValue(5);
-              
                 this.coins[index].reset(index,(this.width+this.coins[index].width+10));
             } 
-            */
             if(this.coins[index].touched)
-            { 
-                
+            {  
                 this.score+= this.coins[index].getValue();
                 this.coins[index].setValue(0);
-
-            }else
+                
+            }
+            else
             {
-               
                 this.coins[index].isTouch(this.bird);
             }
+           
         }
     }
 

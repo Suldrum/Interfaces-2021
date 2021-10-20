@@ -44,15 +44,14 @@ class ObjetoInteractivo extends Objeto {
         this.div.style.setProperty("animation-play-state", "running");
     }
 
+    resetAnimation(){
+        this.div.style.setProperty("animation-play-state", "initial");
+    }
     removeDelay(){
         this.div.style.removeProperty("animation-delay");
     }
 
-    isOutScreen(){
-        let object = this.getPositionData();
-        return (object.left < (0 - object.width) ) ;
 
-    }
 
     resetObject()
     {
