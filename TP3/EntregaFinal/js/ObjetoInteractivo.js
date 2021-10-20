@@ -11,33 +11,53 @@ class ObjetoInteractivo extends Objeto {
     //Constructor de la clase, da propiedades a los objetos
 	constructor(div, baseClase, stateClass, delay) {
 		super(div, baseClase, stateClass);
-	//	this.div.style.setProperty("animation-delay", delay + "s");
+        this.touched = false;
+		this.setAnimationDelay(delay);
 	}
+
+    isTouch(object){
+        
+        let objectData = object.getPositionData();
+        let thisData = this.getPositionData();
+        //Si se esta en rango en eje X
+        if (objectData.left < thisData.left + thisData.width  && objectData.left + objectData.width  > thisData.left) 
+        {
+            //Si se esta en rango en eje Y
+            if (objectData.top < thisData.top + thisData.height && objectData.top + objectData.height > thisData.top)
+            {
+                return true;
+            }
+        }
+        this.playAnimation();
+        return false;
+    }
+
+    setAnimationDelay(delay)
+    {
+        this.div.style.setProperty("animation-delay", delay + "s");
+    }
     stopAnimation() {
         this.div.style.setProperty("animation-play-state", "paused");
         
     }
-    runningAnimation() {
+    playAnimation() {
         this.div.style.setProperty("animation-play-state", "running");
     }
 
     removeDelay(){
         this.div.style.removeProperty("animation-delay");
     }
-    //Si el objeto se fue de la pantalla
+
     isOutScreen(){
         let object = this.getPositionData();
-        return (
-            object.top >= 0 &&
-            object.left >= 0 &&
-            object.bottom <= ( $(window).height()) && 
-            object.right <= ($(window).width())
-        );
+        return (object.left < (0 - object.width) ) ;
+
     }
 
-    isTouch(bird){}
+    resetObject()
+    {
 
-
+    }
 
 
 } //FIN DE LA CLASE

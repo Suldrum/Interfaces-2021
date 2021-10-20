@@ -12,6 +12,8 @@ class Objeto {
 	constructor(div, baseClass, stateClass) {
 		//Div donde se encuentra
 		this.div = document.getElementById(div);
+		//Si tenia algo definido antes lo limpio
+		this.cleanClasses();
 		//Imagen del objeto
 		this.baseClass = baseClass;
 		//Animacion | Keyframe del objeto
@@ -22,24 +24,27 @@ class Objeto {
 		this.height = parseInt(this.div.getBoundingClientRect().height);
 	}
 
+
+	
 	//Posiciones X del Objeto
     getPositionLeft() {
-        return parseInt(this.div.getBoundingClientRect().left);
+        return this.div.getBoundingClientRect().left;
     }
+	
     getPositionRight() {
-        return this.getPositionLeft() + this.width;
+        return this.div.getBoundingClientRect().right;
     }
 
 	//Posiciones Y del Objeto
 	getPositionTop() {
-		return  parseInt(this.div.getBoundingClientRect().top);
+		return this.div.getBoundingClientRect().top;
 	}
 
     getPositionBottom() {
-        return (this.getPositionTop()  + this.height);
+        return this.div.getBoundingClientRect().bottom;
     }
 
-	//Devuelve todas las posicions del objeto en forma de vector
+	//Devuelve toda la informacion del objeto
 	getPositionData(){
 		return this.div.getBoundingClientRect();
     }
@@ -59,6 +64,10 @@ class Objeto {
 		this.div.classList.remove(stateClass);
 	}
 
+	cleanClasses(){
+        this.div.classList.remove();
+    }
+
 	//Cambia el estado del pajaro de uno a otro.Ej: bird flying, bird falling, etc
 	changeStateClass(stateClass){
 		this.removeStateClass(this.stateClass);
@@ -67,4 +76,15 @@ class Objeto {
 	}
 
 	updatePosition(){}
+
+    //Si el objeto es visible
+    isInScreen(){
+        let object = this.getPositionData();
+        return (
+            object.top >= 0 &&
+            object.left >= 0 &&
+            object.bottom <= ( $(window).height() || document.documentElement.clientHeight) && 
+            object.right <= ($(window).width() || document.documentElement.clientWidth)
+        );
+    }
 } //FIN DE LA CLASE

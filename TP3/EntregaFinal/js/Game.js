@@ -1,45 +1,61 @@
 class Game {
     constructor(bird) {
         this.div = document.getElementById("body");
+        this.divCoins =document.getElementById("coins");
+        this.width = parseInt(this.div.getBoundingClientRect().width);
+		this.height = parseInt(this.div.getBoundingClientRect().height);
         this.bird = bird;
-        this.delay = 2;
         this.pipes = [];
-        this.coins = [];
+        this.coins = [3];
         this.score = 0;
-        this.intervalCreation;
         this.interval;
 
     }
 
-    createCoin(){ 
-        let newDiv = document.createElement("div");
-        let newDivID = "coin"+this.coins.length;
-        newDiv.setAttribute("id",newDivID);
-        this.div.appendChild(newDiv);
-        let coin = new Coin (newDivID,"coin","moveCoinToLeft",(Math.random() * 5 ) +this.delay);
-        this.coins.push(coin);
+    createCoins()
+    {
+        for (let index = 0 ; index < 3 ; index++)
+        {
+            this.createCoin(index);
+        }
     }
-
-    //Elimino la moneda
-    deleteCoin(coin){
-        this.coins.splice(coin, 1);
-      //  this.div.removeChild(coin.div);
+    createCoin(index){ 
+        let newDiv = document.createElement("div");
+        let newDivID = "coin"+index;
+        newDiv.setAttribute("id",newDivID);
+        this.divCoins.appendChild(newDiv);
+        this.coins[index] = new Coin (newDivID,"coin","moveCoinToLeft",(Math.random() * 5 )+ 16 * index);
+        //this.coins.push(coin);
     }
 
     //Control de si toca alguna moneda
-    touchCoin(){
-        let i=0;
-        while (i < this.coins.length)
-        {      
-            if(this.coins[i].taked )
+    touchCoin(){  
+        for (let index = 0 ; index < 3 ; index++)
+        {
+           
+            /*
+            if (this.coins[index].isOutScreen())
+            {
+                
+                this.coins[index].touched = false;
+                this.coins[index].setAnimationDelay((Math.random() * 5 )+ 16 * index);
+                this.coins[index].changeStateClass("moveCoinToLeft");
+                this.coins[index].setValue(5);
+              
+                this.coins[index].reset(index,(this.width+this.coins[index].width+10));
+            } 
+            */
+            if(this.coins[index].touched)
             { 
-                this.score+= this.coins[i].getValue();
-                this.deleteCoin(this.coins[i]);
+                
+                this.score+= this.coins[index].getValue();
+                this.coins[index].setValue(0);
+
             }else
             {
-                this.coins[i].isTouch(this.bird);
-                i++;
-            }    
+               
+                this.coins[index].isTouch(this.bird);
+            }
         }
     }
 
@@ -87,26 +103,16 @@ class Game {
         }
     }
     initGame() {
-        this.createCoin();
-        this.createCoin();
-        this.createCoin();
+        this.createCoins();
         this.interval = setInterval(this.loop.bind(this), 16.6);
 
     }
 
     loop() {
-
+       
         if (this.score >= 50) {
             this.endGame();
         }
-/*
-        if (this.coins.length < 3)
-        {
-           // setTimeout(function(){game.createCoin();}, 3000);
-           this.createCoin();
-        }
-      
-       */
         this.touchCoin();
       //  this.touchPipe();
        // this.deleteOutScreen(); //NO ESTA FUNCIONANDO CORRECTAMENTE...creo

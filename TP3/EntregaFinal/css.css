@@ -32,14 +32,14 @@ div{
     width: 78px;
     height: 68px;
     /*centrado del div*/
-   /* margin:auto;*/
+    left: calc(40% - 78px);
+    top: calc(45% - 68px);
     /* Imagen con el movimiento completo */ 
     background-image: url("img/birdGrumpy.png");
     /*Sin posicion no anda editar el top asi que mas vale ponerlo*/
-    position: absolute;
-    top: 250;
-    margin-left: 300px;
-    /*position: absolute; necesita left right porque no se centra*/
+    position: absolute;  
+    
+    
 }
 
 /*
@@ -87,7 +87,7 @@ div{
 @keyframes fall {
    to {
       /* transform: translateY(80vh);*/
-      top: 700px;
+      top: calc(100% - 80px);
     }
 }
 
@@ -135,13 +135,13 @@ cuando la imagen esta volteada
     /* Tamaño de la viñeta individual del ave (la de mas arriba a la izquierda) */
     width: 51px;
     height: 51px;
-    position: absolute;
     /*posicion de la imagen fuera de pantalla por el lado derecho*/
-    left:calc(100% + 51px);
+    left:calc(100% + 61px);
     /* Imagen con el movimiento completo */ 
     background-image: url("img/coin.png");
-    
-    
+    /*Sin posicion no anda editar el top asi que mas vale ponerlo*/
+    position: absolute;
+
 }
 
 .rotating{
@@ -155,7 +155,7 @@ cuando la imagen esta volteada
 }
 
 .moveCoinToLeft{
-    animation: rotate 1s steps(10) infinite, movingLeft 50s linear;
+    animation: rotate 1s steps(10) infinite, movingLeft 10s linear; /*50s*/
     animation-fill-mode: forwards;
 }
 
@@ -173,8 +173,9 @@ cuando la imagen esta volteada
 * Mueve la imagen hacia arriba a la izquierda
 */
 @keyframes collecting {
-    100% {
-        transform: translate(-150vw, -150vh);
+    to {
+        top: calc(0% - 60px);
+        left: calc(0% - 60px);
     }
 }
 
@@ -182,8 +183,11 @@ cuando la imagen esta volteada
 * Mueve la imagen a la izquierda de su posicion para hacer creer que la pantalla se mueve
 */
 @keyframes movingLeft {
-    100% {
-        left: -100px;
+   from{
+        left:calc(100% + 60px);
+    }
+    to {
+        left: calc(0% - 60px);
     }
 }
 

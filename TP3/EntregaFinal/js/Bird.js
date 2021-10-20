@@ -15,22 +15,6 @@ class Bird extends Objeto {
 		this.maxLow = maxLow - this.height;
 	}
 
-	//Para que no se vaya del div
-	validTop()
-	{
-		if (this.getPositionTop() < 0)
-		{
-			return 0;
-		}
-		else
-		if (this.getPositionBottom() > this.maxLow)
-		{	
-			return this.maxLow;
-		}
-		else
-		{return this.getPositionTop();}
-	}
-
 	//Si esta tocando tierra
 	isGrounded(){
 		return(this.getPositionBottom() === this.maxLow);
@@ -38,8 +22,8 @@ class Bird extends Objeto {
 
 	updatePosition()
 	{
-		this.div.style.top= this.getPositionTop()+ "px";
-
+		//Porque ambas animaciones se manejan en el mismo eje
+		this.div.style.top= parseInt(this.getPositionTop()) + "px";
 	}
 
 	changeStateClass(stateClass){
