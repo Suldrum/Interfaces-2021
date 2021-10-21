@@ -9,25 +9,21 @@
 
 class Bird extends Objeto {
     //Constructor de la clase, da propiedades a los objetos
-	constructor(div, baseClass, stateClass, maxLow) {
+	constructor(div, baseClass, stateClass) {
 		super(div, baseClass, stateClass);
-		//Limite de la zona de juego
-		this.maxLow = maxLow - this.height;
 	}
 
-	//Si esta tocando tierra
-	isGrounded(){
-		return(this.getPositionBottom() === this.maxLow);
-	}
-
+	//Actualiza la posicion del ave
 	updatePosition()
 	{
-		//Porque ambas animaciones se manejan en el mismo eje
 		this.div.style.top= parseInt(this.getPositionTop()) + "px";
 	}
 
+	//Actualiza la posicion y cambia la animacion
 	changeStateClass(stateClass){
+		//Actualiza para que la animaciones continuen desde el punto posicion actual
 		this.updatePosition();
+		//Cambio de animacion
 		super.changeStateClass(stateClass);	
 	}
 } //FIN DE LA CLASE

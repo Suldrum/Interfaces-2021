@@ -13,7 +13,7 @@ let bodyHeight = parseInt(window.getComputedStyle(document.querySelector('body')
 //Cuando se carga la pagina
  $(document).ready(function (){
     //Funcion que se encargada de dejar la pagina en default
-    bird = new Bird("bird", "bird","flying",bodyHeight);
+    bird = new Bird("bird", "bird","flying");
 
 });
 
@@ -40,13 +40,3 @@ window.addEventListener('keyup', e => {
     }
 });
 
-/*
-*
-document.getElementById('test').addEventListener('click',function(e){
-    //Esto hace "caer al ave" al ponerle mas top
-    bird.removeClass("flying");
-    bird.addClass("falling");
-    interval = setInterval(() => {bird.makeJump(20);  }, 200);
-});
-
-*/

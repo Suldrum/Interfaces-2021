@@ -11,11 +11,12 @@ class Coin extends ObjetoInteractivo {
     //Constructor de la clase, da propiedades a los objetos
 	constructor(div, baseClase, stateClass, delay) {
 		super(div, baseClase, stateClass,delay);
+        this.touched = false;
         this.value = 5;
         this.setTop();
 	}
 
-    //Esto se cambiara a Math random
+    //Coloca un tope al azar
     setTop(){
         this.div.style.top= ((Math.random() * 60 ) +20)+ "vh";
     }
@@ -28,12 +29,6 @@ class Coin extends ObjetoInteractivo {
     getValue(){return this.value;}
 
     setValue(value){this.value = value;}
-
-    isOutScreen(){
-        let object = this.getPositionData();
-        return (object.left < (0 - (object.width + 5)) ) ;
-
-    }
 
     isTouch(bird,left){
         if(super.isTouch(bird) && !this.touched)

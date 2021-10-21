@@ -34,19 +34,23 @@ class Game {
         newDiv.setAttribute("id",newDivID);
         this.divCoins.appendChild(newDiv);
         this.coins[index] = new Coin (newDivID,"coin","moveCoinToLeft",(Math.random() * 5 )+ 16 * index);
-        //this.coins.push(coin);
     }
 
     createPipe(index){
+        //Tuberia de arriba
         let newUpDiv = document.createElement("div");
-        let newDownDiv = document.createElement("div");
         let newUpID= "pipeUp"+index;
-        let newDownID= "pipeDown"+index;
         newUpDiv.setAttribute("id",newUpID);
-        newDownDiv.setAttribute("id",newDownID);
         this.divPipes.appendChild(newUpDiv);
+        let pipeUp = new ObjetoInteractivo(newUpID,"pipeUp","movePipeToLeft", 10 * (index + 1));
+        //Tuberia de abajo
+        let newDownDiv = document.createElement("div");
+        let newDownID= "pipeDown"+index;
+        newDownDiv.setAttribute("id",newDownID);
         this.divPipes.appendChild(newDownDiv);
-        this.pipes[index] = new Pipe (newUpID, newDownID,"pipeUp","pipeDown","movePipeToLeft",+ 10 * (index + 1),this.bird.height);
+        let pipeDown =new ObjetoInteractivo(newDownID,"pipeDown","movePipeToLeft", 10 * (index + 1));
+        //Nuevo Obstaculo
+        this.pipes[index] = new Pipe (pipeUp,pipeDown, this.bird.height);
     }
 
     //Control de si toca alguna moneda
@@ -71,9 +75,6 @@ class Game {
            
         }
     }
-
-
-
 
     //Control de si toca alguna cañeria
     checkPipes(){
