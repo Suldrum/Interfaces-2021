@@ -93,6 +93,7 @@ class Game {
                 if (this.pipes[index].isTouch(this.bird))
                 {
                     this.endGame();
+                    this.bird.changeStateClass("dying");
                     break;
                 }
                 else

@@ -105,8 +105,8 @@ div{
 * Modifica Cada 3 segundos llama de manera lineal a die que modifica su posicion en X
 */
 .dying {
-    /*  tercera imagen  background-position:-257px;*/
-    background-position:-257px;
+    /*  tercera imagen*/
+    background-position:-237px;
     rotate: 90deg;
     animation: die 3s linear;
     animation-fill-mode: forwards;
