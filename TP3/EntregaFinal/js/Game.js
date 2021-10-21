@@ -13,7 +13,7 @@ class Game {
         this.coins = [];
         this.score = 0;
         this.interval;
-
+        this.updateScore();
     }
 
     createElements()
@@ -92,9 +92,9 @@ class Game {
             else
             {
                 if (this.pipes[index].isTouch(this.bird))
-                {
-                    this.endGame();
+                {           
                     this.bird.changeStateClass("dying");
+                    this.endGame(false);
                     break;
                 }
                 else
@@ -115,24 +115,25 @@ class Game {
     loop() {
        
         if (this.score >= 50) {
-            this.endGame();
+            this.bird.changeStateClass("flying");
+            this.endGame(true);
         }
         this.checkCoins();
         this.checkPipes();
     }
 
-    endGame() {
+    endGame(victory) {
         clearInterval(this.interval);
         this.stopAllAnimation();
-        //this.reset();
-       
-    }
-
-    reset() {
-        this.stopAllAnimation();
-        this.pipes = [];
-        this.coins = [];
-        this.score = 0;
+        document.getElementById('reset').hidden = false;
+        if (victory)
+        {
+            alert("¡Felicidades has ganado!");
+        }
+        else
+        {
+            alert("¡Oh no! Intentalo otra vez");
+        }
     }
 
     //Detiene todas las animaciones
