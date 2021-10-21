@@ -35,21 +35,16 @@ class Coin extends ObjetoInteractivo {
 
     }
 
-    isTouch(bird){
-        super.stopAnimation();
-        let left = this.getPositionLeft();
+    isTouch(bird,left){
         if(super.isTouch(bird) && !this.touched)
         {
-            super.removeDelay();
+            this.removeDelay();
             this.touched = true;
             this.setLeft(left);
             this.changeStateClass("collected");
-            super.playAnimation();
-        }
-            
+        }  
     }
     reset(index,value){
-        super.stopAnimation();
         this.setTop();                  
         if (this.touched )
        {
@@ -57,10 +52,15 @@ class Coin extends ObjetoInteractivo {
             this.setLeft(value);
             this.setValue(5);
             this.setAnimationDelay(((Math.random() * 5 )+ 16 * index)); 
-            super.changeStateClass("moveCoinToLeft");
+            this.changeStateClass("moveCoinToLeft");
        } 	    
-        super.playAnimation();
     }
 
+    stopAnimation(left)
+    {
+        this.removeDelay();
+        this.setLeft(left);
+        this.changeStateClass("rotating");
+    }
 
 } //FIN DE LA CLASE

@@ -17,7 +17,7 @@ class Game {
     {
         for (let index = 0 ; index < 3 ; index++)
         {
-        //    this.createCoin(index);
+            this.createCoin(index);
             this.createPipe(index);
         }
     }
@@ -31,10 +31,6 @@ class Game {
     }
 
     createPipe(index){
-        //constructor(div,div2, baseClass, baseClass2, stateClass,delay,space)
-        /*		this.upObstacle = new ObjetoInteractivo(div, baseClass, stateClass,delay);
-		this.downObstacle = new ObjetoInteractivo(div2, baseClass2, stateClass,delay);	
-        */
         let newUpDiv = document.createElement("div");
         let newDownDiv = document.createElement("div");
         let newUpID= "pipeUp"+index;
@@ -48,7 +44,7 @@ class Game {
 
     //Control de si toca alguna moneda
     checkCoins(){  
-        for (let index = 0 ; index < 3 ; index++)
+        for (let index = 0 ; index < this.coins.length ; index++)
         {
             if (this.coins[index].isOutScreen())
             {
@@ -58,11 +54,12 @@ class Game {
             {  
                 this.score+= this.coins[index].getValue();
                 this.coins[index].setValue(0);
+                this.updateScore();
                 
             }
             else
             {
-                this.coins[index].isTouch(this.bird);
+                this.coins[index].isTouch(this.bird,parseInt(this.coins[index].getPositionLeft()));
             }
            
         }
@@ -72,43 +69,51 @@ class Game {
 
 
     //Control de si toca alguna cañeria
-    touchPipe(){
-        for (let i = 0; i < this.pipes.length; i++) {
-            if (this.pipes[i].isTouch(bird)) {
-                this.endGame();
-            } 
-            else 
+    checkPipes(){
+        for (let index = 0; index < this.pipes.length; index++) {
+            if (this.pipes[index].isOutScreen())
             {
-                if (this.obstacles[i].isPassed(this.bird)){
-                    this.score+=1;
-                    this.deletePipe(this.pipes[i]);
-                }
+                this.pipes[index].reset();
+            } 
+            if(this.pipes[index].passed)
+            {  
+                this.score+= this.pipes[index].getValue();
+                this.pipes[index].setValue(0);
+                this.updateScore();
+            }
+            else
+            {
+                if (this.pipes[index].isTouch(this.bird))
+                {this.endGame();}
+                else
+                {this.pipes[index].checkPass(this.bird);}
             }
         }
     }
 
     initGame() {
         this.createElements();
-    //    this.createPipe();
         this.interval = setInterval(this.loop.bind(this), 16.6);
 
     }
 
+    updateScore(){
+        document.getElementById("score").innerHTML = this.score;
+    }
     loop() {
        
         if (this.score >= 50) {
             this.endGame();
         }
-    //    this.checkCoins();
-     //   this.checkPipe();
-      
-
+        this.checkCoins();
+        this.checkPipes();
     }
 
     endGame() {
+        clearInterval(this.interval);
         this.stopAllAnimation();
         //this.reset();
-        clearInterval(this.interval);
+       
     }
 
     reset() {
@@ -120,12 +125,16 @@ class Game {
 
     //Detiene todas las animaciones
     stopAllAnimation(){
-        for (let i = 0; i < this.pipes.length; i++) {
-            this.pipes[i].stopAnimation();
+     
+        for (let index  = 0; index  < this.pipes.length; index++) {
+            this.pipes[index].stopAnimation();
         }
-        for (let i = 0; i < this.coins.length; i++) {
-            if ( this.coins[i].getStateClass() === "moveCoinToLeft")
-                {this.coins[i].changeStateClass("rotating");}
+        
+        for (let index = 0; index  < this.coins.length; index++) {
+            if ( this.coins[index].getStateClass() === "moveCoinToLeft")
+            {
+                this.coins[index].stopAnimation(parseInt(this.coins[index].getPositionLeft()));
+            }
         }
     }
 }
