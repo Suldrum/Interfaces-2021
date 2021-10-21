@@ -49,9 +49,6 @@ class Coin extends ObjetoInteractivo {
             
     }
     reset(index,value){
-               /*1651
-       left:calc(100% + 60px);
-        */
         super.stopAnimation();
         this.setTop();                  
         if (this.touched )
@@ -63,23 +60,6 @@ class Coin extends ObjetoInteractivo {
             super.changeStateClass("moveCoinToLeft");
        } 	    
         super.playAnimation();
-        /*
-        if (this.getStateClass() !== "moveCoinToLeft")
-        {
-                this.changeStateClass("moveCoinToLeft");
-                this.setValue(5);
-                this.touched = false;
-        }
-        */
-
-        /*
-        this.coins[index].cleanClasses();
-        this.coins[index].div.style.setProperty('left', 'calc(100% + 51px)');
-        console.log(this.coins[index].getPositionLeft());
-        let newDivID = "coin"+index;
-        let coin = new Coin (newDivID,"coin","moveCoinToLeft",(Math.random() * 5 )+ 16 * index);
-        this.coins[index]= coin;
-*/
     }
 
 

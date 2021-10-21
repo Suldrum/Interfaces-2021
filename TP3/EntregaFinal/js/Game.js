@@ -2,21 +2,23 @@ class Game {
     constructor(bird) {
         this.div = document.getElementById("body");
         this.divCoins =document.getElementById("coins");
+        this.divPipes =document.getElementById("pipes");
         this.width = parseInt(this.div.getBoundingClientRect().width);
 		this.height = parseInt(this.div.getBoundingClientRect().height);
         this.bird = bird;
-        this.pipes = [];
+        this.pipes = [3];
         this.coins = [3];
         this.score = 0;
         this.interval;
 
     }
 
-    createCoins()
+    createElements()
     {
         for (let index = 0 ; index < 3 ; index++)
         {
-            this.createCoin(index);
+        //    this.createCoin(index);
+            this.createPipe(index);
         }
     }
     createCoin(index){ 
@@ -28,8 +30,24 @@ class Game {
         //this.coins.push(coin);
     }
 
+    createPipe(index){
+        //constructor(div,div2, baseClass, baseClass2, stateClass,delay,space)
+        /*		this.upObstacle = new ObjetoInteractivo(div, baseClass, stateClass,delay);
+		this.downObstacle = new ObjetoInteractivo(div2, baseClass2, stateClass,delay);	
+        */
+        let newUpDiv = document.createElement("div");
+        let newDownDiv = document.createElement("div");
+        let newUpID= "pipeUp"+index;
+        let newDownID= "pipeDown"+index;
+        newUpDiv.setAttribute("id",newUpID);
+        newDownDiv.setAttribute("id",newDownID);
+        this.divPipes.appendChild(newUpDiv);
+        this.divPipes.appendChild(newDownDiv);
+        this.pipes[index] = new Pipe (newUpID, newDownID,"pipeUp","pipeDown","movePipeToLeft",+ 10 * (index + 1),this.bird.width);
+    }
+
     //Control de si toca alguna moneda
-    touchCoin(){  
+    checkCoins(){  
         for (let index = 0 ; index < 3 ; index++)
         {
             if (this.coins[index].isOutScreen())
@@ -50,9 +68,8 @@ class Game {
         }
     }
 
-    createPipe(){}
 
-    deletePipe(pipe){this.pipes.splice(pipe, 1);}
+
 
     //Control de si toca alguna cañeria
     touchPipe(){
@@ -70,31 +87,9 @@ class Game {
         }
     }
 
-    //Elimina todo los objetos que dejaron de ser visibles
-    deleteOutScreen(){
-        let i=0;
-        while (i < this.coins.length)
-        {
-            if(this.coins[i].isOutScreen())
-            {
-                this.deleteCoin(this.coins[i]);
-            }else{
-                i++;
-            }
-        }
-        i=0;
-        while (i < this.pipes.length)
-        {
-            if(this.pipes[i].isOutScreen())
-            {
-                this.deleteCoin(this.coins[i]);
-            }else{
-                i++;
-            }
-        }
-    }
     initGame() {
-        this.createCoins();
+        this.createElements();
+    //    this.createPipe();
         this.interval = setInterval(this.loop.bind(this), 16.6);
 
     }
@@ -104,9 +99,9 @@ class Game {
         if (this.score >= 50) {
             this.endGame();
         }
-        this.touchCoin();
-      //  this.touchPipe();
-       // this.deleteOutScreen(); //NO ESTA FUNCIONANDO CORRECTAMENTE...creo
+    //    this.checkCoins();
+     //   this.checkPipe();
+      
 
     }
 
