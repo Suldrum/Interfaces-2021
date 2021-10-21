@@ -1,3 +1,6 @@
+const MAX_COINS = 3;
+const MAX_PIPES = 5;
+
 class Game {
     constructor(bird) {
         this.div = document.getElementById("body");
@@ -6,8 +9,8 @@ class Game {
         this.width = parseInt(this.div.getBoundingClientRect().width);
 		this.height = parseInt(this.div.getBoundingClientRect().height);
         this.bird = bird;
-        this.pipes = [3];
-        this.coins = [3];
+        this.pipes = [];
+        this.coins = [];
         this.score = 0;
         this.interval;
 
@@ -15,9 +18,13 @@ class Game {
 
     createElements()
     {
-        for (let index = 0 ; index < 3 ; index++)
+        for (let index = 0 ; index <  MAX_COINS; index++)
         {
             this.createCoin(index);
+        }
+
+        for (let index = 0 ; index < MAX_PIPES ; index++)
+        {
             this.createPipe(index);
         }
     }
@@ -39,7 +46,7 @@ class Game {
         newDownDiv.setAttribute("id",newDownID);
         this.divPipes.appendChild(newUpDiv);
         this.divPipes.appendChild(newDownDiv);
-        this.pipes[index] = new Pipe (newUpID, newDownID,"pipeUp","pipeDown","movePipeToLeft",+ 10 * (index + 1),this.bird.width);
+        this.pipes[index] = new Pipe (newUpID, newDownID,"pipeUp","pipeDown","movePipeToLeft",+ 10 * (index + 1),this.bird.height);
     }
 
     //Control de si toca alguna moneda
@@ -84,7 +91,9 @@ class Game {
             else
             {
                 if (this.pipes[index].isTouch(this.bird))
-                {this.endGame();}
+                {
+                    //this.endGame();
+                }
                 else
                 {this.pipes[index].checkPass(this.bird);}
             }
@@ -126,11 +135,11 @@ class Game {
     //Detiene todas las animaciones
     stopAllAnimation(){
      
-        for (let index  = 0; index  < this.pipes.length; index++) {
+        for (let index  = 0; index  < MAX_PIPES; index++) {
             this.pipes[index].stopAnimation();
         }
         
-        for (let index = 0; index  < this.coins.length; index++) {
+        for (let index = 0; index  < MAX_COINS; index++) {
             if ( this.coins[index].getStateClass() === "moveCoinToLeft")
             {
                 this.coins[index].stopAnimation(parseInt(this.coins[index].getPositionLeft()));

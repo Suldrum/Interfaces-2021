@@ -50,8 +50,10 @@ class ObjetoInteractivo extends Objeto {
     removeDelay(){
         this.div.style.removeProperty("animation-delay");
     }
-
-
+	setLeft(value)
+    {
+        this.div.style.left =value+"px";
+    }
 
     resetObject()
     {

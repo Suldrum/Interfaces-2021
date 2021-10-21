@@ -206,7 +206,7 @@ cuando la imagen esta volteada
     /* Tamaño de la viñeta individual del ave*/
     width: 37px;
     /*MAXIMO 618px*/
-    height: 618px;
+  /*  height: 618px;
     /*posicion de la imagen fuera de pantalla por el lado derecho*/
     left:calc(100% + 61px);
     bottom: 0px;
@@ -223,7 +223,7 @@ cuando la imagen esta volteada
     /* Tamaño de la viñeta individual del ave*/
     width: 37px;
     /*MAXIMO 618px*/
-    height: 618px; /*editar por js*/
+  /*  height: 618px; /*editar por js*/
     left:calc(100% + 61px);
     top: 0px;
     /*centrado del div*/

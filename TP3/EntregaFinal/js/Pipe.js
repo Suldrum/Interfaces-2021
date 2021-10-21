@@ -14,6 +14,8 @@ class Pipe {
 		this.downObstacle = new ObjetoInteractivo(div2, baseClass2, stateClass,delay);	
 		this.space = space * 2;
 		//La altura maxima de cada obstaculo sera el tamaño de la imagen original menos el espacio para el ave dividio 2
+		//239
+		
 		this.maxHeight= (618 - this.space) / 2;
 		this.value= 1;
 		this.passed = false;
@@ -22,6 +24,7 @@ class Pipe {
 
 	getValue(){return this.value ;}
 	setValue(value){this.value = value;}
+
 
 	isOutScreen(){
         let object = this.upObstacle.getPositionData();
@@ -32,19 +35,29 @@ class Pipe {
 	checkPass(bird){
 		let thisData = this.upObstacle.getPositionData();
 		let birdData = bird.getPositionData();
-		if (birdData.left > (thisData.right + 5) )
+		if (birdData.left > (thisData.right + 3) )
 			{this.passed = true;}
 		
 	}
 	//modifica el la altura de los obstaculos <- solo esta modificando arriba pero no abajo, esto no es optimo
 	setAltitudes(){
-		let newHeight = (Math.random() * this.maxHeight) ;
-		this.setHeight(this.upObstacle,newHeight);
-		this.setHeight(this.downObstacle,newHeight+this.maxHeight);
+		let plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+		let newHeight = Math.floor((Math.random() * this.maxHeight));
+		if (plusOrMinus >0)
+		{
+			this.setHeight(this.upObstacle,(this.maxHeight - newHeight));
+			this.setHeight(this.downObstacle,(this.maxHeight + newHeight));
+		}
+		else{
+			this.setHeight(this.upObstacle,(this.maxHeight + newHeight));
+			this.setHeight(this.downObstacle,(this.maxHeight - newHeight));
+		}
 	}
     //Esto se cambiara a Math random
     setHeight(obstacle,height){
-        obstacle.div.style.height= height+ "px";
+	//	console.log(height);
+       obstacle.div.style.height = height+ "px";
+	   //obstacle.div.style.height= -80+ "px";
     }
 	//si toco alguno de los obstaculos
 	isTouch(bird){
@@ -58,8 +71,15 @@ class Pipe {
 		this.setAltitudes();
 	}
 
+
+
 	stopAnimation(){
+	//	this.upObstacle.removeDelay();
+	//	this.upObstacle.setLeft(parseInt(this.upObstacle.getPositionLeft()));
 		this.upObstacle.stopAnimation();
+
+	//	this.downObstacle.removeDelay();
+	//	this.downObstacle.setLeft(parseInt(this.downObstacle.getPositionLeft()));
 		this.downObstacle.stopAnimation();
 	}
 } //FIN DE LA CLASE
