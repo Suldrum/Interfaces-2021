@@ -92,7 +92,8 @@ class Game {
             {
                 if (this.pipes[index].isTouch(this.bird))
                 {
-                    //this.endGame();
+                    this.endGame();
+                    break;
                 }
                 else
                 {this.pipes[index].checkPass(this.bird);}
