@@ -6,7 +6,7 @@
  * 
  * 
  */
-	//	this.div.style.setProperty("animation-delay", delay + "s");
+
 class Coin extends ObjetoInteractivo {
     //Constructor de la clase, da propiedades a los objetos
 	constructor(div, baseClase, stateClass, delay) {

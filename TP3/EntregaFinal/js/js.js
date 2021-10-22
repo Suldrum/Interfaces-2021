@@ -9,10 +9,11 @@
  */
 
 let game = null;
+let bird = null;
 //Cuando se carga la pagina
  $(document).ready(function (){
     //Ave por defecto
-    createBird();
+    bird = new Bird("bird", "bird","flying");
 });
 
 //BOTON TEST
@@ -39,10 +40,10 @@ document.getElementById('play').addEventListener('click',function(e){
     });
    
 });
-
+//
 //Pa' el dia que haya multiples aves
 function createBird(){
-    bird = new Bird("bird", "bird","flying");
+    
 }
 
 //Limpia todos los elementos hijos de un padre
@@ -62,7 +63,11 @@ document.getElementById('reset').addEventListener('click',function(e){
     game = null;
     cleanElements("coins");
     cleanElements("pipes");
-    createBird();
+
+    if(bird.getStateClass() !== "flying")
+        {bird.changeStateClass("flying");}
+    bird.setInitialPosition();
+
 });
 
 //Funcion para controlar la visibilidad de la informacion

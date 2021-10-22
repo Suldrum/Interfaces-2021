@@ -11,6 +11,12 @@ class Bird extends Objeto {
     //Constructor de la clase, da propiedades a los objetos
 	constructor(div, baseClass, stateClass) {
 		super(div, baseClass, stateClass);
+		this.initialPosition = parseInt(this.getPositionTop());
+	}
+
+	//Devuelve el ave a su posicion inicial
+	setInitialPosition(){
+		this.div.style.top = this.initialPosition+"px";
 	}
 
 	//Actualiza la posicion del ave
@@ -26,4 +32,5 @@ class Bird extends Objeto {
 		//Cambio de animacion
 		super.changeStateClass(stateClass);	
 	}
+
 } //FIN DE LA CLASE
