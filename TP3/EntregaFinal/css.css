@@ -2,20 +2,82 @@
 html,body {
     margin:0;
     overflow: hidden;
-    height: 100%;
-    background-repeat: no-repeat;
-    background:url("img/background/back1.jpg") center center fixed;
-    background-size: 100% 100%;
+   
   }
-
-
-.hidden {
-    visibility: hidden;
-}
 
 div{
     border:1px solid #000000;
 
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    align-items: flex-end;
+    width: 100vw;
+    height: 100vh;
+    background: url("../image/parallax2/parallax-mountain-bg.png");
+    background-size: cover;
+}
+
+
+.background{
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+}
+.sky{
+    background:url("img/parallax/game_background_1/layers/sky.png");
+}
+
+.clouds_1{
+    width: 100vw;
+    height: 100vh;
+    background:url("img/parallax/game_background_1/layers/clouds_1.png") ;
+    animation: moveParallax 45s linear infinite;
+}
+
+.clouds_2{
+    width: 100vw;
+    height: 100vh;
+    background:url("img/parallax/game_background_1/layers/clouds_2.png") ;
+    animation: moveParallax 45s linear infinite;
+}
+.clouds_3{
+    width: 100vw;
+    height: 100vh;
+    background:url("img/parallax/game_background_1/layers/clouds_3.png") ;
+    animation: moveParallax 50s linear infinite;
+}
+.clouds_4{
+    width: 100vw;
+    height: 100vh;
+    background:url("img/parallax/game_background_1/layers/clouds_4.png") ;
+    animation: moveParallax 45s linear infinite;
+}
+
+.rocks_1{
+    width: 100vw;
+    height: 100vh;
+    background:url("img/parallax/game_background_1/layers/rocks_1.png");
+    animation: moveParallax 35s linear infinite;
+}
+
+.rocks_2{
+    width: 100vw;
+    height: 100vh;
+    background:url("img/parallax/game_background_1/layers/rocks_2.png");
+    animation: moveParallax 30s linear infinite;
+}
+
+@keyframes moveParallax {
+    0% {
+        background-position: 0px;
+    }
+    100% {
+        background-position: -1920px;
+    }
 }
 
 /************************************************************/
@@ -155,7 +217,7 @@ cuando la imagen esta volteada
 }
 
 .moveCoinToLeft{
-    animation: rotate 1s steps(10) infinite, movingLeft 50s linear infinite;
+    animation: rotate 1s steps(10) infinite, movingLeft 30s linear infinite;
     animation-fill-mode: forwards;
 }
 
@@ -234,6 +296,6 @@ cuando la imagen esta volteada
 }
 
 .movePipeToLeft{
-    animation: movingLeft 50s linear infinite;
+    animation: movingLeft 30s linear infinite;
     animation-fill-mode: forwards;
 }
