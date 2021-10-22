@@ -1,0 +1,301 @@
+/* Eliminamos márgenes y ponemos el fondo  */
+html,body {
+    margin:0;
+    overflow: hidden;
+   
+  }
+
+div{
+    border:1px solid #000000;
+
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    align-items: flex-end;
+    width: 100vw;
+    height: 100vh;
+    background: url("../image/parallax2/parallax-mountain-bg.png");
+    background-size: cover;
+}
+
+
+.background{
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+}
+.sky{
+    background:url("img/parallax/game_background_1/layers/sky.png");
+}
+
+.clouds_1{
+    width: 100vw;
+    height: 100vh;
+    background:url("img/parallax/game_background_1/layers/clouds_1.png") ;
+    animation: moveParallax 45s linear infinite;
+}
+
+.clouds_2{
+    width: 100vw;
+    height: 100vh;
+    background:url("img/parallax/game_background_1/layers/clouds_2.png") ;
+    animation: moveParallax 45s linear infinite;
+}
+.clouds_3{
+    width: 100vw;
+    height: 100vh;
+    background:url("img/parallax/game_background_1/layers/clouds_3.png") ;
+    animation: moveParallax 50s linear infinite;
+}
+.clouds_4{
+    width: 100vw;
+    height: 100vh;
+    background:url("img/parallax/game_background_1/layers/clouds_4.png") ;
+    animation: moveParallax 45s linear infinite;
+}
+
+.rocks_1{
+    width: 100vw;
+    height: 100vh;
+    background:url("img/parallax/game_background_1/layers/rocks_1.png");
+    animation: moveParallax 35s linear infinite;
+}
+
+.rocks_2{
+    width: 100vw;
+    height: 100vh;
+    background:url("img/parallax/game_background_1/layers/rocks_2.png");
+    animation: moveParallax 30s linear infinite;
+}
+
+@keyframes moveParallax {
+    0% {
+        background-position: 0px;
+    }
+    100% {
+        background-position: -1920px;
+    }
+}
+
+/************************************************************/
+/************************************************************/
+/************************************************************/
+/************************************************************/
+
+/*
+*
+*Clase del ave
+*/
+.bird {
+    /* Tamaño de la viñeta individual del ave*/
+    width: 78px;
+    height: 68px;
+    /*centrado del div*/
+    left: calc(40% - 78px);
+    top: calc(45% - 68px);
+    /* Imagen con el movimiento completo */ 
+    background-image: url("img/birdGrumpy.png");
+    /*Sin posicion no anda editar el top asi que mas vale ponerlo*/
+    position: absolute;  
+    
+    
+}
+
+/*
+* Cada segundo llama de manera infinita a fly con un paso por cada sprite/movimiento dentro de la imagen
+*/
+.flying {
+    animation: fly 1s steps(4) infinite;
+    animation-fill-mode: forwards;
+}
+
+/*
+* Cada 300ms llama de manera infinita a fly con un paso por cada sprite/movimiento dentro de la imagen
+*/
+.flapping {
+    animation: fly 300ms steps(4) infinite; 
+    animation-fill-mode: forwards;
+}
+
+/*
+* Mueve la imagen a la izquierda (por el negativo) para generar el efecto de volar
+*/
+@keyframes fly {
+    /* Partimos de la primera viñeta del sprite sheet */
+    0% { background-position:0; }
+    /*Ancho total de la imagen en negativo*/
+    100% { background-position: -315px; }
+}
+
+/*
+* Cada 3 segundos llama a fall para que se ejecute en la misma velocidad y con el mismo efecto constante
+*/
+.falling{
+    animation: fly 1s steps(4) infinite, fall 5s linear;
+    animation-fill-mode: forwards;
+}
+
+.rising{
+    animation: fly 300ms steps(4) infinite, rise 3s linear;
+    animation-fill-mode: forwards;
+}
+
+/**
+* Modifica la posicion Y para generar el efecto de caida
+*/
+@keyframes fall {
+   to {
+      /* transform: translateY(80vh);*/
+      top: calc(100% - 70px);
+    }
+}
+
+/**
+* Modifica la posicion Y para generar el efecto de subida
+*/
+@keyframes rise {
+    to {
+       /* transform: translateY(-80vh);*/
+       top:0px;
+    }
+}
+
+/*
+* Modifica Cada 3 segundos llama de manera lineal a die que modifica su posicion en X
+*/
+.dying {
+    /*  tercera imagen*/
+    background-position:-237px;
+    rotate: 90deg;
+    animation: die 3s linear;
+    animation-fill-mode: forwards;
+}
+
+/**
+* Modifica la posicion X para generar el efecto de caida 
+cuando la imagen esta volteada
+*/
+@keyframes die {
+    100% {
+        transform: translateX(150vh);
+    }
+}
+
+/************************************************************/
+/************************************************************/
+/************************************************************/
+/************************************************************/
+
+/*
+*
+*Clase de la moneda
+*/
+.coin {
+    /* Tamaño de la viñeta individual del ave (la de mas arriba a la izquierda) */
+    width: 51px;
+    height: 51px;
+    /*posicion de la imagen fuera de pantalla por el lado derecho*/
+    left:calc(100% + 61px);
+    /* Imagen con el movimiento completo */ 
+    background-image: url("img/coin.png");
+    /*Sin posicion no anda editar el top asi que mas vale ponerlo*/
+    position: absolute;
+
+}
+
+.rotating{
+    animation: rotate 1s steps(10) infinite; 
+    animation-fill-mode: forwards;
+}
+
+.collected{
+    animation: rotate 1s steps(10) infinite, collecting 5s linear;
+    animation-fill-mode: forwards;
+}
+
+.moveCoinToLeft{
+    animation: rotate 1s steps(10) infinite, movingLeft 30s linear infinite;
+    animation-fill-mode: forwards;
+}
+
+/*
+* Mueve la imagen a la izquierda (por el negativo) para generar el efecto de girar
+*/
+@keyframes rotate {
+    /* Partimos de la primera viñeta del sprite sheet */
+    0% { background-position:0 }
+    /*Ancho total de la imagen en negativo*/
+    100% {background-position: -512px;}
+}
+
+/*
+* Mueve la imagen hacia arriba a la izquierda
+*/
+@keyframes collecting {
+    to {
+        top: calc(0% - 60px);
+        left: calc(0% - 60px);
+    }
+}
+
+/*
+* Mueve la imagen a la izquierda de su posicion para hacer creer que la pantalla se mueve
+*/
+@keyframes movingLeft {
+   from{
+        left:calc(100% + 60px);
+    }
+    to {
+        left: calc(0% - 60px);
+    }
+}
+
+/************************************************************/
+/************************************************************/
+/************************************************************/
+/************************************************************/
+
+
+/*
+*
+*Clase de las tuberias
+*/
+
+.pipeUp {
+    /* Tamaño de la viñeta individual del ave*/
+    width: 37px;
+    /*MAXIMO 618px*/
+  /*  height: 618px;
+    /*posicion de la imagen fuera de pantalla por el lado derecho*/
+    left:calc(100% + 61px);
+    bottom: 0px;
+    /* Imagen con el movimiento completo */
+   /* background-image: url("img/marioPipe.png") ; */
+    /*Sin posicion no anda editar el top asi que mas vale ponerlo*/
+    position: absolute;
+    background: no-repeat url("img/marioPipe.png");
+    /*position: absolute; necesita left right porque no se centra*/
+}
+
+.pipeDown{
+
+    /* Tamaño de la viñeta individual del ave*/
+    width: 37px;
+    /*MAXIMO 618px*/
+  /*  height: 618px; /*editar por js*/
+    left:calc(100% + 61px);
+    top: 0px;
+    /*centrado del div*/
+    position: absolute;
+    /* Imagen con el movimiento completo */ 
+    rotate: 180deg;
+    background: no-repeat url("img/marioPipe.png");
+}
+
+.movePipeToLeft{
+    animation: movingLeft 30s linear infinite;
+    animation-fill-mode: forwards;
+}
