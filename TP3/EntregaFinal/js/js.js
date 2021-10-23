@@ -16,7 +16,7 @@ let bird = null;
     bird = new Bird("bird", "blueBird","flying");
 });
 
-//BOTON TEST
+//Boton que inicia el juego
 document.getElementById('play').addEventListener('click',function(e){
     this.hidden = true;
     document.getElementById('information').hidden = true;
@@ -47,13 +47,6 @@ document.getElementById('avatar').addEventListener('change',function(e){
 	bird = new Bird("bird", this.value,"flying");
 });
 
-//Limpia todos los elementos hijos de un padre
-function cleanElements(toClean){
-    let node = document.getElementById(toClean);
-    while (node.firstChild) {
-        node.removeChild(node.lastChild);
-    }
-}
 
 //Funcion para detener el juego en cualquier momento
 document.getElementById('reset').addEventListener('click',function(e){
@@ -61,9 +54,9 @@ document.getElementById('reset').addEventListener('click',function(e){
     document.getElementById('informationButton').hidden = false;
     document.getElementById("score").hidden = true;
 	this.hidden = true;
+    game.cleanGameOfScreen();
     game = null;
-    cleanElements("coins");
-    cleanElements("pipes");
+   
 
     if(bird.getStateClass() !== "flying")
         {bird.changeStateClass("flying");}

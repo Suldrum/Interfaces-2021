@@ -33,7 +33,7 @@ class Pipe {
 	checkPass(bird){
 		let thisData = this.upObstacle.getPositionData();
 		let birdData = bird.getPositionData();
-		if (birdData.left > (thisData.right + 3) )
+		if (birdData.left > (thisData.right + 1) )
 			{this.passed = true;}
 		
 	}
@@ -69,8 +69,8 @@ class Pipe {
 
 	//Resetea la tuberia
 	reset(){
-		this.setValue(1);
 		this.passed = false;
+		this.setValue(1);
 		this.setAltitudes();
 	}
 

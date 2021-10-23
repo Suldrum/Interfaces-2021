@@ -213,7 +213,7 @@ div{
     width: 51px;
     height: 51px;
     /*posicion de la imagen fuera de pantalla por el lado derecho*/
-    left:calc(100% + 65px);
+    left:calc(100% + 60px);
     /* Imagen con el movimiento completo */ 
     background-image: url("img/coin.png");
     /*Sin posicion no anda editar el top asi que mas vale ponerlo*/
@@ -264,10 +264,10 @@ div{
 */
 @keyframes movingLeft {
    from{
-        left:calc(100% + 65px);
+        left:calc(100% + 60px);
     }
     to {
-        left: calc(0% - 65px);
+        left: calc(0% - 60px);
     }
 }
 
@@ -283,25 +283,27 @@ div{
 */
 
 .pipeUp {
-    width: 64px;
+    width: 51px;
     height: 618px;
     /*posicion de la imagen fuera de pantalla por el lado derecho*/
-    left:calc(100% + 70px);
+    left:calc(100% + 60px);
     bottom: 0px;
     /*Sin posicion no anda asi que mas vale ponerlo*/
     position: absolute;
     background: no-repeat url("img/buildingPipe.png");
+    background-size: cover;
 }
 
 .pipeDown{
-    width: 64px;
+    width: 51px;
     height: 618px; 
-    left:calc(100% + 70px);
+    left:calc(100% + 60px);
     top: 0px;
     position: absolute;
     /* Se rota para voltearla */ 
     rotate: 180deg;
     background: no-repeat url("img/buildingPipe.png");
+    background-size: cover;
 }
 
 /*Clase para el movimiento de las tuberias*/

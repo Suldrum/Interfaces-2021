@@ -1,5 +1,6 @@
 const MAX_COINS = 3;
 const MAX_PIPES = 3;
+const WIN_VALUE = 50;
 
 class Game {
     constructor(bird) {
@@ -16,6 +17,7 @@ class Game {
         this.updateScore();
     }
 
+    //Crea todos los elementos del juego
     createElements()
     {
         for (let index = 0 ; index <  MAX_COINS; index++)
@@ -33,7 +35,7 @@ class Game {
         let newDivID = "coin"+index;
         newDiv.setAttribute("id",newDivID);
         this.divCoins.appendChild(newDiv);
-        this.coins[index] = new Coin (newDivID,"coin","moveCoinToLeft",(Math.random() * 3 + 2 )+ 10 * (index + 1));
+        this.coins[index] = new Coin (newDivID,"coin","moveCoinToLeft",Math.floor(Math.random() * 5 ) - 2 + 15 * (index + 1));
     }
 
     createPipe(index){
@@ -57,55 +59,72 @@ class Game {
     checkCoins(){  
         for (let index = 0 ; index < this.coins.length ; index++)
         {
-            if (this.coins[index].isOutScreen())
+            //Si ya termino el juego por puntos
+            if (this.score >= WIN_VALUE){
+                this.endGame(true);
+                break;
+            }
+            //Si se salio la moneda de la pantalla
+            if(this.coins[index].isOutScreen())
             {
+                //Se reinicia la moneda
                 this.coins[index].reset(index,(this.width+this.coins[index].width+10));
-            } 
-            if(this.coins[index].touched)
-            {  
-                this.score+= this.coins[index].getValue();
-                this.coins[index].setValue(0);
-                this.updateScore();
-                
             }
-            else
-            {
-                this.coins[index].isTouch(this.bird,parseInt(this.coins[index].getPositionLeft()));
+            else{
+                //Si todavia no se toco
+                if (!this.coins[index].touched)
+                {
+                    this.coins[index].isTouch(this.bird,parseInt(this.coins[index].getPositionLeft()));
+                }
+                //Si se toco y todavia no la conte
+                if(this.coins[index].touched && this.coins[index].getValue() !== 0)
+                {  
+                    this.score+= this.coins[index].getValue();
+                    this.coins[index].setValue(0);
+                    this.updateScore();
+                }
             }
-           
         }
     }
 
     //Control de si toca alguna cañeria
     checkPipes(){
         for (let index = 0; index < this.pipes.length; index++) {
+            //Si ya termino el juego por puntos
+            if (this.score >= WIN_VALUE){
+                this.endGame(true);
+                break;
+            }
+            //Si toque una tuberia fuerza el termino
+            if (this.pipes[index].isTouch(this.bird))
+            {           
+                this.bird.changeStateClass("dying");
+                this.endGame(false);
+                break;
+            }
+            //Si se salio de pantalla resetea la tuberia
             if (this.pipes[index].isOutScreen())
             {
                 this.pipes[index].reset();
-            } 
-            if(this.pipes[index].passed)
-            {  
-                this.score+= this.pipes[index].getValue();
-                this.pipes[index].setValue(0);
-                this.updateScore();
             }
-            else
-            {
-                if (this.pipes[index].isTouch(this.bird))
-                {           
-                    this.bird.changeStateClass("dying");
-                    this.endGame(false);
-                    break;
-                }
-                else
+            else{
+                //Sino se fija si la paso
+                if (!this.pipes[index].passed )
                 {this.pipes[index].checkPass(this.bird);}
-            }
+                //Si la paso y todavia no la conte 
+                if (this.pipes[index].passed && this.pipes[index].getValue() !== 0)
+                {
+                    this.score+= this.pipes[index].getValue();
+                    this.pipes[index].setValue(0);
+                    this.updateScore();
+                }
+            } 
         }
     }
 
     initGame() {
         this.createElements();
-        this.interval = setInterval(this.loop.bind(this), 16.6);
+        this.interval = setInterval(this.loop.bind(this), 4.6);
 
     }
 
@@ -113,8 +132,7 @@ class Game {
         document.getElementById("score").innerHTML = this.score;
     }
     loop() {
-       
-        if (this.score >= 50) {
+        if (this.score >= WIN_VALUE) {
             this.bird.changeStateClass("flying");
             this.endGame(true);
         }
@@ -122,6 +140,18 @@ class Game {
         this.checkPipes();
     }
 
+    cleanGameOfScreen(){
+        this.cleanElements("coins");
+        this.cleanElements("pipes");
+    }
+
+    //Limpia todos los elementos hijos de un padre
+    cleanElements(toClean){
+        let node = document.getElementById(toClean);
+        while (node.firstChild) {
+            node.removeChild(node.lastChild);
+        }
+    }
     endGame(victory) {
         clearInterval(this.interval);
         this.stopAllAnimation();
@@ -138,7 +168,6 @@ class Game {
 
     //Detiene todas las animaciones
     stopAllAnimation(){
-     
         for (let index  = 0; index  < MAX_PIPES; index++) {
             this.pipes[index].stopAnimation();
         }
