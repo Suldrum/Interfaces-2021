@@ -10,34 +10,44 @@
 </head>
 <body id="body" >
   <div class="background sky">
-     
-        <div class="clouds_1">
-          <div class="clouds_2">
-            <div class="clouds_3">
-            <div class="clouds_4">
-              <div class="rocks_1">
-                <div class="rocks_2">
-                  <button id="play">¡Inicia!</button>
+    <div class="clouds_1">
+      <div class="clouds_2">
+        <div class="clouds_3">
+          <div class="clouds_4">
+            <div class="rocks_1">
+              <div class="rocks_2">
+                <div id = "principalMenu">  
+                  <div><button id="play">¡Inicia!</button> </div>
                   <button id="informationButton">¿Como jugar?</button>
                   <div id="information" hidden>
                     <p>Presiona la Flecha hacia Arriba para subir y sueltala para caer.</p>
                     <p>Para ganar solo debes conseguir 50 puntos,</p> 
                     <p>¡Agarra monedas para sumar mas puntos! </p>
                   </div>
-                  
-                  <button id="reset" hidden>Vuelve a jugar</button>
-                  <label id="score" hidden>0</label>
-                  <div id="pipes" ></div>
-                  <div id="coins"></div>
-                  <div id="bird"></div>
+                  <div>
+                  <label>Elige a tu personaje:</label>
+                  <select id="avatar">
+                    <option value="blueBird">Ave azul</option>
+                    <option value="pinkBird">Ave rosa</option>
+                    <option value="chicken">Gallina</option>
+                    <option value="dragon">Dragon</option>
+                  </select>
+                  </div>
                 </div>
+                <div id="gameMenu" hidden>   
+                  <div><button id="reset" hidden>Volver al menu</button></div>
+                  <label>Puntuacion: </label><label id="score">0</label>
+                </div>
+                <div id="pipes" ></div>
+                <div id="coins"></div>
+                <div id="bird" class="avatar"></div>  
               </div>
-            </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
   </div>
-
   <script src="js/Objeto.js"></script>
   <script src="js/ObjetoInteractivo.js"></script>
   <script src="js/Bird.js"></script>

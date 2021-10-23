@@ -33,4 +33,9 @@ class Bird extends Objeto {
 		super.changeStateClass(stateClass);	
 	}
 
+	cleanClasses(){
+       	super.cleanClasses();
+		this.addClass("avatar");
+    }
+	
 } //FIN DE LA CLASE

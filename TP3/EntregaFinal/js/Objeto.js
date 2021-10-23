@@ -12,8 +12,6 @@ class Objeto {
 	constructor(div, baseClass, stateClass) {
 		//Div donde se encuentra
 		this.div = document.getElementById(div);
-		//Si tenia algo definido antes lo limpio
-		this.cleanClasses();
 		//Imagen del objeto
 		this.baseClass = baseClass;
 		//Animacion | Keyframe del objeto
@@ -67,7 +65,7 @@ class Objeto {
 
 	//Remueve todas las clases
 	cleanClasses(){
-        this.div.classList.remove();
+        this.div.setAttribute("class", "");
     }
 
 	//Cambia la animacion por otra.Ej: bird flying, bird falling, etc
