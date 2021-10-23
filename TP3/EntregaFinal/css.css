@@ -266,33 +266,33 @@ cuando la imagen esta volteada
 
 .pipeUp {
     /* Tamaño de la viñeta individual del ave*/
-    width: 37px;
+    width: 64px;
     /*MAXIMO 618px*/
   /*  height: 618px;
     /*posicion de la imagen fuera de pantalla por el lado derecho*/
-    left:calc(100% + 61px);
+    left:calc(100% + 68px);
     bottom: 0px;
     /* Imagen con el movimiento completo */
    /* background-image: url("img/marioPipe.png") ; */
     /*Sin posicion no anda editar el top asi que mas vale ponerlo*/
     position: absolute;
-    background: no-repeat url("img/marioPipe.png");
+    background: no-repeat url("img/buildingPipe.png");
     /*position: absolute; necesita left right porque no se centra*/
 }
 
 .pipeDown{
 
     /* Tamaño de la viñeta individual del ave*/
-    width: 37px;
+    width: 64px;
     /*MAXIMO 618px*/
   /*  height: 618px; /*editar por js*/
-    left:calc(100% + 61px);
+    left:calc(100% + 68px);
     top: 0px;
     /*centrado del div*/
     position: absolute;
     /* Imagen con el movimiento completo */ 
     rotate: 180deg;
-    background: no-repeat url("img/marioPipe.png");
+    background: no-repeat url("img/buildingPipe.png");
 }
 
 .movePipeToLeft{

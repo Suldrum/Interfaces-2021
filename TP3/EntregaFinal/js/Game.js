@@ -1,5 +1,5 @@
 const MAX_COINS = 3;
-const MAX_PIPES = 5;
+const MAX_PIPES = 3;
 
 class Game {
     constructor(bird) {
@@ -33,7 +33,7 @@ class Game {
         let newDivID = "coin"+index;
         newDiv.setAttribute("id",newDivID);
         this.divCoins.appendChild(newDiv);
-        this.coins[index] = new Coin (newDivID,"coin","moveCoinToLeft",(Math.random() * 5 )+ 16 * index);
+        this.coins[index] = new Coin (newDivID,"coin","moveCoinToLeft",(Math.random() * 7 )+ 16 * index);
     }
 
     createPipe(index){

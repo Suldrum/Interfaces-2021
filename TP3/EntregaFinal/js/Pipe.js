@@ -15,7 +15,7 @@ class Pipe {
 		//Espacio para el ave	
 		this.space = space * 2;
 		//La altura maxima de cada obstaculo
-		this.maxHeight= (618 - this.space) / 2;
+		this.maxHeight= (644 - this.space) / 2;
 		this.value= 1;
 		this.passed = false;
 		this.setAltitudes();
