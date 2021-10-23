@@ -41,17 +41,12 @@ class ObjetoInteractivo extends Objeto {
         this.div.style.removeProperty("animation-delay");
     }
 
-    //NOTA: no jugar con la tecla de luz, evitar usar stop/play constantemente
     //Detiene la animacion
     stopAnimation() {
         this.div.style.setProperty("animation-play-state", "paused");   
     }
 
-    //Activa/Reactiva la animacion
-    playAnimation() {
-        this.div.style.setProperty("animation-play-state", "running");
-    }
-
+    //Si el objecto se fue de la pantalla, que bello que la moneda sea cuadrada
     isOutScreen(){
         let object = this.getPositionData();
         return (object.left < (0 - (object.width + 5))) ;

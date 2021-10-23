@@ -55,7 +55,7 @@ class Game {
         this.pipes[index] = new Pipe (pipeUp,pipeDown, this.bird.height);
     }
 
-    //Control de si toca alguna moneda
+    //Control de las monedas en el juego
     checkCoins(){  
         for (let index = 0 ; index < this.coins.length ; index++)
         {
@@ -87,7 +87,7 @@ class Game {
         }
     }
 
-    //Control de si toca alguna cañeria
+    //Control de las tuberias en el juego
     checkPipes(){
         for (let index = 0; index < this.pipes.length; index++) {
             //Si ya termino el juego por puntos
@@ -124,6 +124,7 @@ class Game {
 
     initGame() {
         this.createElements();
+        this.bird.changeStateClass("falling");
         this.interval = setInterval(this.loop.bind(this), 4.6);
 
     }
@@ -131,6 +132,8 @@ class Game {
     updateScore(){
         document.getElementById("score").innerHTML = this.score;
     }
+
+    //Llama a todos los controles del juego
     loop() {
         if (this.score >= WIN_VALUE) {
             this.bird.changeStateClass("flying");
@@ -140,6 +143,7 @@ class Game {
         this.checkPipes();
     }
 
+    //Limpia todos los elementos del juego que son visibles en la pantalla
     cleanGameOfScreen(){
         this.cleanElements("coins");
         this.cleanElements("pipes");
@@ -152,6 +156,8 @@ class Game {
             node.removeChild(node.lastChild);
         }
     }
+
+    //Termina el juego y declara si se gano o no
     endGame(victory) {
         clearInterval(this.interval);
         this.stopAllAnimation();
@@ -166,12 +172,13 @@ class Game {
         }
     }
 
-    //Detiene todas las animaciones
+    //Detiene todas las animaciones de los objetos en juego
     stopAllAnimation(){
+        //Detiene las animaciones de las tuberias
         for (let index  = 0; index  < MAX_PIPES; index++) {
             this.pipes[index].stopAnimation();
         }
-        
+        //Detiene las animaciones de las monedas
         for (let index = 0; index  < MAX_COINS; index++) {
             if ( this.coins[index].getStateClass() === "moveCoinToLeft")
             {
