@@ -13,7 +13,7 @@ class Objeto {
 		//Div donde se encuentra
 		this.div = document.getElementById(div);
 		//Si tenia algo definido antes lo limpio
-		this.cleanClasses();
+	//	this.cleanClasses();
 		//Imagen del objeto
 		this.baseClass = baseClass;
 		//Animacion | Keyframe del objeto

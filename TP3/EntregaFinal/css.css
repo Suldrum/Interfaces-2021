@@ -89,19 +89,33 @@ div{
 *
 *Clase del ave
 */
-.bird {
+.avatar {
     /* Tamaño de la viñeta individual del ave*/
-    width: 78px;
+    width: 86px;
     height: 68px;
     /*centrado del div*/
-    left: calc(40% - 78px);
+    left: calc(40% - 86px);
     top: calc(45% - 68px);
     /* Imagen con el movimiento completo */ 
-    background-image: url("img/birdGrumpy.png");
+    
     /*Sin posicion no anda editar el top asi que mas vale ponerlo*/
     position: absolute;  
-    
-    
+}
+
+.blueBird{
+    background-image: url("img/avatar/blueBird.png");
+}
+
+.pinkBird{
+    background-image: url("img/avatar/pinkBird.png");
+}
+
+.dragon{
+    background-image: url("img/avatar/dragon.png");
+}
+
+.chicken{
+    background-image: url("img/avatar/chicken.png");
 }
 
 /*
@@ -127,7 +141,7 @@ div{
     /* Partimos de la primera viñeta del sprite sheet */
     0% { background-position:0; }
     /*Ancho total de la imagen en negativo*/
-    100% { background-position: -315px; }
+    100% { background-position: -352px; }
 }
 
 /*
@@ -168,7 +182,7 @@ div{
 */
 .dying {
     /*  tercera imagen*/
-    background-position:-237px;
+    background-position:-264px;
     rotate: 90deg;
     animation: die 3s linear;
     animation-fill-mode: forwards;

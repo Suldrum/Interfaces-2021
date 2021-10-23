@@ -13,7 +13,7 @@ let bird = null;
 //Cuando se carga la pagina
  $(document).ready(function (){
     //Ave por defecto
-    bird = new Bird("bird", "bird","flying");
+    bird = new Bird("bird", "blueBird","flying");
 });
 
 //BOTON TEST
@@ -40,11 +40,12 @@ document.getElementById('play').addEventListener('click',function(e){
     });
    
 });
-//
-//Pa' el dia que haya multiples aves
-function createBird(){
-    
-}
+
+//Edita el tipo de avatar
+document.getElementById('avatar').addEventListener('change',function(e){
+    bird.cleanClasses();
+	bird = new Bird("bird", this.value,"flying");
+});
 
 //Limpia todos los elementos hijos de un padre
 function cleanElements(toClean){
