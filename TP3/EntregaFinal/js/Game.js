@@ -35,7 +35,7 @@ class Game {
         let newDivID = "coin"+index;
         newDiv.setAttribute("id",newDivID);
         this.divCoins.appendChild(newDiv);
-        this.coins[index] = new Coin (newDivID,"coin","moveCoinToLeft",Math.floor(Math.random() * 5 ) - 2 + 15 * (index + 1));
+        this.coins[index] = new Coin (newDivID,"coin","moveCoinToLeft", 12 * (index + 1));
     }
 
     createPipe(index){
