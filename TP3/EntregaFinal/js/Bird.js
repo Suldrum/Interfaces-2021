@@ -34,7 +34,7 @@ class Bird extends Objeto {
 	}
 
 	cleanClasses(){
-        this.div.classList.remove();
+       	super.cleanClasses();
 		this.addClass("avatar");
     }
 	

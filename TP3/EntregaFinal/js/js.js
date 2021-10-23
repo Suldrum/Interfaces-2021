@@ -13,17 +13,16 @@ let bird = null;
 //Cuando se carga la pagina
  $(document).ready(function (){
     //Ave por defecto
+    document.getElementById('avatar').value = "blueBird";
     bird = new Bird("bird", "blueBird","flying");
 });
 
 //Boton que inicia el juego
 document.getElementById('play').addEventListener('click',function(e){
-    this.hidden = true;
-    document.getElementById('information').hidden = true;
-    document.getElementById('informationButton').hidden = true;
+    document.getElementById('principalMenu').hidden = true;
     game = new Game(bird);
     game.initGame();
-    document.getElementById("score").hidden = false;
+    document.getElementById('gameMenu').hidden = false;
     //Cuando se presiona la tecla para arriba el ave comienza a subir
     window.addEventListener('keydown', e => {
     //Si se mantiene presionando la flecha hacia arriba evito volver a invocar al metodo
@@ -48,16 +47,13 @@ document.getElementById('avatar').addEventListener('change',function(e){
 });
 
 
-//Funcion para detener el juego en cualquier momento
+//Funcion para volver al menu
 document.getElementById('reset').addEventListener('click',function(e){
-	document.getElementById('play').hidden = false;
-    document.getElementById('informationButton').hidden = false;
-    document.getElementById("score").hidden = true;
-	this.hidden = true;
+	document.getElementById('principalMenu').hidden = false;
+    document.getElementById('gameMenu').hidden = true;
+    this.hidden = true;
     game.cleanGameOfScreen();
     game = null;
-   
-
     if(bird.getStateClass() !== "flying")
         {bird.changeStateClass("flying");}
     bird.setInitialPosition();

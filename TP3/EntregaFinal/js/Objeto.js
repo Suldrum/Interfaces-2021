@@ -65,7 +65,7 @@ class Objeto {
 
 	//Remueve todas las clases
 	cleanClasses(){
-        this.div.classList.remove();
+        this.div.setAttribute("class", "");
     }
 
 	//Cambia la animacion por otra.Ej: bird flying, bird falling, etc
