@@ -10,6 +10,8 @@ class Game {
         this.width = parseInt(this.div.getBoundingClientRect().width);
 		this.height = parseInt(this.div.getBoundingClientRect().height);
         this.bird = bird;
+        //Estado del juego
+        this.state = this.setState("create");
         this.pipes = [];
         this.coins = [];
         this.score = 0;
@@ -17,6 +19,13 @@ class Game {
         this.updateScore();
     }
 
+    setState(state){
+        this.state = state;
+    }
+
+    getState(){
+        return this.state;
+    }
     //Crea todos los elementos del juego
     createElements()
     {
@@ -60,7 +69,8 @@ class Game {
         for (let index = 0 ; index < this.coins.length ; index++)
         {
             //Si ya termino el juego por puntos
-            if (this.score >= WIN_VALUE){
+            if (this.score >= WIN_VALUE && this.getState() === "running"){
+                this.setState("finished");
                 this.endGame(true);
                 break;
             }
@@ -91,14 +101,15 @@ class Game {
     checkPipes(){
         for (let index = 0; index < this.pipes.length; index++) {
             //Si ya termino el juego por puntos
-            if (this.score >= WIN_VALUE){
+            if (this.score >= WIN_VALUE && this.getState() === "running"){
+                this.setState("finished");
                 this.endGame(true);
                 break;
             }
             //Si toque una tuberia fuerza el termino
-            if (this.pipes[index].isTouch(this.bird))
-            {           
-                this.bird.changeStateClass("dying");
+            if (this.pipes[index].isTouch(this.bird) && this.getState() === "running")
+            {
+                this.setState("finished");           
                 this.endGame(false);
                 break;
             }
@@ -124,6 +135,7 @@ class Game {
 
     initGame() {
         this.createElements();
+        this.setState("running");
         this.bird.changeStateClass("falling");
         this.interval = setInterval(this.loop.bind(this), 4.6);
 
@@ -135,25 +147,14 @@ class Game {
 
     //Llama a todos los controles del juego
     loop() {
-        if (this.score >= WIN_VALUE) {
-            this.bird.changeStateClass("flying");
+        if (this.score >= WIN_VALUE && this.getState() === "running") {
+            this.setState("finished");
             this.endGame(true);
         }
-        this.checkCoins();
-        this.checkPipes();
-    }
-
-    //Limpia todos los elementos del juego que son visibles en la pantalla
-    cleanGameOfScreen(){
-        this.cleanElements("coins");
-        this.cleanElements("pipes");
-    }
-
-    //Limpia todos los elementos hijos de un padre
-    cleanElements(toClean){
-        let node = document.getElementById(toClean);
-        while (node.firstChild) {
-            node.removeChild(node.lastChild);
+        else
+        {
+            this.checkCoins();
+            this.checkPipes();
         }
     }
 
@@ -164,10 +165,12 @@ class Game {
         document.getElementById('reset').hidden = false;
         if (victory)
         {
+            this.bird.changeStateClass("flying");
             alert("¡Felicidades has ganado!");
         }
         else
         {
+            this.bird.changeStateClass("dying");
             alert("¡Oh no! Intentalo otra vez");
         }
     }
