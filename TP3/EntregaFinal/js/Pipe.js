@@ -63,8 +63,8 @@ class Pipe {
     }
 
 	//Si toco alguno de los obstaculos
-	isTouch(bird){
-		return this.upObstacle.isTouch(bird) || this.downObstacle.isTouch(bird);
+	isTouch(object){
+		return this.upObstacle.isTouch(object) || this.downObstacle.isTouch(object);
 	}
 
 	//Resetea la tuberia
