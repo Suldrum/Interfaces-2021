@@ -44,7 +44,7 @@ class Game {
         let newDivID = "coin"+index;
         newDiv.setAttribute("id",newDivID);
         this.divCoins.appendChild(newDiv);
-        this.coins[index] = new Coin (newDivID,"coin","moveCoinToLeft", 12 * (index + 1));
+        this.coins[index] = new Coin (newDivID,"coin","moveCoinToLeft", 13 * (index + 1));
     }
 
     createPipe(index){
@@ -53,13 +53,13 @@ class Game {
         let newUpID= "pipeUp"+index;
         newUpDiv.setAttribute("id",newUpID);
         this.divPipes.appendChild(newUpDiv);
-        let pipeUp = new ObjetoInteractivo(newUpID,"pipeUp","movePipeToLeft", 10 * (index + 1));
+        let pipeUp = new ObjetoInteractivo(newUpID,"pipeUp","movePipeToLeft", 10 * index );
         //Tuberia de abajo
         let newDownDiv = document.createElement("div");
         let newDownID= "pipeDown"+index;
         newDownDiv.setAttribute("id",newDownID);
         this.divPipes.appendChild(newDownDiv);
-        let pipeDown =new ObjetoInteractivo(newDownID,"pipeDown","movePipeToLeft", 10 * (index + 1));
+        let pipeDown =new ObjetoInteractivo(newDownID,"pipeDown","movePipeToLeft", 10 * index );
         //Nuevo Obstaculo
         this.pipes[index] = new Pipe (pipeUp,pipeDown, this.bird.height);
     }
@@ -68,10 +68,9 @@ class Game {
     checkCoins(){  
         for (let index = 0 ; index < this.coins.length ; index++)
         {
-            //Si ya termino el juego por puntos
-            if (this.score >= WIN_VALUE && this.getState() === "running"){
-                this.setState("finished");
-                this.endGame(true);
+            //Si el juego ya termino no dejo avanzar el for
+            if (this.getState() === "finished")
+            {       
                 break;
             }
             //Si se salio la moneda de la pantalla
@@ -81,9 +80,10 @@ class Game {
                 this.coins[index].reset(index,(this.width+this.coins[index].width+10));
             }
             else{
-                //Si todavia no se toco
+                //Si todavia esta en pantalla y no se toco
                 if (!this.coins[index].touched)
                 {
+                    //Veo si se toca y la marco como tal
                     this.coins[index].isTouch(this.bird,parseInt(this.coins[index].getPositionLeft()));
                 }
                 //Si se toco y todavia no la conte
@@ -92,6 +92,11 @@ class Game {
                     this.score+= this.coins[index].getValue();
                     this.coins[index].setValue(0);
                     this.updateScore();
+                    //Si al contarla el juego termina por puntos
+                    if (this.score >= WIN_VALUE ){
+                        this.setState("finished");
+                        break;
+                    }
                 }
             }
         }
@@ -100,19 +105,19 @@ class Game {
     //Control de las tuberias en el juego
     checkPipes(){
         for (let index = 0; index < this.pipes.length; index++) {
-            //Si ya termino el juego por puntos
-            if (this.score >= WIN_VALUE && this.getState() === "running"){
-                this.setState("finished");
-                this.endGame(true);
+            //Si ya termino el juego no dejo avanzar el for
+            if (this.getState() === "finished")
+            {       
                 break;
             }
-            //Si toque una tuberia fuerza el termino
-            if (this.pipes[index].isTouch(this.bird) && this.getState() === "running")
-            {
-                this.setState("finished");           
-                this.endGame(false);
-                break;
-            }
+            else
+           {
+               //Si el ave se choca con la tuberia corto el for
+               if (this.pipes[index].isTouch(this.bird) ){
+                    this.setState("finished");
+                    break;
+                }
+           } 
             //Si se salio de pantalla resetea la tuberia
             if (this.pipes[index].isOutScreen())
             {
@@ -128,6 +133,11 @@ class Game {
                     this.score+= this.pipes[index].getValue();
                     this.pipes[index].setValue(0);
                     this.updateScore();
+                    //Si al contarla el juego termina por puntos
+                    if (this.score >= WIN_VALUE ){
+                        this.setState("finished");
+                        break;
+                    }
                 }
             } 
         }
@@ -147,9 +157,9 @@ class Game {
 
     //Llama a todos los controles del juego
     loop() {
-        if (this.score >= WIN_VALUE && this.getState() === "running") {
-            this.setState("finished");
-            this.endGame(true);
+        //Si el juego esta en estado de finalizado se corta el bucle
+        if (this.getState() === "finished") {
+            this.endGame();
         }
         else
         {
@@ -159,11 +169,12 @@ class Game {
     }
 
     //Termina el juego y declara si se gano o no
-    endGame(victory) {
+    endGame() {
         clearInterval(this.interval);
         this.stopAllAnimation();
         document.getElementById('reset').hidden = false;
-        if (victory)
+        //Si gano por puntos
+        if (this.score >= WIN_VALUE)
         {
             this.bird.changeStateClass("flying");
             alert("¡Felicidades has ganado!");
@@ -188,5 +199,19 @@ class Game {
                 this.coins[index].stopAnimation(parseInt(this.coins[index].getPositionLeft()));
             }
         }
+    }
+
+    //Limpia todos los elementos del juego que son visibles en la pantalla
+    cleanGameOfScreen(){
+    this.cleanElements("coins");
+    this.cleanElements("pipes");
+    }
+
+    //Limpia todos los elementos hijos de un padre
+    cleanElements(toClean){
+    let node = document.getElementById(toClean);
+    while (node.firstChild) {
+        node.removeChild(node.lastChild);
+    }
     }
 }

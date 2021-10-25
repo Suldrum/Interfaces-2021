@@ -51,26 +51,14 @@ document.getElementById('reset').addEventListener('click',function(e){
 	document.getElementById('principalMenu').hidden = false;
     document.getElementById('gameMenu').hidden = true;
     this.hidden = true;
-    cleanGameOfScreen();
+    game.cleanGameOfScreen();
     if(bird.getStateClass() !== "flying")
         {bird.changeStateClass("flying");}
     bird.setInitialPosition();
 
 });
 
-//Limpia todos los elementos del juego que son visibles en la pantalla
-function cleanGameOfScreen(){
-    cleanElements("coins");
-    cleanElements("pipes");
-}
 
-//Limpia todos los elementos hijos de un padre
-function cleanElements(toClean){
-    let node = document.getElementById(toClean);
-    while (node.firstChild) {
-        node.removeChild(node.lastChild);
-    }
-}
 
 //Funcion para controlar la visibilidad de la informacion
 document.getElementById('informationButton').addEventListener('click',function(e){

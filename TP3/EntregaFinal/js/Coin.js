@@ -46,7 +46,7 @@ class Coin extends ObjetoInteractivo {
             this.touched = false;
             this.setLeft(value);
             this.setValue(5);
-            this.setAnimationDelay(12 * (index + 1));
+            this.setAnimationDelay(13 * (index + 1));
             this.changeStateClass("moveCoinToLeft");
        } 	    
     }
