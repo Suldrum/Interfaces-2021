@@ -64,6 +64,17 @@ class Game {
         this.pipes[index] = new Pipe (pipeUp,pipeDown, this.bird.height);
     }
 
+    checkSuperposition(coin){
+        for (let index = 0 ; index < this.pipes.length ; index++)
+        {
+            if (this.pipes[index].isTouch(coin))
+            {
+                coin.setAnimationDelay(13 * (index + 1) + 5);
+                break;
+            }
+        }
+    }
+
     //Control de las monedas en el juego
     checkCoins(){  
         for (let index = 0 ; index < this.coins.length ; index++)
@@ -78,6 +89,7 @@ class Game {
             {
                 //Se reinicia la moneda
                 this.coins[index].reset(index,(this.width+this.coins[index].width+10));
+                this.checkSuperposition(this.coins[index]);
             }
             else{
                 //Si todavia esta en pantalla y no se toco
