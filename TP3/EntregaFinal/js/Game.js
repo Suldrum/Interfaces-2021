@@ -64,6 +64,7 @@ class Game {
         this.pipes[index] = new Pipe (pipeUp,pipeDown, this.bird.height);
     }
 
+    //Si la moneda se esta chocando con alguna tuberia una vez que se reseteo le edita el delay
     checkSuperposition(coin){
         for (let index = 0 ; index < this.pipes.length ; index++)
         {
