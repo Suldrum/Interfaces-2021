@@ -38,6 +38,7 @@ div{
     background:url("img/parallax/game_background_1/layers/sky.png");
 }
 
+/*Imagenes del fondo parallax*/
 .clouds_1{
     width: 100vw;
     height: 100vh;
@@ -180,16 +181,7 @@ div{
       top: calc(100% - 70px);
     }
 }
-/*
-@keyframes fall {
-    from {
-        top: 0%;
-    }
-    to {
-       top: 100%;
-    }
- }
-*/
+
 /**
 * Efecto de subida al llevarlo al tope 0
 */
@@ -200,16 +192,6 @@ div{
     }
 }
 
-/*
-@keyframes rise {
-    from {
-        top: 100%;
-    }
-    to {
-       top: 0%;
-    }
-}
-*/
 /*
 * Clase para cuando el avatar pierde el juego
 */
@@ -317,8 +299,9 @@ div{
 .pipeUp {
     width: 51px;
     height: 618px;
-    /*posicion de la imagen fuera de pantalla por el lado derecho*/
+    /*Posicion de la imagen fuera de pantalla por el lado derecho*/
     left:calc(100% + 60px);
+    /*Para irse al borde inferior de la pantalla*/
     bottom: 0px;
     /*Sin posicion no anda asi que mas vale ponerlo*/
     position: absolute;
@@ -328,12 +311,15 @@ div{
 
 .pipeDown{
     width: 51px;
-    height: 618px; 
+    height: 618px;
+    /*Posicion de la imagen fuera de pantalla por el lado derecho*/ 
     left:calc(100% + 60px);
+     /*Para irse al borde superior de la pantalla*/
     top: 0px;
     position: absolute;
-    /* Se rota para voltearla */ 
+    /*Rotacion*/ 
     rotate: 180deg;
+    /*Reflejo*/
     transform: scaleX(-1);
     background: no-repeat url("img/buildingPipe.png");
     background-size: cover;

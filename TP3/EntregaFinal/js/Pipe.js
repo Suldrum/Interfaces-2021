@@ -8,7 +8,7 @@
  */
 
 class Pipe {
-    //Constructor de la clase, da propiedades a los objetos
+    //Constructor de la clase
 	constructor(pipeUp,pipeDown,space) {
 		this.upObstacle = pipeUp;
 		this.downObstacle = pipeDown;
@@ -18,19 +18,24 @@ class Pipe {
 		this.maxHeight= (this.upObstacle.height - this.space) / 2;
 		this.value= 1;
 		this.passed = false;
+		//Coloca la altura a las tuberias
 		this.setAltitudes();
 	}
 	
+	//Devuelve el valor por pasar las tuberias
 	getValue(){return this.value ;}
+	//Da valor al obstaculo
 	setValue(value){this.value = value;}
 
-
+	//Si ya salieron de pantalla
 	isOutScreen(){
-        return  this.upObstacle.isOutScreen() ;
+		//Como van juntas a la misma velocidad con verificar una alcanza
+        return this.upObstacle.isOutScreen() ;
     }
 
 	//Si el ave pasa por el objecto
 	checkPass(bird){
+		//Con verificar que paso por la izquierda de uno de los objetos alcanza dado que van juntos
 		let thisData = this.upObstacle.getPositionData();
 		let birdData = bird.getPositionData();
 		if (birdData.left > (thisData.right + 1) )
@@ -64,13 +69,15 @@ class Pipe {
 
 	//Si toco alguno de los obstaculos
 	isTouch(object){
+		//En este caso le pregunto individualmente a cada tuberia si el ave las toco
 		return this.upObstacle.isTouch(object) || this.downObstacle.isTouch(object);
 	}
 
 	//Resetea la tuberia
 	reset(){
+		//Vuelve a sus valores default
 		this.passed = false;
-		this.setValue(1);
+		//Modifica sus alturas
 		this.setAltitudes();
 	}
 

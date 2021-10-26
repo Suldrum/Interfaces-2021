@@ -4,66 +4,82 @@ const WIN_VALUE = 50;
 
 class Game {
     constructor(bird) {
-        this.div = document.getElementById("body");
-        this.divCoins =document.getElementById("coins");
-        this.divPipes =document.getElementById("pipes");
-        this.width = parseInt(this.div.getBoundingClientRect().width);
-		this.height = parseInt(this.div.getBoundingClientRect().height);
+        //Ancho del juego
+        this.width = parseInt(document.getElementById("body").getBoundingClientRect().width);
+        //Lugares en el html donde estaran los elementos del juego
+        this.divCoins= document.getElementById("coins");
+        this.divPipes= document.getElementById("pipes");
+        //Avatar
         this.bird = bird;
         //Estado del juego
         this.state = this.setState("create");
+        //Arreglos para llevar el control de los elementos
         this.pipes = [];
         this.coins = [];
+        //Puntaje
         this.score = 0;
+        //Variable donde se guardara el bucle de controles
         this.interval;
-        this.updateScore();
+        //Poner la puntuacion por pantalla
+        this.updateScore(this.score);
     }
 
+    //Cambia el estado del juego
     setState(state){
         this.state = state;
     }
 
+    //Devuelve el estado del juego
     getState(){
         return this.state;
     }
-    //Crea todos los elementos del juego
+
+    //Crea todos los elementos del juego y los agrega al arreglo de control correspondiente
     createElements()
     {
+        //Crea las monedas
         for (let index = 0 ; index <  MAX_COINS; index++)
         {
             this.createCoin(index);
         }
 
+        //Crea los obstaculos
         for (let index = 0 ; index < MAX_PIPES ; index++)
         {
             this.createPipe(index);
         }
     }
-    createCoin(index){ 
+
+    //Crea un nuevo div a un padre
+    createDiv(id, parent)
+    {
         let newDiv = document.createElement("div");
+        newDiv.setAttribute("id",id);
+        parent.appendChild(newDiv);
+    }
+    
+    //Crea una moneda
+    createCoin(index){ 
         let newDivID = "coin"+index;
-        newDiv.setAttribute("id",newDivID);
-        this.divCoins.appendChild(newDiv);
+        this.createDiv(newDivID, this.divCoins);
         this.coins[index] = new Coin (newDivID,"coin","moveCoinToLeft", 13 * (index + 1));
     }
 
+    //Crea un nuevo obstaculo
     createPipe(index){
         //Tuberia de arriba
-        let newUpDiv = document.createElement("div");
         let newUpID= "pipeUp"+index;
-        newUpDiv.setAttribute("id",newUpID);
-        this.divPipes.appendChild(newUpDiv);
-        let pipeUp = new ObjetoInteractivo(newUpID,"pipeUp","movePipeToLeft", 10 * index );
+        this.createDiv(newUpID, this.divPipes);
+        let pipeUp = new ObjetoInteractivo(newUpID,"pipeUp","movePipeToLeft", 10 * index);
         //Tuberia de abajo
-        let newDownDiv = document.createElement("div");
         let newDownID= "pipeDown"+index;
-        newDownDiv.setAttribute("id",newDownID);
-        this.divPipes.appendChild(newDownDiv);
-        let pipeDown =new ObjetoInteractivo(newDownID,"pipeDown","movePipeToLeft", 10 * index );
+        this.createDiv(newDownID,this.divPipes);
+        let pipeDown =new ObjetoInteractivo(newDownID,"pipeDown","movePipeToLeft", 10 * index);
         //Nuevo Obstaculo
         this.pipes[index] = new Pipe (pipeUp,pipeDown, this.bird.height);
     }
 
+    //Si la moneda se choca con una tuberia modifica el delay de dicha moneda
     checkSuperposition(coin){
         for (let index = 0 ; index < this.pipes.length ; index++)
         {
@@ -97,19 +113,17 @@ class Game {
                 {
                     //Veo si se toca y la marco como tal
                     this.coins[index].isTouch(this.bird,parseInt(this.coins[index].getPositionLeft()));
-                }
-                //Si se toco y todavia no la conte
-                if(this.coins[index].touched && this.coins[index].getValue() !== 0)
-                {  
-                    this.score+= this.coins[index].getValue();
-                    this.coins[index].setValue(0);
-                    this.updateScore();
-                    //Si al contarla el juego termina por puntos
-                    if (this.score >= WIN_VALUE ){
-                        this.setState("finished");
-                        break;
+                    //Si esta vez se toco la cuento
+                    if(this.coins[index].touched)
+                    {  
+                        this.updateScore(this.coins[index].getValue());
+                        //Si al contarla el juego termina por puntos
+                        if (this.score >= WIN_VALUE ){
+                            this.setState("finished");
+                            break;
+                        }
                     }
-                }
+                }   
             }
         }
     }
@@ -122,48 +136,52 @@ class Game {
             {       
                 break;
             }
-            else
-           {
-               //Si el ave se choca con la tuberia corto el for
-               if (this.pipes[index].isTouch(this.bird) ){
-                    this.setState("finished");
-                    break;
-                }
-           } 
             //Si se salio de pantalla resetea la tuberia
             if (this.pipes[index].isOutScreen())
             {
                 this.pipes[index].reset();
             }
             else{
-                //Sino se fija si la paso
-                if (!this.pipes[index].passed )
-                {this.pipes[index].checkPass(this.bird);}
-                //Si la paso y todavia no la conte 
-                if (this.pipes[index].passed && this.pipes[index].getValue() !== 0)
+                //Si todavia no la paso
+                if (!this.pipes[index].passed)
                 {
-                    this.score+= this.pipes[index].getValue();
-                    this.pipes[index].setValue(0);
-                    this.updateScore();
-                    //Si al contarla el juego termina por puntos
-                    if (this.score >= WIN_VALUE ){
+                    //Si el ave se choca con la tuberia corto el for
+                    if (this.pipes[index].isTouch(this.bird)){
                         this.setState("finished");
                         break;
                     }
-                }
+                    //Veo si se paso el obstaculo y lo marco como tal
+                    this.pipes[index].checkPass(this.bird);
+                    //Si lo paso lo cuento
+                    if (this.pipes[index].passed)
+                    {
+                        this.updateScore(this.pipes[index].getValue());
+                        //Si al contarla el juego termina por puntos
+                        if (this.score >= WIN_VALUE ){
+                            this.setState("finished");
+                            break;
+                        }
+                    }
+                } 
             } 
         }
     }
 
+    //Inicia el juego como tal
     initGame() {
+        //Crea los elementos
         this.createElements();
+        //Cambia el estado
         this.setState("running");
+        //El avatar comienza a caer
         this.bird.changeStateClass("falling");
+        //Inicia el bucle controlador
         this.interval = setInterval(this.loop.bind(this), 4.6);
-
     }
 
-    updateScore(){
+    //Actualiza la puntuacion del juego tanto internamente como en el HTML
+    updateScore(value){
+        this.score+= value;
         document.getElementById("score").innerHTML = this.score;
     }
 
@@ -182,8 +200,11 @@ class Game {
 
     //Termina el juego y declara si se gano o no
     endGame() {
+        //Limpia el intervalo
         clearInterval(this.interval);
+        //Se detienen las animaciones
         this.stopAllAnimation();
+        //Se vuelve visible el boton para volver a jugar
         document.getElementById('reset').hidden = false;
         //Si gano por puntos
         if (this.score >= WIN_VALUE)
@@ -215,15 +236,14 @@ class Game {
 
     //Limpia todos los elementos del juego que son visibles en la pantalla
     cleanGameOfScreen(){
-    this.cleanElements("coins");
-    this.cleanElements("pipes");
+        this.cleanElements(this.divCoins);
+        this.cleanElements(this.divPipes);
     }
 
     //Limpia todos los elementos hijos de un padre
     cleanElements(toClean){
-    let node = document.getElementById(toClean);
-    while (node.firstChild) {
-        node.removeChild(node.lastChild);
+        while (toClean.firstChild) 
+        {toClean.removeChild(toClean.lastChild);}
     }
-    }
+    
 }
