@@ -16,9 +16,9 @@ class Objeto {
 		this.baseClass = baseClass;
 		//Animacion | Keyframe del objeto
 		this.stateClass = stateClass;
-		//Clase de la base del objeto
+		//Añade la clase de la base del objeto
 		this.addClass(baseClass);
-		//Clase de la animacion
+		//Añade la clase de la animacion
 		this.addClass(stateClass);
 		this.width = parseInt(this.div.getBoundingClientRect().width);
 		this.height = parseInt(this.div.getBoundingClientRect().height);
@@ -58,21 +58,21 @@ class Objeto {
 	}
 
 	//Remueve solo una clase
-	removeStateClass(stateClass)
+	removeClass(stateClass)
 	{
 		this.div.classList.remove(stateClass);
 	}
 
-	//Remueve todas las clases
-	cleanClasses(){
-        this.div.setAttribute("class", "");
-    }
-
 	//Cambia la animacion por otra.Ej: bird flying, bird falling, etc
 	changeStateClass(stateClass){
-		this.removeStateClass(this.stateClass);
+		this.removeClass(this.stateClass);
 		this.stateClass = stateClass;
 		this.addClass(stateClass);
+	}
+
+	//Remueve todas las clases
+	cleanClasses(){
+		this.div.setAttribute("class", "");
 	}
 	
 } //FIN DE LA CLASE

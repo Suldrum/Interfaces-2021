@@ -46,11 +46,10 @@ class ObjetoInteractivo extends Objeto {
         this.div.style.setProperty("animation-play-state", "paused");   
     }
 
-    //Si el objecto se fue de la pantalla, que bello que la moneda sea cuadrada
+    //Si el objecto se fue de la pantalla
     isOutScreen(){
         let object = this.getPositionData();
         return (object.left < (0 - (object.width + 5))) ;
-
     }
 
 } //FIN DE LA CLASE

@@ -8,7 +8,7 @@
  */
 
 class Bird extends Objeto {
-    //Constructor de la clase, da propiedades a los objetos
+    //Constructor de la clase
 	constructor(div, baseClass, stateClass) {
 		super(div, baseClass, stateClass);
 		this.initialPosition = parseInt(this.getPositionTop());
@@ -33,9 +33,11 @@ class Bird extends Objeto {
 		super.changeStateClass(stateClass);	
 	}
 
-	cleanClasses(){
-       	super.cleanClasses();
-		this.addClass("avatar");
+	//Cambia la imagen del avatar por otra
+	changeBaseClass(baseClass){
+		this.removeClass(this.baseClass);
+		this.baseClass = baseClass;
+		this.addClass(baseClass);
     }
 	
 } //FIN DE LA CLASE
