@@ -26,7 +26,6 @@
   height: 94vh;
   text-align: center;
 }
-
 .fondo-parallax{
   background-image: url("../img/parallax.png");
   background-size: cover;
@@ -35,13 +34,31 @@
   height: auto;
   animation: fondo-parallax 180s linear infinite;
 }
-
 @keyframes fondo-parallax {
   0% {
     background-position: 2798px;
   }
   100% {
     background-position: 0;
+  }
+}
+.parallax-2 {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url('../img/logos/logo_huellitas_sin_texto.svg');
+  opacity: 12%;
+  animation: fondo-parallax-2 3s linear infinite;
+}
+@keyframes fondo-parallax-2 {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -180px;
   }
 }
 
