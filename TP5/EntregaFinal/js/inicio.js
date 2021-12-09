@@ -18,11 +18,11 @@ function changePop()
 {
     if (booleano)
     {
-        document.querySelector("#popup").innerHTML="Contenido promocionado activado" ;
+        document.querySelector("#popup").innerHTML="Publicar con promoción" ;
         return "img/home/promocionar_activo.png";
     }else
     {
-        document.querySelector("#popup").innerHTML="Contenido promocionado desactivado"; 
+        document.querySelector("#popup").innerHTML="Publicar sin promoción"; 
         return "img/home/promocionar.png";
     }
 }
