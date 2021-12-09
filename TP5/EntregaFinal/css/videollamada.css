@@ -1,6 +1,6 @@
 .videollamada-contenido {
   width: 100vw;
-  height: calc(100vh - var(--nav-altura));
+  height: calc(90vh - var(--nav-altura));
 }
 
 .contenedor-llamada {

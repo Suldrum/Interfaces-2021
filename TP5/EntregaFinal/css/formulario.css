@@ -1,0 +1,9 @@
+.boton-login {
+  background: var(--primary-medium);
+  cursor: pointer;
+  
+}
+.boton-registrar{
+  background: var(--green-medium);
+  cursor: pointer;
+}

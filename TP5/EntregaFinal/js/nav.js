@@ -19,9 +19,9 @@ document.querySelector("#chat").addEventListener("click", function () {
   window.location.href = chat;
 });
 
-document.addEventListener("keydown", function (e) {
-  let key = e.keyCode;
-  if (key == 13) window.location.href = busqueda;
+document.querySelector("#busquedaInput").addEventListener("keyup", function (e) {
+  let key = e.key;
+  if (key === "Enter") window.location.href = busqueda;
 });
 
 document.querySelector("#hamburguesa").addEventListener("click", function(e){

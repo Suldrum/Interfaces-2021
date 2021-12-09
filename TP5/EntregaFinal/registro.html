@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/estilo.css" rel="stylesheet">
+    <link href="css/formulario.css" rel="stylesheet">
     <link href="css/registro.css" rel="stylesheet">
-    <title>Registro</title>
+    <title>Huellitas | Registro</title>
 </head>
 
 <body>
@@ -18,25 +20,25 @@
             <form class="registrarse-content-box layout">
                 <h1 class="registrarse-registrarse layout">REGISTRO</h1>
 
-                <label class="registrarse-nombre layout">Nombre de Usuario</label>
+                <label class="registrarse-nombre layout">Nombre de usuario</label>
                 <div class="registrarse-cover-group1 layout">
                     <input class="registrarse-background layout" placeholder="Nombre en Huellitas"></input>
                 </div>
                 <label class="registrarse-apellido layout">Email</label>
                 <div class="registrarse-cover-group2 layout">
-                    <input class="registrarse-background layout" placeholder="ejemplo@ejemplo.com"></input>
+                    <input type="email" class="registrarse-background layout" placeholder="ejemplo@ejemplo.com"></input>
                 </div>
                 <label class="registrarse-highlights layout">Contraseña</label>
                 <div class="registrarse-cover-group4 layout">
-                    <input class="registrarse-background layout" placeholder="*****"></input>
+                    <input type="password" class="registrarse-background layout"></input>
                 </div>
                 <label class="registrarse-highlights layout1">Confirmar contraseña</label>
                 <div class="registrarse-cover-group5 layout">
-                    <input class="registrarse-background layout" placeholder="*****"></input>
+                    <input type="password" class="registrarse-background layout" ></input>
                 </div>
-                <button id="next1" type="button" class="registrarse-group3 layout">CREAR CUENTA</button>
+                <button id="next1" type="button" class="registrarse-group3 layout" onclick="window.location.href = 'ring.html'">CREAR CUENTA</button>
                 <hr>
-                <button id="login" type="button" class="registrarse-group2 layout">IR AL LOGIN</button>
+                <button id="login" type="button" class="registrarse-group2 layout" onclick="window.location.href = 'login.html'">IR AL LOGIN</button>
             </form>
         </div>
     </div>

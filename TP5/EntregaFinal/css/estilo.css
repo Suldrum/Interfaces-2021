@@ -1,4 +1,11 @@
+@charset "UTF-8";
+* {
+  margin: 0%;
+}
+
+
 @import url('http://fonts.cdnfonts.com/css/roboto');
+
 
 body {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
@@ -118,8 +125,6 @@ button:focus, button:active {
     left: 0px;
   }
 
-  .contenido {
-  }
   
   .roboto-normal-eerie-black-10px
    {
