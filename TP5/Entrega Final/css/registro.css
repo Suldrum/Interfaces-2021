@@ -1,0 +1,377 @@
+@charset "UTF-8";
+* {
+  margin: 0%;
+}
+
+
+body {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  color: var(--black);
+  margin: 0px;
+}
+
+input, select, textarea, button, a {
+  border-radius: 3px;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+}
+.display{
+  display: none;
+}
+
+.logo{
+  text-align: center;
+  width: 120px;
+  height: auto;
+}
+
+.pasos{
+  width: 150px;
+  padding: 15px;
+}
+
+
+.logo1{
+  width: 100%;
+  text-align: center;
+}
+.parallax{
+  padding: 20px 25% 20px 31%;
+  width: 30%;
+  height: 94vh;
+  text-align: center;
+}
+
+.fondo-parallax{
+  background-image: url("../img/parallax.png");
+  background-size: cover;
+  background-repeat: repeat;
+  width: 100%;
+  height: auto;
+  animation: fondo-parallax 180s linear infinite;
+}
+
+@keyframes fondo-parallax {
+  0% {
+    background-position: 2798px;
+  }
+  100% {
+    background-position: 0;
+  }
+}
+
+
+/*==========================================================*/
+.registrarse-flex1-col1 {
+  display: flex;
+  margin-top: 25%;
+  flex: 0 1 364px;
+}
+
+.registrarse-group {
+  display: flex;
+  background-color: rgba(255, 93, 222, 1);
+}
+.registrarse-group.layout {
+  position: relative;
+  overflow: hidden;
+  flex-grow: 1;
+  margin: 0px;
+}
+.registrarse-flex {
+  display: flex;
+}
+.registrarse-flex.layout {
+  position: relative;
+  overflow: visible;
+  flex-grow: 1;
+  margin: 0px;
+}
+
+.registrarse-flex-col {
+  display: flex;
+  flex: 0 1 60%;
+}
+
+.registrarse-group2:hover, .registrarse-group3:hover {
+  cursor: pointer;
+}
+
+.registrarse-cover-group {
+  display: flex;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.login-flex.layout {
+  position: relative;
+  overflow: visible;
+  flex-grow: 1;
+  margin: 20px 50px;
+}
+.login-flex1 {
+  display: flex;
+}
+.login-flex1.layout {
+  position: relative;
+  overflow: visible;
+  justify-content: center;
+  margin-top: 15%;
+}
+.login-flex1-col {
+  display: flex;
+  flex: 0 1 165px;
+}
+.login-flex1-col1 {
+  display: flex;
+  flex: 0 1 364px;
+}
+.login-hero-title {
+
+  color: white;
+  letter-spacing: 0px;
+  margin: 0px;
+}
+.login-hero-title.layout {
+  position: relative;
+  margin: 103px 75px 100px 91px;
+}
+.login-cover-group {
+  display: flex;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-cover-group.layout {
+ 
+  width: 827.083;
+  position: relative;
+  /* flex-grow: 1; */
+  margin: -5px 0 0 -5px;
+}
+.registrarse-cover-group.layout {
+  position: relative;
+  height: 100%;
+  flex-grow: 1;
+  margin: -5px 0 0 -5px;
+}
+.registrarse-flex1 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.registrarse-flex1.layout {
+  position: relative;
+  overflow: visible;
+  justify-content: center;
+  margin-top: 15%;
+}
+.registrarse-flex1-col {
+  display: flex;
+  flex: 0 1 165px;
+}
+
+.registrarse-img.layout1 {
+  position: relative;
+  height: 74px;
+  flex-grow: 1;
+  margin: 38px 0px;
+}
+
+.registrarse-img.layout {
+  position: relative;
+  height: 150px;
+  flex-grow: 1;
+  margin: 0px;
+}
+
+.registrarse-flex-spacer {
+  display: flex;
+  flex: 0 1 7%;
+}
+.registrarse-flex-col1 {
+  display: flex;
+  margin: auto;
+  flex: 0 1 380px;
+}
+.registrarse-group1 {
+  display: flex;
+}
+.registrarse-group1.layout {
+  position: relative;
+  flex-grow: 1;
+}
+.registrarse-content-box {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 20px 20px  20px 20px; 
+  box-shadow: 0px 4px 4px 0px #414141;
+}
+.registrarse-content-box.layout {
+  text-align: left;
+  position: relative;
+  overflow: visible;
+  flex-grow: 1;
+  margin: 0px;
+}
+.registrarse-registrarse {
+  display: flex;
+  justify-content: center;
+  color: #414141;
+  text-align: right;
+  letter-spacing: 0px;
+}
+.registrarse-registrarse.layout {
+  position: relative;
+}
+.registrarse-nombre {
+
+  color: #414141;
+  letter-spacing: 0px;
+}
+.registrarse-nombre.layout {
+  position: relative;
+  margin: 18px 26px 0px;
+}
+.registrarse-cover-group1 {
+  display: flex;
+}
+.registrarse-cover-group1.layout {
+  position: relative;
+  overflow: visible;
+  min-height: 40px;
+  margin: 5px 26px 0px;
+}
+.registrarse-background {
+  border: 1px solid #7b90a9;
+  border-radius: 5px 5px 5px 5px;
+}
+.registrarse-background.layout {
+  position: relative;
+  height: 40px;
+  flex-grow: 1;
+  margin: 0px;
+}
+.registrarse-apellido {
+
+  color: #414141;
+  letter-spacing: 0px;
+}
+.registrarse-apellido.layout {
+  position: relative;
+  margin: 14px 26px 0px;
+}
+.registrarse-cover-group2 {
+  display: flex;
+}
+.registrarse-cover-group2.layout {
+  position: relative;
+  overflow: visible;
+  min-height: 40px;
+  margin: 5px 26px 0px;
+}
+.registrarse-email {
+
+  color: #414141;
+  letter-spacing: 0px;
+}
+.registrarse-email.layout {
+  position: relative;
+  margin: 14px 26px 0px;
+}
+.registrarse-cover-group3 {
+  display: flex;
+}
+.registrarse-cover-group3.layout {
+  position: relative;
+  overflow: visible;
+  min-height: 40px;
+  margin: 5px 26px 0px;
+}
+.registrarse-highlights {
+
+  color: #414141;
+  letter-spacing: 0px;
+}
+.registrarse-highlights.layout {
+  position: relative;
+  margin: 14px 26px 0px;
+}
+
+input:focus {
+  outline-color: rgba(255, 93, 222, 1);
+  color: #414141;
+}
+
+.registrarse-cover-group4 {
+  display: flex;
+}
+.registrarse-cover-group4.layout {
+  position: relative;
+  overflow: visible;
+  min-height: 40px;
+  margin: 5px 26px 0px;
+}
+.registrarse-highlights.layout1 {
+  position: relative;
+  margin: 13px 27px 0px;
+}
+.registrarse-cover-group5 {
+  display: flex;
+}
+.registrarse-cover-group5.layout {
+  position: relative;
+  overflow: visible;
+  min-height: 40px;
+  margin: 5px 25px 0px 27px;
+}
+.registrarse-group2 {
+  display: flex;
+  display: flex;
+  background-color: rgba(255, 93, 222, 1);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2509803922);
+  border: none;
+  border-radius: 3px 3px 3px 3px;
+  font: 16px/1 "Roboto", Helvetica, Arial, serif;
+  color: white;
+  letter-spacing: 0px;
+  justify-content: center;
+  padding: 10px 12px 10px 10px;
+}
+.registrarse-group2.layout {
+  position: relative;
+  overflow: visible;
+  height: 35px;
+  margin: 12px 26px 12px;
+}
+.registrarse-line {
+  background-color: #7b90a9;
+}
+.registrarse-line.layout {
+  position: relative;
+  height: 1px;
+  margin: 12px 26px 12px;
+}
+.registrarse-group3 {
+  display: flex;
+  background-color: #43b82b;
+  box-shadow: 0px 4px 4px 0px rgb(0 0 0 / 25%);
+  border: none;
+  border-radius: 3px 3px 3px 3px;
+  font: 16px / 1 "Roboto", Helvetica, Arial, serif;
+  color: white;
+  letter-spacing: 0px;
+  justify-content: center;
+  padding: 10px 12px 10px 10px;
+}
+.registrarse-group3.layout {
+  margin-bottom: 20px;
+  position: relative;
+  overflow: visible;
+  height: 36px;
+  margin: 12px 26px 12px;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+/*# sourceMappingURL=registro.css.map */

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="svg221"
+   width="221.23285"
+   height="227.95799"
+   viewBox="0 0 221.23285 227.95799"
+   sodipodi:docname="logo_huellitas_contorno.svg"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)">
+  <metadata
+     id="metadata21">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs225">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath2633">
+      <rect
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:4.65"
+         id="rect2635"
+         width="239.72308"
+         height="199.66154"
+         x="469.75385"
+         y="-111.78461" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath2633-7">
+      <rect
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:4.65"
+         id="rect2635-3"
+         width="239.72308"
+         height="199.66154"
+         x="469.75385"
+         y="-111.78461" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="namedview223"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="1.547619"
+     inkscape:cx="73.67109"
+     inkscape:cy="112.50969"
+     inkscape:window-width="1280"
+     inkscape:window-height="961"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:snap-global="false"
+     inkscape:document-rotation="0" />
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="Image"
+     id="g227"
+     transform="translate(-568.96153,150.59063)">
+    <path
+       style="fill:#000000"
+       id="path521"
+       d="" />
+    <path
+       style="fill:#000000"
+       id="path501"
+       d="" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:61.3758px;line-height:1.25;font-family:'MS Gothic';-inkscape-font-specification:'MS Gothic';fill:#ff5ede;fill-opacity:1;stroke:#141414;stroke-width:2.00000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.75;"
+       x="586.58026"
+       y="73.801109"
+       id="text7092"
+       transform="scale(0.96320146,1.0382044)"><tspan
+         sodipodi:role="line"
+         id="tspan7090"
+         x="586.58026"
+         y="73.801109"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Helvetica;-inkscape-font-specification:Helvetica;fill:#ff5ede;fill-opacity:1;stroke:#141414;stroke-width:2.00000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.75;"
+         dy="0 0 0 0 0 0 0 0 0">Huellitas</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Image 1">
+    <g
+       id="g2631"
+       clip-path="url(#clipPath2633-7)"
+       transform="translate(-469.90764,91.577443)"
+       style="stroke:#141414;stroke-opacity:0.75;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none">
+      <path
+         style="fill:#ff5ede;fill-opacity:1;stroke:#141414;stroke-opacity:0.75;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 592.15811,79.387509 c -15.30279,-14.47584 -27.3611,-20.563913 -41.5465,-19.94773 -14.9403,0.67963 -16.0615,0.60045 -20.2568,-1.43046 -18.8561,-12.831129 8.27911,-40.532027 19.3478,-46.78815 10.3161,-5.6265403 18.1792,-7.6654003 27.3039,-7.0798103 17.6171,1.1306 32.6747,16.2319203 38.1835,38.2942803 5.7775,23.13866 -7.5843,44.57601 -23.0319,36.95187 z m -95.2134,-33.49869 c -7.404,-15.30201 -10.2464,-27.32507 -10.2346,-43.2911503 0.013,-16.8814697 2.5883,-27.9445997 10.0581,-43.2011397 21.2525,-43.406315 76.0679,-62.982459 121.3158,-43.325295 27.0675,11.75903 48.3706,37.65827 54.1624,65.847895 1.5074,7.33671 2.9014,21.8890497 1.5342,16.0165097 -0.85463,-3.7969317 -0.78656,-3.9562467 -1.0314,0 -0.2106,3.40047 -0.2524,3.35782 -1.4719,-1.5 -25.5214,-90.2684647 -145.8635,-70.2545647 -170.258,-7.9999997 -6.1089,17.1151797 -6.069,40.94599 0.098,58.29041 0.8389,2.35973 1.1273,4.04443 0.6409,3.74377 -0.4865,-0.30065 -1.0659,-0.002 -1.2877,0.66277 -0.2217,0.66517 -1.8082,-1.69452 -3.5255,-5.24377 z m 121.0662,-17.96278 c -5.6636,-2.2813 -7.2403,-11.28315 -3.3216,-18.9643203 2.8393,-5.5655 9.4473,-11.77971 13.9393,-13.10852 4.7401,-1.40222 11.0246,0.60508 12.7814,4.08243997 4.1349,8.18427003 -2.3148,23.84885033 -11.3786,27.63597033 -3.6628,1.53041 -8.7301,1.67982 -12.0205,0.35443 z M 537.77361,4.1840887 c -4.8095,-2.45246 -6.9149,-5.78176 -8.1713,-12.92157 -1.3132,-7.4622797 0.5817,-15.5516697 4.5067,-19.2389897 3.6193,-3.40019 10.2811,-3.92408 13.8715,-1.09089 9.1634,7.23087 9.0674,28.67033967 -0.1497,33.4366797 -3.881,2.00695 -5.8284,1.97108 -10.0572,-0.18523 z m 61.929,-3 c -5.0853,-2.5404 -7.1799,-7.25987 -6.7826,-15.2827997 0.6236,-12.59413 8.6932,-23.63768 18.0422,-24.69144 9.1381,-1.03 14.0345,4.45922 14.0345,15.73385 0,13.6511497 -9.6102,25.9561597 -20.2941,25.9848097 -0.825,0.002 -3.075,-0.78278 -5,-1.74442 z m -31.4617,-8.73571 c -6.4729,-2.32438 -9.5214,-8.0229997 -9.5328,-17.8199197 -0.01,-7.72756 1.88,-13.28118 6.178,-18.163995 4.8871,-5.55206 9.6713,-7.16171 15.4188,-5.18773 7.8693,2.70271 11.0951,12.945065 8.0119,25.439045 -3.2942,13.3489097 -10.6536,19.1161197 -20.0759,15.7325997 z"
+         id="path861"
+         sodipodi:nodetypes="ccccscccccsscccccccccscscsscccsscscsscsscssss" />
+    </g>
+  </g>
+</svg>

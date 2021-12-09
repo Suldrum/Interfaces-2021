@@ -1,0 +1,164 @@
+.fondo-capa1, .fondo-capa2, .fondo-capa3, .fondo-capa4, .contenedor-flex {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  margin: 0 0;
+}
+
+.fondo-capa1 {
+  background-image: url('../img/login-reg/login@1x.png');
+  z-index: -3;
+}
+.fondo-capa2 {
+  z-index: -2;
+  background-image: linear-gradient(to bottom right, rgba(253,22,96,0.25), rgba(0,0,0,0));
+}
+.fondo-capa3 {
+  z-index: -1;
+}
+.fondo-capa3 img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: fill;
+}
+.fondo-capa4 {
+  z-index: 0;
+}
+.fondo-capa4 img {
+  position: absolute;
+  top: 2vh;
+  left: 2vw;
+}
+
+.contenedor-flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.contenedor-flex .izquierda {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 60%;
+}
+
+.izquierda p {
+  position: absolute;
+  top: 50%;
+  margin: 4vh 4vw;
+  padding: 2rem;
+  background: rgba(0,0,0,0.47);
+  background-blend-mode: screen;
+  color: var(--white-medium);
+  font-size: 16pt;
+}
+
+.contenedor-flex .derecha {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 40%;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.derecha .form-container {
+  background: var(--white);
+  position: absolute;
+  width: 80%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  box-shadow: 0px 5px 10px var(--dark-gray);
+}
+.derecha .form-container form {
+  width: 87%;
+  text-align: center;
+}
+
+.derecha .form-container * {
+  display: flex;
+  flex-direction: column;
+}
+.derecha .form-container form label, input {
+  margin: 0.5rem 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.derecha .form-container form div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5em;
+}
+.derecha .form-container form div:not(.botones-login-registro) * {
+  display: flex;
+  flex-direction: row;
+  margin: 0 0;
+}
+.derecha .form-container form div label {
+  font-size: 10pt;
+}
+
+.derecha .form-container form .botones-login-registro {
+  margin-top: 3vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  justify-items: space-around;
+  flex-basis: 37%
+}
+
+input, button, a {
+  display: flex;
+  flex-direction: row;
+  font-size: 12pt;
+  border-radius: 3px;
+  font-weight: 500;
+}
+hr {
+  background-color: var(--primary-light);
+  height: 0.5pt;
+  width: 100%;
+  border: none;
+}
+input, input:active, input:focus {
+  padding: 0.5em 1ch;
+  border: var(--primary-medium) 1px solid;
+  outline: none;
+}
+button {
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  color: var(--white);
+  box-shadow: 0px 3px 5px var(--dark-gray);
+  letter-spacing: 0.1ch;
+}
+.boton-login {
+  background: var(--primary-medium);
+  
+}
+.boton-registrar{
+  background: var(--green-medium);
+}
+button, a {
+  text-align: center;
+  margin: 1ch 0;
+}
+a, a:hover, a:active {
+  font-size: 10pt;
+  color: var(--primary);
+  text-decoration: none;
+}

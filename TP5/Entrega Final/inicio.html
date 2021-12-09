@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Entrega TPE 3 - Grupo 13 - Integrantes: Gonzalo Milesi y Selene Rodrigo</title>
+  <link href="css/estilo.css" rel="stylesheet">
+  <link href="css/nav.css" rel="stylesheet">
+  <link href="css/inicio.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body id="body">
+
+  <div class="nav">
+    <div class="nav_left">
+      <div class="img_logo_conteiner">
+        <img src="img/logo.png" alt="logo" class="img_logo" id="logo">
+      </div>
+      <div class="input_search_conteiner">
+        <img src="img/lupa.png" alt="icono lupa">
+        <input class="input_search" type="search" placeholder="Buscar">
+      </div>
+    </div>
+    <div class="nav_rigth">
+      <div class="icono_nav_conteiner">
+        <img src="img/icono_home.png" alt="icono home" class="icono_nav" id="home">
+        <p>inicio</p>
+      </div>
+      <div class="icono_nav_conteiner">
+        <img src="img/icono_perfil.png" alt="icono perfil" class="icono_nav" id="perfil">
+        <p>perfil</p>
+      </div>
+      <div class="icono_nav_conteiner">
+        <img src="img/icono_chat.png" alt="icono chat" class="icono_nav" id="chat">
+        <p>chat</p>
+      </div>
+      <div class="icono_nav_conteiner">
+        <img src="img/img_perfil.png" alt="imagen perfil" class="icono_nav_grande">
+      </div>
+    </div>
+
+    <img class="icono_nav_grande menu_hamburguesa" src="img/home/menu_hamburguesa.png" alt="" id="hamburguesa">
+
+    <ul class="menu oculto" id="menu">
+      <li>
+        <img src="img/icono_home.png" alt="icono home" class="icono_nav" id="home"> 
+        <p class="texto">Inicio</p>
+      </li>
+      <li>
+        <img src="img/icono_perfil.png" alt="icono perfil" class="icono_nav" id="perfil">
+        <p class="texto">Perfil</p>
+      </li>
+      <li>
+        <img src="img/icono_chat.png" alt="icono chat" class="icono_nav" id="chat">
+        <p class="texto">Chat</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="contenedor_principal">
+    <div class="col_1">
+      <div class="publicar_conteiner">
+        <div class="publicar_header">
+          <p class="titulo_publicar">Nueva publicacion</p>
+          <img id="promocionar" class="promocionar_publicacion" src="img/home/promocionar.png" alt="">
+
+          <p id="popup" class="popup oculto">¿Seguro qué quiere promocionar esta publicación?</p>
+
+        </div>
+        <div class="publicar_input_conteiner">
+          <input class="input_publicar" type="text" placeholder="¿Que estas pensando?">
+          <div class="publicar_imagenes">
+            <img src="img/home/bx-link.png" alt="">
+            <img src="img/home/bx-image.png" alt="">
+            <img src="img/home/btn_enviar.png" alt="" class="publicar_imagen_postear">
+          </div>
+        </div>
+      </div>
+
+      <div class="publicacion_contenedor">
+        <div class="publicacion_header">
+          <div style="display: flex;">
+            <img src="img/home/publicacion1.png" alt="">
+            <div class="publicacion_titulo_contenedor">
+              <p class="publicacion_titulo">Gerardo Cisneros</p>
+              <p class="publicacion_subtitulo">Hace 30 minutos</p>
+            </div>
+          </div>
+          <img class="img_tres_puntitos" src="img/home/tres_puntitos.png" alt="">
+        </div>
+        <p class="publicacion_texto">
+          Es curioso que a los gatos les guste tanto el atún siendo que no les hace bien.
+          Igual llegado el caso a nosotros nos gustan las hamburguesas así que...
+          <span class="publicacion_emojis"> 👨 🍔 ♥️ 🐟 🐈</span>
+        </p>
+        <div class="publicacion_footer">
+          <div class="publicacion_footer_left">
+            <div>
+              <img src="img/home/like.png" alt="">
+            </div>
+            <div>
+              <img src="img/home/comment.png" alt="">
+            </div>
+          </div>
+          <div class="publicacion_footer_right">
+            <div>
+              <img src="img/home/btn _ compartir.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="publicacion_contenedor">
+        <div class="publicacion_header">
+          <div style="display: flex;">
+            <img src="img/home/natalia.png" alt="">
+            <div class="publicacion_titulo_contenedor">
+              <p class="publicacion_titulo">Natalia Oreiro</p>
+              <p class="publicacion_subtitulo">Hace 30 minutos</p>
+            </div>
+          </div>
+          <img class="img_tres_puntitos" src="img/home/tres_puntitos.png" alt="">
+        </div>
+        <p class="publicacion_texto">
+          Esa templanza que te roba el aliento
+        </p>
+
+        <img class="img_publicacion_principal" src="img/home/lobo.png" alt="">
+
+        <br>
+        <div class="publicacion_footer">
+          <div class="publicacion_footer_left">
+            <div>
+              <img src="img/home/like.png" alt="">
+            </div>
+            <div>
+              <img src="img/home/comment.png" alt="">
+            </div>
+          </div>
+
+          <div class="publicacion_footer_right">
+            <div>
+              <img src="img/home/btn _ compartir.png" alt="">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="col_2">
+      <div class="sugerencias">
+        <p class="titulo_sugerencias">Sugerencias</p>
+        <div class="sugerencia">
+          <div class="sugerencia_header">
+            <img class="img_sugerencia" src="img/home/octavius.png">
+            <p class="sugerencia_nombre">Octavius Quattrini</p>
+          </div>
+          <button class="btn-rosa">Perfil</button>
+        </div>
+        <div class="sugerencia">
+          <div class="sugerencia_header">
+            <img class="img_sugerencia" src="img/home/maria.png">
+            <p class="sugerencia_nombre">Maria Eva Saragoza</p>
+          </div>
+          <button class="btn-rosa">Perfil</button>
+        </div>
+        <div class="sugerencia">
+          <div class="sugerencia_header">
+            <img class="img_sugerencia" src="img/home/francesca.png">
+            <p class="sugerencia_nombre">Francesca Bernoulli</p>
+          </div>
+          <button class="btn-rosa">Perfil</button>
+        </div>
+        <div class="sugerencia">
+          <div class="sugerencia_header">
+            <img class="img_sugerencia" src="img/home/miguel.png">
+            <p class="sugerencia_nombre">Miguel De Lys</p>
+          </div>
+          <button class="btn-rosa">Perfil</button>
+        </div>
+      </div>
+
+      <img class="publicidad_1" src="img/publicidad_1.png" alt="publicidad 1">
+    </div>
+  </div>
+  <script src="js/nav.js"></script>
+  <script src="js/inicio.js"></script>
+</body>
+
+</html>

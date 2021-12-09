@@ -1,0 +1,234 @@
+
+
+.contenedor-chat {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  top: 60px;
+  left: 60px;
+  justify-content: space-evenly;
+  align-items: center;
+  background: gray;
+}
+.contenedor-chat .izq, .contenedor-chat .der {
+  height: 95%;
+  margin: auto 0;
+  display: flex;
+  flex-flow: column;
+  justify-content: start;
+
+}
+
+.contenedor-chat .izq {
+  background: #f8f8f8;
+  width: 36%;
+  align-items: center;
+  justify-content: flex-start;
+}
+.contenedor-chat .izq span:first-child {
+  margin-top: 2em;
+}
+
+.contenedor-chat .der {
+  background: var(--white-medium);
+  width: 60%;
+}
+
+.span-input-busqueda {
+  padding: 0em 1em;
+  display: flex;
+  flex-direction: row;
+  height: 2.5em;
+  border-radius: 25px;
+  background: white;
+  border: var(--gris-claro) 1px solid;
+  justify-content: flex-start;
+}
+.span-input-busqueda .imagen {
+  padding: 0em;
+  display: flex; 
+  flex-direction: column;
+  flex-basis: 15%;
+  align-items: center;
+  justify-content: center;
+}
+.span-input-busqueda .imagen img {
+  width: 24px;
+  height: 24px;
+  margin: auto 0.25em;
+  padding: 0em !important;
+}
+.span-input-busqueda input {
+  background: transparent;
+  width: 100% !important;
+  border: none;
+  font-size: 12pt;
+}
+
+.lista-contactos {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2em;
+  align-items: center;
+}
+
+.lista-contactos > div {
+  border-bottom: #FF5EDE33 1px solid;
+}
+.lista-contactos > div:last-child {
+  border-bottom: none;
+}
+
+.contacto {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  width: 99%;
+  height: 4em;
+  padding: 0.5em;
+}
+
+.contacto.online {
+  background-image: linear-gradient(90deg, rgba(251, 153, 231, 0.27) 0%, rgba(0,0,0,0) 83.85%);
+}
+
+.imagen, .nombre-texto, .msg, .msg_notif {
+  display: flex;
+  flex-direction: column;
+}
+
+.imagen {
+  position: relative;
+  padding-right: 1em;
+  flex-basis: 20%;
+  flex-direction: row;
+}
+
+.imagen * {
+  display: flex;
+  flex-direction: column;
+}
+
+.imagen img {
+  height: 100%;
+  width: auto;
+}
+.imagen .redondelito{
+  z-index: 2; 
+  position: absolute;
+  border-radius: 50%;
+  height: 1em;
+  width: 1em;
+  top: 3em;
+  left: 3em;
+}
+.redondelito.online {
+  background: var(--green);
+}
+.redondelito.offline {
+  background: transparent;
+  border: #c4c4c4 3pt solid;
+  box-sizing: border-box;
+}
+
+.nombre-texto {
+  flex-basis: 80%;
+  justify-content: flex-start;
+  color: var(--negro);
+}
+.nombre-texto h4 {
+  margin: 0 0;
+  margin-top: 0.5em;
+  font-weight: 900;
+}
+.nombre-texto p {
+  margin: 0 0.25em;
+  font-size: 9pt; 
+}
+.msg, .msg_notif {
+  height: 28px;
+  width: 30px;
+  justify-self: flex-end;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+}
+.msg {
+  background-image: url('../img/iconos/msg.svg');
+}
+.msg_notif {
+  background-image: url('../img/iconos/msg_notificacion.svg');
+}
+
+.barra-superior-chat {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: var(--nav-altura);
+  padding: 1em 0em;
+  background: #f8f8f8;
+  border-bottom: var(--primary-light) 1px solid;
+  align-self: flex-start;
+}
+
+.chat-avatar, .chat-nombre-usuario, .chat-camarita  {
+  display: flex;
+  flex-direction: column;
+}
+.chat-avatar {
+  object-fit: contain;
+  flex-basis: 10%;
+}
+.chat-nombre-usuario{
+  flex-basis: 80%;
+}
+.chat-camarita {
+  height: 100%;
+}
+
+.barra-superior-chat a {
+  justify-self: flex-end;
+  align-self: center;
+  flex-basis: 10%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contenedor-mensajes {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex-grow: 1;
+}
+
+.chat-trucho {
+  object-fit: contain;
+  padding: 1em;
+}
+
+.barra-inferior-chat {
+  display: flex;
+  background: #f8f8f8;
+  height: var(--nav-altura);
+  flex-direction: row;
+  align-items: center;
+  border-top: var(--primary-medium) 1px solid;
+}
+
+.barra-inferior-chat * {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+}
+.barra-inferior-chat input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+}
+.barra-inferior-chat img {
+  margin: 0em 1em;
+  cursor: pointer;
+}

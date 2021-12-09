@@ -1,0 +1,30 @@
+.videollamada-contenido {
+  width: 100vw;
+  height: calc(100vh - var(--nav-altura));
+}
+
+.contenedor-llamada {
+  width: 95%;
+  position: relative;
+  margin: 1em;
+  padding: 1em;
+  background: var(--gris-claro);
+  object-fit: contain;
+}
+
+.contenedor-llamada img {
+  object-fit: contain;
+  width: 100%;
+  height: auto;
+}
+
+.boton-cortar {
+  position: absolute;
+  left: 47.75%;
+  bottom: 13.9%;
+  border-radius: 50%;
+  width: 4.5em;
+  height: 4.5em;
+  background: rgba(191,31,191,0.01);
+  cursor: pointer;
+}
